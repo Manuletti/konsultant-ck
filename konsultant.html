@@ -100,7 +100,7 @@ h2 { font-family: var(--f-type); font-weight: 400; font-size: clamp(20px, 3.2vw,
 .voices ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
 .voices li { font-size: 15px; line-height: 1.45; padding: 4px 8px; margin-inline: -8px; }
 .voices li.match { background: rgba(90,63,142,.09); outline: 1px solid rgba(90,63,142,.35); }
-.voices li.match::after { content: "ваш выбор — как здесь"; display: block; font-family: var(--f-hand); font-size: 18px; color: var(--stamp); }
+.voices li.match::after { content: "похожий выбор"; display: block; font-family: var(--f-hand); font-size: 18px; color: var(--stamp); }
 .voices li b { font-family: var(--f-type); font-weight: 400; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); }
 .voices .src { display: block; font-family: var(--f-type); font-size: 12px; color: var(--ink-soft); }
 
@@ -281,7 +281,7 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   <main class="sheet" id="sheet" aria-live="polite"></main>
   <aside>
     <div class="file" id="file"></div>
-    <p class="note">Герой вымышлен. Обстановка, даты и поступки реальных людей — по мемуарам, документам и литературе из вики архива; везде пересказ, ссылки — на страницы изданий (у Бовина, Черняева и в главе Брутенца об Афганистане — физические страницы файлов). Блок «Как вспоминали» относится к сцене; строка, похожая на ваш выбор, отмечена. Некоторые решения требуют показателей или рискованны: шанс зависит от показателя. Кредо героя выбирается в начале; от него зависит, что укрепляет его убеждения.</p>
+    <p class="note">Герой вымышлен. Обстановка, даты и поступки реальных людей — по мемуарам, документам и литературе из вики архива; везде пересказ, ссылки — на страницы изданий (у Бовина, Черняева и в главе Брутенца об Афганистане — физические страницы файлов). Блок «Как вспоминали» относится к сцене; строка с похожим выбором отмечена. Некоторые решения требуют показателей или рискованны: шанс зависит от показателя. Кредо героя выбирается в начале; от него зависит, что укрепляет его убеждения.</p>
   </aside>
 </div>
 
@@ -1402,7 +1402,7 @@ function renderScene() {
   } else {
     const p = S.pick;
     const dice = p.chance !== null ? `<div class="dice">Шанс ${Math.round(p.chance * 100)}% · ${p.ok ? "удалось" : "не удалось"}</div>` : "";
-    const likeLine = p.like ? `<div class="like">Так же поступили или похоже описывают: ${esc(p.like)} — см. ниже.</div>` : `<div class="like">Среди свидетельств к этой сцене такого выбора нет — это ваш собственный путь.</div>`;
+    const likeLine = p.like ? `<div class="like">Похожий выбор в свидетельствах: ${esc(p.like)} — см. ниже.</div>` : `<div class="like">Среди свидетельств к этой сцене такого выбора нет — это ваш собственный путь.</div>`;
     const orders = (p.events || []).map(e => `<div class="order"><b>${esc(e.t)}</b>${esc(e.x)}</div>`).join("");
     const credLine = p.fx.con ? `<div class="dice">Убеждения ${p.fx.con > 0 ? "укрепились" : "пошатнулись"}: для ${CREDO[S.flags.credo].gen} это ${p.fx.con > 0 ? "решение по убеждению" : "решение вопреки себе"}.</div>` : "";
     html += `<div class="result"><div class="picked">${esc(p.t)}</div>${dice}${fxHTML(p.fx)}${credLine}<p>${esc(p.res)}</p>${likeLine}${orders}</div>${voicesHTML(sc.voices, p.like)}
