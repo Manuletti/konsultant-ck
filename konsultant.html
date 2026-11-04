@@ -153,16 +153,11 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 .drift { margin-top: 16px; font-family: var(--f-hand); font-size: 20px; color: var(--pencil); line-height: 1.3; }
 .voices.us { background: rgba(90,63,142,.05); border-left-color: var(--stamp); }
 .voices.us h3 { color: var(--stamp); }
-.readings { margin-top: 14px; display: grid; gap: 4px; font-family: var(--f-type); font-size: 13px; border-top: 1px dotted var(--rule); padding-top: 10px; }
-.readings b { font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--stamp); font-size: 12px; }
-.readings span { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr); gap: 10px; }
-.readings i { font-style: normal; color: var(--ink-soft); }
-@media (max-width: 520px) { .readings span { grid-template-columns: minmax(0, 1fr); gap: 0; } }
-.file .perk { margin-top: 8px; padding: 6px 8px; border: 1px dashed var(--stamp); font-size: 12px; line-height: 1.4; }
+@media (max-width: 520px) { .file .perk { margin-top: 8px; padding: 6px 8px; border: 1px dashed var(--stamp); font-size: 12px; line-height: 1.4; }
 .file .perk b { display: block; font-weight: 400; color: var(--stamp); letter-spacing: .08em; text-transform: uppercase; }
 
 /* Анимация гравюр */
-.illus svg * { transform-box: fill-box; transform-origin: center; }
+.illus svg [class*="a-"] { transform-box: fill-box; transform-origin: center; }
 .illus .a-spin { transform-box: view-box; transform-origin: 440px 110px; }
 .illus .a-tilt { transform-box: view-box; transform-origin: 300px 60px; }
 .illus .a-beam { transform-box: view-box; transform-origin: 300px 40px; }
@@ -353,7 +348,7 @@ const ILL = {
     <path ${INK} d="M200 112 h44 l-4 34 h-36 z M244 120 q16 4 0 18"/><path ${INK} d="M350 112 h44 l-4 34 h-36 z M394 120 q16 4 0 18"/>
     <path ${RED} class="a-steam" d="M216 100 q6 -12 0 -22"/><path ${RED} class="a-steam" style="animation-delay:.8s" d="M226 100 q6 -12 0 -22"/><path ${RED} class="a-steam" style="animation-delay:.4s" d="M366 100 q6 -12 0 -22"/>
     <rect x="272" y="96" width="56" height="74" fill="#f6f5ef" stroke="currentColor" stroke-width="3" transform="rotate(6 300 133)"/>
-    <path ${INK} class="a-write" d="M282 112 h34 M282 124 h30 M282 136 h36" transform="rotate(6 300 133)"/>
+    <g transform="rotate(6 300 133)"><path ${INK} class="a-write" d="M282 112 h34 M282 124 h30 M282 136 h36"/></g>
     <path ${INK} d="M60 192 H540"/>`, "Запись беседы с американским гостем — для ЦК"),
   paper: frame(`
     <path ${INK} d="M140 60 H420 L460 90 V184 H140 Z"/><path ${INK} d="M420 60 V90 H460"/>
@@ -369,10 +364,9 @@ const ILL = {
       <path fill="currentColor" d="M200 112 l6 -34 6 34 z M220 112 l6 -40 6 40 z"/>
       <path fill="#b0261c" d="M362 112 l6 -34 6 34 z M382 112 l6 -40 6 40 z"/>
     </g>
-    <path ${INK} d="M60 186 H540"/><rect x="60" y="188" width="480" height="8" fill="url(#hatch)"/>`, "Весы ОСВ: потолки, паритет, уровни"),
+    <path ${INK} d="M60 186 H540"/><rect x="60" y="188" width="480" height="8" fill="url(#hatch)"/>`, "Весы ОСВ: паритет и равные предельные уровни"),
   lodge: frame(`
     <path ${INK} d="M90 186 V96 L300 34 L510 96 V186"/>
-    <path ${INK} d="M90 120 H510 M90 150 H510" opacity=".45"/>
     <rect x="170" y="128" width="260" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
     <path ${INK} d="M190 142 v30 M410 142 v30"/>
     ${[0,1,2,3,4].map(k => `<circle class="${k === 2 ? "a-nod" : ""}" cx="${200 + k*50}" cy="118" r="8" ${INK}/>`).join('')}
@@ -422,7 +416,7 @@ const ILL = {
     <path ${INK} d="M150 172 L166 116 H274 L290 172 Z"/><rect x="150" y="172" width="140" height="12" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
     <circle cx="220" cy="146" r="20" ${INK}/><circle cx="220" cy="146" r="6" fill="currentColor"/>
     <g class="a-lift"><path fill="#b0261c" stroke="currentColor" stroke-width="3" d="M160 92 q60 -36 120 0 l-8 12 q-52 -24 -104 0 Z"/></g>
-    <path ${INK} d="M166 110 q-20 20 -6 40 q14 20 -6 34" stroke-dasharray="4 5"/>
+    <path ${INK} d="M162 100 q-34 10 -30 44 q4 30 18 34" stroke-dasharray="4 5"/>
     <path ${RED} class="a-pulse" d="M300 70 q14 18 0 36"/><path ${RED} class="a-pulse" style="animation-delay:.3s" d="M318 58 q24 30 0 60"/>
     <path ${INK} d="M380 172 h170 l-8 -24 h-36 l-16 -20 h-60 l-16 20 h-26 z"/>
     <path ${INK} d="M412 148 l12 -18 M470 148 l-8 -18"/>
@@ -451,16 +445,16 @@ const ILL = {
   endSpeech: frame(`
     <path ${INK} d="M150 70 V176 M150 132 H226 V176 M150 70 h10 V132"/>
     <path ${INK} d="M450 70 V176 M450 132 H374 V176 M450 70 h-10 V132"/>
-    <rect x="156" y="112" width="66" height="18" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
-    <text x="189" y="125" text-anchor="middle" font-family="PT Serif, serif" font-size="11" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
-    <g class="a-nod"><rect x="376" y="106" width="66" height="24" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
-    <text x="409" y="123" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#f6f5ef">ДОКЛАД</text></g>
+    <rect x="164" y="112" width="58" height="18" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="193" y="125" text-anchor="middle" font-family="PT Serif, serif" font-size="9.5" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
+    <g class="a-nod"><rect x="378" y="106" width="58" height="24" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
+    <text x="407" y="123" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="#f6f5ef">ДОКЛАД</text></g>
     <g class="a-sway-b"><circle cx="300" cy="66" r="14" ${INK}/><path ${INK} d="M300 80 V136 M300 96 L252 116 M300 96 L348 116 M300 136 L284 176 M300 136 L316 176"/></g>
     <path ${INK} d="M40 180 H560"/><rect x="40" y="182" width="520" height="8" fill="url(#hatch)"/>`, "Два стула: газетная колонка и речи генсека"),
   endIzv: frame(`
     <g class="a-roll"><circle cx="170" cy="100" r="40" ${INK}/><path stroke="currentColor" stroke-width="3" d="M130 100 h80 M170 60 v80 M142 72 l56 56 M198 72 l-56 56"/></g>
     <g class="a-roll-r"><circle cx="270" cy="150" r="30" ${INK}/><path stroke="currentColor" stroke-width="3" d="M240 150 h60 M270 120 v60"/></g>
-    <path ${INK} d="M120 140 Q170 190 240 120 Q300 100 330 150 L560 150"/>
+    <path ${INK} d="M70 140 H170 C210 140 230 120 270 120 C300 120 310 150 330 150 H352"/>
     ${[0,1,2].map(k => `<g class="a-sheet" style="animation-delay:${k * 1.2}s"><rect x="360" y="120" width="56" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/><path stroke="currentColor" stroke-width="2" d="M368 132 h40 M368 142 h30"/></g>`).join('')}
     <path ${INK} d="M40 190 H560"/>`, "Ротационная машина: ваша колонка уходит в тираж"),
   endInst: frame(`
@@ -491,8 +485,8 @@ const ILL = {
     <path ${INK} d="M40 190 H560"/>`, "Трибуна и черновики: ваши мысли стали словами генсека"),
   endMo: frame(`
     <path ${INK} d="M80 186 V50 H520 V186"/><path ${INK} d="M70 50 H530 M80 72 H520"/>
-    ${[0,1,2,3].map(r => [...Array(11)].map((_, k) => `<rect class="${r === 2 && k === 7 ? "a-flicker" : ""}" x="${96 + k*38}" y="${84 + r*24}" width="18" height="14" fill="${r === 2 && k === 7 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
-    <path ${INK} d="M270 186 v-26 h60 v26"/>
+    ${[0,1,2].map(r => [...Array(11)].map((_, k) => `<rect class="${r === 2 && k === 7 ? "a-flicker" : ""}" x="${96 + k*38}" y="${84 + r*24}" width="18" height="14" fill="${r === 2 && k === 7 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
+    <path ${INK} d="M272 186 v-32 h56 v32 M300 154 v32"/>
     <g class="a-nod"><rect x="420" y="160" width="60" height="26" rx="4" fill="#3a2e22" stroke="currentColor" stroke-width="2.5"/><path stroke="#f6f5ef" stroke-width="2" d="M440 160 v-6 h20 v6"/></g>
     <path ${RED} d="M480 172 h10"/>
     <path ${INK} d="M40 190 H560"/>`, "Старая площадь, август 1991 г.: портфель с записными книжками"),
@@ -627,7 +621,7 @@ const SCENES = [
     { t: "Дописывать текст. Кто бы ни победил, документ понадобится.", cred: { r: -1, s: -1, i: -1 }, fx: { pen: +1 }, like: "Брутенц",
       res: "Вы правы: документ понадобился, только подписывать его будет другой человек. Заменить одну фамилию на другую — минутное дело.",
       ep: "в октябре шестьдесят четвёртого вы дописывали доклад, не зная, чьим именем он будет подписан" },
-    { t: "Позвонить Андропову напрямую по «вертушке».", req: { trust: 7 }, fx: { trust: +1 }, like: "Шахназаров",
+    { t: "Позвонить Андропову напрямую по «вертушке».", req: { trust: 6 }, fx: { trust: +1 }, like: "Шахназаров",
       res: "В трубке спокойный голос: продолжайте работать. Только потом вы поймёте, что он знал больше, чем говорил.",
       ep: "в октябре шестьдесят четвёртого вы позвонили Андропову, и он велел продолжать работу" },
     { t: "Позвонить знакомому из аппарата с дачного телефона.", fx: { circ: +1, trust: -1 }, like: "Арбатов",
@@ -798,7 +792,7 @@ const SCENES = [
   ] },
 
 { year: "1974", ill: "salt", place: "Осень, накануне Владивостока", title: "Записка об ОСВ",
-  text: s => `<p>Готовится встреча с новым президентом США Фордом. Нужно обосновать, почему потолки на стратегические вооружения выгодны. ${s.place === "inst" ? "Институт пишет записку в ЦК." : "Вас просят подготовить справку."}</p>
+  text: s => `<p>Готовится встреча с новым президентом США Фордом. Нужно обосновать, почему СССР выгодно согласиться на равные предельные уровни стратегических вооружений — одинаковое для обеих сторон число носителей (во Владивостоке это будет 2400). ${s.place === "inst" ? "Институт пишет записку в ЦК." : "Вас просят подготовить справку."}</p>
     <p>Военные против любых уступок. Генсек, говорят, готов спорить с ними сам.</p>`,
   choices: s => [
     { t: "Доказывать, что паритет достигнут, и разрядка выгоднее гонки.", cred: { r: +2, s: +1 }, fx: { pen: +2, trust: -1 }, like: "Историк",
@@ -807,7 +801,7 @@ const SCENES = [
     { t: "Учесть позицию военных: осторожная формула, ни шагу без гарантий.", cred: { r: -1, s: +2 }, fx: { trust: +1 }, like: null,
       res: "Справку хвалят за взвешенность. Через неделю вы видите её в чужой папке с чужой подписью.",
       ep: "в семьдесят четвёртом вы написали осторожную справку, и её подписал другой" },
-    { t: "Предложить обсудить потолки неофициально, через Дартмутские встречи.", req: { circ: 6 }, cred: { r: +1 }, fx: { circ: +2, trust: -1 }, set: { dartmouth: true }, like: "Дартмут",
+    { t: "Предложить сначала прощупать американцев неофициально: обсудить предельные уровни на Дартмутских встречах учёных и общественных деятелей.", req: { circ: 6 }, cred: { r: +1 }, fx: { circ: +2, trust: -1 }, set: { dartmouth: true }, like: "Дартмут",
       res: "Идею приняли без восторга, но в составе следующей делегации на встречу с американцами есть и ваша фамилия.",
       ep: "вы ездили на Дартмутские встречи и спорили с американцами, которые потом стали вам друзьями" }
   ],
@@ -1087,18 +1081,6 @@ function voicesHTML(v, like) {
     <p class="hint">Как то же время видели в Вашингтоне: пресса, мемуары, документы (пересказ)</p>
     <ul>${us.map(li).join("")}</ul></section>` : "");
 }
-function readingsHTML(c, fx) {
-  const word = (d, plus, minus, zero) => d > 0 ? plus : d < 0 ? minus : zero;
-  const rows = [
-    ["Начальство", word(fx.trust || 0, "одобрит", "нахмурится", "не заметит")],
-    ["Друзья вне аппарата", word(fx.circ || 0, "оценят", "отдалятся", "пожмут плечами")],
-    ...Object.entries(CREDO).map(([k, cr]) => {
-      const d = c.cred ? (c.cred[k] || 0) : 0;
-      return [cr.name + (S.flags.credo === k ? " (вы)" : ""), word(d, "сочтёт поступком по убеждению", "сочтёт уступкой", "отнесётся спокойно")];
-    })
-  ];
-  return `<div class="readings"><b>Как это прочтут</b>${rows.map(([a, b]) => `<span><i>${esc(a)}</i>${esc(b)}</span>`).join("")}</div>`;
-}
 function fxHTML(fx) {
   const parts = Object.entries(fx).filter(([, d]) => d !== 0).map(([k, d]) => `<span>${STATS[k].short} ${d > 0 ? "+" : "−"}${Math.abs(d)}</span>`);
   return parts.length ? `<div class="fx">${parts.join("")}</div>` : "";
@@ -1125,7 +1107,7 @@ function renderScene() {
     const likeLine = p.like ? `<div class="like">Так же поступили или похоже описывают: ${esc(p.like)} — см. ниже.</div>` : `<div class="like">Среди свидетельств к этой сцене такого выбора нет — это ваш собственный путь.</div>`;
     const orders = (p.events || []).map(e => `<div class="order"><b>${esc(e.t)}</b>${esc(e.x)}</div>`).join("");
     const credLine = p.fx.con ? `<div class="dice">Убеждения ${p.fx.con > 0 ? "укрепились" : "пошатнулись"}: для ${CREDO[S.flags.credo].gen} это ${p.fx.con > 0 ? "решение по убеждению" : "решение вопреки себе"}.</div>` : "";
-    html += `<div class="result"><div class="picked">${esc(p.t)}</div>${dice}${fxHTML(p.fx)}${credLine}<p>${esc(p.res)}</p>${likeLine}${orders}${S.flags.credo ? readingsHTML(sc.choices(S).find(x => x.t === p.t) || {}, p.fx) : ""}</div>${voicesHTML(sc.voices, p.like)}
+    html += `<div class="result"><div class="picked">${esc(p.t)}</div>${dice}${fxHTML(p.fx)}${credLine}<p>${esc(p.res)}</p>${likeLine}${orders}</div>${voicesHTML(sc.voices, p.like)}
       <div class="row"><button type="button" class="btn" id="next">${over() || nextIndex() === null ? "Закрыть дело →" : "Следующий лист →"}</button>
       ${over() && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть этот лист</button>` : ""}</div>`;
   }
