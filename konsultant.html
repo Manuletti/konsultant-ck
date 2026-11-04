@@ -185,8 +185,6 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 .voices.us { background: rgba(90,63,142,.05); border-left-color: var(--stamp); }
 .voices.us h3 { color: var(--stamp); }
 .file .perk { margin-top: 8px; padding: 6px 8px; border: 1px dashed var(--stamp); font-size: 12px; line-height: 1.4; }
-.file .file-restart { margin-top: 10px; width: 100%; padding: 6px 8px; font: inherit; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--folder-ink); background: transparent; border: 1px solid currentColor; cursor: pointer; }
-.file .file-restart:hover { background: rgba(0,0,0,.05); }
 .file .perk.danger { border-color: var(--pencil); } .file .perk.danger b { color: var(--pencil); }
 .file .perk b { display: block; font-weight: 400; color: var(--stamp); letter-spacing: .08em; text-transform: uppercase; }
 
@@ -1446,7 +1444,6 @@ function renderFile() {
        return left > 0 ? `<div class="perk danger"><b>Заступник под ударом</b>Ещё ${left === 1 ? "один лист" : "два листа"} за вас никто не вступится: если доверие упадёт до нуля, уволят.</div>` : ""; })()}
      ${S.flags.nevyezd ? `<div class="perk danger"><b>Невыездной</b>С ${S.flags.nevyezd} года. Командировки закрыты, рукописи лежат; каждое новое взыскание стоит пера.</div>` : ""}
      <details class="pos rules"${S.rulesOpen ?? window.innerWidth > 860 ? " open" : ""}><summary>Правила</summary>Доверие 0 — увольнение, но при круге от 6 вас пристроят рядом. Убеждения 0 — конец игры (двоемыслие). Перо 0 — тексты возвращают. Каждые два листа в аппарате слабеет круг, вне аппарата — доверие. Показатель 8 даёт особое умение.</details>`;
-  $("file").insertAdjacentHTML("beforeend", S.log.length && S.phase !== "end" ? `<button type="button" class="restart file-restart">Начать заново</button>` : "");
   const d = $("file").querySelector("details.rules"); if (d) d.addEventListener("toggle", () => { S.rulesOpen = d.open; });
 }
 
@@ -1479,7 +1476,7 @@ function renderScene() {
       const note = miss.length ? `<span class="req">Недоступно. Нужно: ${esc(miss.join(", "))}</span>`
         : ch !== null ? `<span class="risk">Риск: удастся примерно в ${Math.round(ch * 100)}% случаев (зависит от показателя «${STATS[c.risk.stat].short}»)</span>` : "";
       return `<button type="button" id="c${S.i}-${k}" data-k="${k}" data-n="${k + 1}."${miss.length ? " disabled" : ""}>${esc(c.t)}${note}</button>`;
-    }).join("")}</div>${S.log.length > 2 ? `<div class="row"><button type="button" class="btn ghost restart">Начать заново</button></div>` : ""}`;
+    }).join("")}</div>`;
   } else {
     const p = S.pick;
     const dice = p.chance !== null ? `<div class="dice">Шанс ${Math.round(p.chance * 100)}% · ${p.ok ? "удалось" : "не удалось"}</div>` : "";
