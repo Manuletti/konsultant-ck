@@ -138,6 +138,79 @@ aside { min-width: 0; }
 .path li span:first-child { color: var(--stamp); font-variant-numeric: tabular-nums; }
 details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-size: 13px; color: var(--stamp); margin-top: 10px; }
 
+
+.choices button[disabled] { cursor: not-allowed; color: var(--ink-soft); border-style: dashed; background: transparent; }
+.choices button .req, .choices button .risk { display: block; font-size: 12px; margin-top: 4px; letter-spacing: .03em; }
+.choices button .req { color: var(--ink-soft); }
+.choices button .risk { color: var(--pencil); }
+.order { margin-top: 14px; padding: 12px 14px; border: 2px solid var(--stamp); background: rgba(90,63,142,.05); font-size: 15.5px; }
+.order b { display: block; margin-bottom: 4px; font-family: var(--f-type); font-weight: 400; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--stamp); }
+.dice { font-family: var(--f-type); font-size: 13px; color: var(--stamp); margin: 2px 0 6px; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.meter.warn .name, .meter.warn .val { color: var(--pencil); }
+.meter .warnline { grid-column: 1 / -1; font-family: var(--f-hand); font-size: 18px; color: var(--pencil); line-height: 1.2; }
+
+/* Анимация гравюр */
+.illus svg * { transform-box: fill-box; transform-origin: center; }
+.illus .a-spin { transform-box: view-box; transform-origin: 440px 110px; }
+.illus .a-tilt { transform-box: view-box; transform-origin: 300px 60px; }
+.illus .a-beam { transform-box: view-box; transform-origin: 300px 40px; }
+.illus .a-wave { transform-box: view-box; transform-origin: 300px 142px; }
+.illus .a-sway-b, .illus .a-fire { transform-origin: 50% 100%; }
+.illus .a-curtain-l { transform-origin: 0% 50%; }
+.illus .a-curtain-r { transform-origin: 100% 50%; }
+@media (prefers-reduced-motion: no-preference) {
+  .a-carriage { animation: carriage 4s steps(10, end) infinite; }
+  .a-key { animation: key .5s ease-in-out infinite alternate; }
+  .a-shake { animation: shake 2s ease-in-out infinite; }
+  .a-pulse { animation: pulse 1.6s ease-in-out infinite; }
+  .a-rise { animation: rise 3s ease-in infinite; }
+  .a-flicker { animation: flicker 3s steps(1, end) infinite; }
+  .a-sway-b { animation: sway 5s ease-in-out infinite; }
+  .a-blink { animation: blink 1.4s steps(1, end) infinite; }
+  .a-spin { animation: spin 6s linear infinite; }
+  .a-draw { stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.4s ease-out .3s forwards; }
+  .a-stamp { animation: stampin .5s cubic-bezier(.3, 1.6, .5, 1) 1.2s both; }
+  .a-curtain-l, .a-curtain-r { animation: curtain 6s ease-in-out infinite; }
+  .a-beam { animation: beam 5s ease-in-out infinite; }
+  .a-wave { animation: wave 2.4s ease-in-out infinite; }
+  .a-dust { animation: dust 5s ease-in-out infinite; }
+  .a-needle { animation: needle 4s ease-in-out infinite; }
+  .a-steam { animation: rise 2.4s ease-in infinite; }
+  .a-write { stroke-dasharray: 160; animation: write 4s linear infinite; }
+  .a-tilt { animation: tilt 4s ease-in-out infinite; }
+  .a-nod { animation: nod 1.8s ease-in-out infinite; }
+  .a-fire { animation: fire .9s ease-in-out infinite alternate; }
+  .a-fly { animation: fly 8s linear infinite; }
+  .a-rotor { animation: rotor .18s linear infinite alternate; }
+  .a-snow { animation: snow 6s linear infinite; }
+  .a-lid { animation: lid 3s ease-in-out infinite; }
+}
+@keyframes carriage { from { transform: translateX(30px); } to { transform: translateX(-30px); } }
+@keyframes key { to { transform: translateY(2px); } }
+@keyframes shake { 0%, 55%, 100% { transform: rotate(0); } 60% { transform: rotate(-4deg); } 65% { transform: rotate(4deg); } 70% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } 80% { transform: rotate(0); } }
+@keyframes pulse { 0%, 100% { opacity: .1; } 50% { opacity: 1; } }
+@keyframes rise { 0% { transform: translateY(8px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(-16px); opacity: 0; } }
+@keyframes flicker { 0% { opacity: 1; } 40% { opacity: .7; } 43% { opacity: 1; } 78% { opacity: .85; } 80% { opacity: 1; } }
+@keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+@keyframes blink { 0% { opacity: 1; } 50% { opacity: .15; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes stampin { from { transform: scale(1.9) rotate(-10deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes curtain { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.8); } }
+@keyframes beam { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+@keyframes wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-22deg); } }
+@keyframes dust { 0%, 100% { transform: translate(0, 0); opacity: .2; } 50% { transform: translate(8px, -14px); opacity: .9; } }
+@keyframes needle { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(26px); } 60% { transform: translateX(12px); } }
+@keyframes write { from { stroke-dashoffset: 160; } 60%, to { stroke-dashoffset: 0; } }
+@keyframes tilt { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes nod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes fire { from { transform: scaleY(.8) skewX(-3deg); } to { transform: scaleY(1.1) skewX(3deg); } }
+@keyframes fly { from { transform: translateX(-460px); } to { transform: translateX(260px); } }
+@keyframes rotor { from { transform: scaleX(1); } to { transform: scaleX(.3); } }
+@keyframes snow { from { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } to { transform: translateY(170px); opacity: 0; } }
+@keyframes lid { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(-2deg); } }
+
 @media (prefers-reduced-motion: no-preference) {
   .sheet.enter { animation: slide .35s ease-out; }
   .fx span { animation: pop .5s ease-out; display: inline-block; }
@@ -167,7 +240,7 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   <main class="sheet" id="sheet" aria-live="polite"></main>
   <aside>
     <div class="file" id="file"></div>
-    <p class="note">Герой вымышлен. Обстановка, даты и поступки реальных людей — по мемуарам, документам и литературе из вики архива; везде пересказ, ссылки — на страницы изданий (у Бовина, Черняева и в главе Брутенца об Афганистане — физические страницы файлов). Блок «Как вспоминали» относится к сцене; строка, похожая на ваш выбор, отмечена.</p>
+    <p class="note">Герой вымышлен. Обстановка, даты и поступки реальных людей — по мемуарам, документам и литературе из вики архива; везде пересказ, ссылки — на страницы изданий (у Бовина, Черняева и в главе Брутенца об Афганистане — физические страницы файлов). Блок «Как вспоминали» относится к сцене; строка, похожая на ваш выбор, отмечена. Некоторые решения требуют показателей или рискованны: шанс зависит от показателя.</p>
   </aside>
 </div>
 
@@ -178,110 +251,133 @@ const RED = 'fill="none" stroke="#b0261c" stroke-width="3" stroke-linecap="round
 const frame = (body, cap) => `<figure class="illus"><svg viewBox="0 0 600 210" role="img" aria-label="${cap}"><g filter="url(#lino)">${body}</g></svg><figcaption>${cap}</figcaption></figure>`;
 const ILL = {
   typewriter: frame(`
-    <path ${INK} d="M250 112 V36 H350 V112"/><path ${INK} d="M264 52h62M264 66h50M264 80h58"/>
-    <path ${RED} d="M262 94 q30 6 64 -2"/>
+    <g class="a-carriage">
+      <path ${INK} d="M250 112 V36 H350 V112"/><path ${INK} d="M264 52h62M264 66h50M264 80h58"/>
+      <path ${RED} class="a-draw" d="M262 94 q30 6 64 -2"/>
+    </g>
     <rect x="196" y="104" width="208" height="14" rx="7" fill="currentColor"/>
     <path ${INK} d="M214 118 L196 176 H404 L386 118"/>
     <rect x="186" y="176" width="228" height="12" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
-    ${[0,1,2].map(r => [...Array(9 - r)].map((_, k) => `<circle cx="${236 + r*9 + k*17}" cy="${134 + r*14}" r="5" fill="currentColor"/>`).join('')).join('')}
+    ${[0,1,2].map(r => [...Array(9 - r)].map((_, k) => `<circle class="${(k + r) % 4 === 1 ? "a-key" : ""}" style="animation-delay:${((k * 7 + r * 3) % 10) / 10}s" cx="${236 + r*9 + k*17}" cy="${134 + r*14}" r="5" fill="currentColor"/>`).join('')).join('')}
     <path ${INK} d="M60 186 H540"/>`, "Лист в машинке: анкета, автобиография, список трудов"),
   phone: frame(`
-    <path ${INK} d="M210 170 L230 100 H370 L390 170 Z"/><rect x="210" y="170" width="180" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
-    <circle cx="300" cy="138" r="26" ${INK}/><circle cx="300" cy="138" r="8" fill="currentColor"/>
-    ${[...Array(10)].map((_, k) => { const a = (k * 27 - 200) * Math.PI / 180; return `<circle cx="${300 + 18*Math.cos(a)}" cy="${138 + 18*Math.sin(a)}" r="3" fill="currentColor"/>`; }).join('')}
-    <path ${INK} d="M216 90 q84 -40 168 0 l-10 14 q-74 -28 -148 0 Z"/>
-    <path ${RED} d="M420 70 q14 18 0 36M440 58 q24 30 0 60M180 70 q-14 18 0 36M160 58 q-24 30 0 60"/>
+    <g class="a-shake">
+      <path ${INK} d="M210 170 L230 100 H370 L390 170 Z"/><rect x="210" y="170" width="180" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+      <circle cx="300" cy="138" r="26" ${INK}/><circle cx="300" cy="138" r="8" fill="currentColor"/>
+      ${[...Array(10)].map((_, k) => { const a = (k * 27 - 200) * Math.PI / 180; return `<circle cx="${300 + 18*Math.cos(a)}" cy="${138 + 18*Math.sin(a)}" r="3" fill="currentColor"/>`; }).join('')}
+      <path ${INK} d="M216 90 q84 -40 168 0 l-10 14 q-74 -28 -148 0 Z"/>
+    </g>
+    <path ${RED} class="a-pulse" d="M420 70 q14 18 0 36M180 70 q-14 18 0 36"/>
+    <path ${RED} class="a-pulse" style="animation-delay:.3s" d="M440 58 q24 30 0 60M160 58 q-24 30 0 60"/>
     <path ${INK} d="M300 184 V196 M60 196 H540"/>`, "«Вертушка»: правительственная связь, положенная консультанту"),
   dacha: frame(`
+    <path ${INK} d="M350 82 V52 H368 V92"/>
+    ${[0, 1, 2].map(k => `<circle class="a-rise" style="animation-delay:${k}s" cx="${360 + k*6}" cy="${38 - k*8}" r="${6 + k*3}" fill="none" stroke="currentColor" stroke-width="2"/>`).join('')}
     <path ${INK} d="M200 180 V110 L300 58 L400 110 V180"/><path ${INK} d="M186 116 L300 50 L414 116"/>
-    <rect x="232" y="122" width="44" height="34" ${INK}/><rect x="324" y="122" width="44" height="34" fill="#f0d48a" stroke="currentColor" stroke-width="3"/>
+    <rect x="232" y="122" width="44" height="34" ${INK}/><rect class="a-flicker" x="324" y="122" width="44" height="34" fill="#f0d48a" stroke="currentColor" stroke-width="3"/>
     <path ${INK} d="M254 122v34M232 139h44M346 122v34M324 139h44"/>
-    <path ${INK} d="M90 180 L120 70 L150 180 M100 140 h40 M106 112 h28"/><path ${INK} d="M470 180 L505 60 L540 180 M480 140 h50 M488 108 h34"/>
+    <g class="a-sway-b"><path ${INK} d="M90 180 L120 70 L150 180 M100 140 h40 M106 112 h28"/></g>
+    <g class="a-sway-b" style="animation-delay:-1.5s"><path ${INK} d="M470 180 L505 60 L540 180 M480 140 h50 M488 108 h34"/></g>
     <path ${RED} d="M290 168 h20 v12 h-20z"/>
     <path ${INK} d="M40 182 H560"/><rect x="40" y="184" width="520" height="10" fill="url(#hatch)"/>`, "Госдача: читки вслух, бильярд, «парткурица»"),
   silent: frame(`
     <path ${INK} d="M150 170 L166 112 H274 L290 170 Z"/><circle cx="220" cy="142" r="18" ${INK}/>
     <path ${INK} d="M156 104 q64 -30 128 0 l-8 10 q-56 -20 -112 0 Z"/>
-    <path ${RED} d="M312 96 L352 136 M352 96 L312 136"/>
-    <circle cx="440" cy="110" r="56" ${INK}/><path ${INK} d="M440 110 V72 M440 110 L470 124"/>
+    <path ${RED} class="a-blink" d="M312 96 L352 136 M352 96 L312 136"/>
+    <circle cx="440" cy="110" r="56" ${INK}/><path ${INK} d="M440 110 V72"/>
+    <path ${INK} class="a-spin" d="M440 110 L476 110"/>
     ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${110 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${110 + 54*Math.sin(a)}"/>`; }).join('')}
     <path ${INK} d="M60 186 H540"/>`, "Октябрь 1964 г.: звонки сверху прекратились"),
   abolish: frame(`
     <rect x="200" y="28" width="200" height="160" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
     <path ${INK} d="M222 52h120M222 70h156M222 88h140M222 106h150M222 124h120M222 142h146"/>
-    <path ${RED} d="M214 160 L388 40"/>
-    <rect x="300" y="146" width="88" height="30" fill="none" stroke="#5a3f8e" stroke-width="3" transform="rotate(-8 344 161)"/>
-    <text x="344" y="167" text-anchor="middle" font-family="PT Mono, monospace" font-size="14" fill="#5a3f8e" transform="rotate(-8 344 161)">УПРАЗДН.</text>
+    <path ${RED} class="a-draw" d="M214 160 L388 40"/>
+    <g class="a-stamp">
+      <rect x="300" y="146" width="88" height="30" fill="none" stroke="#5a3f8e" stroke-width="3" transform="rotate(-8 344 161)"/>
+      <text x="344" y="167" text-anchor="middle" font-family="PT Mono, monospace" font-size="14" fill="#5a3f8e" transform="rotate(-8 344 161)">УПРАЗДН.</text>
+    </g>
     <path ${INK} d="M60 192 H540"/>`, "12 мая 1965 г.: подотдел упразднён"),
   theatre: frame(`
     <path ${INK} d="M120 40 H480 V186 H120 Z"/>
-    <path fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 40 q40 70 0 146 Z M480 40 q-40 70 0 146 Z"/>
-    <path ${INK} d="M300 40 L230 186 M300 40 L370 186" opacity=".5"/>
-    <circle cx="300" cy="118" r="12" ${INK}/><path ${INK} d="M300 130 v34 M300 142 l-18 12 M300 142 l18 -10 M300 164 l-12 20 M300 164 l12 20"/>
-    <path ${RED} d="M300 46 L270 110 H330 Z" opacity=".55"/>
+    <path class="a-curtain-l" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 40 q40 70 0 146 Z"/>
+    <path class="a-curtain-r" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M480 40 q-40 70 0 146 Z"/>
+    <path class="a-beam" fill="#b0261c" opacity=".35" d="M300 40 L262 186 H338 Z"/>
+    <circle cx="300" cy="118" r="12" ${INK}/><path ${INK} d="M300 130 v34 M300 164 l-12 20 M300 164 l12 20"/>
+    <g class="a-wave"><path ${INK} d="M300 142 l-18 12 M300 142 l20 -14"/></g>
     <path ${INK} d="M60 192 H540"/>`, "Таганка: свет на сцене, консультанты в зале"),
   empty: frame(`
     <path ${INK} d="M120 30 V186 H480 V30"/><path ${INK} d="M120 150 L60 196 M480 150 L540 196 M120 150 H480"/>
+    <path class="a-flicker" fill="#f0d48a" opacity=".35" d="M250 122 H350 L400 196 H200 Z"/>
     <rect x="250" y="52" width="100" height="70" ${INK}/><path ${INK} d="M300 52v70M250 87h100"/>
     <path ${INK} d="M382 150 v-36 h30 v36 M382 132 h30 M412 114 v-34"/>
-    <path ${RED} d="M150 170 q20 -6 40 0"/>
+    ${[0, 1, 2, 3].map(k => `<circle class="a-dust" style="animation-delay:${k * 1.3}s" cx="${270 + k*20}" cy="${150 - (k % 2) * 14}" r="2" fill="currentColor"/>`).join('')}
     <path ${INK} d="M60 196 H540"/>`, "Хлебный переулок, 1967 г.: кабинет без мебели"),
   radio: frame(`
     <rect x="170" y="70" width="260" height="110" rx="12" ${INK}/>
     <rect x="190" y="88" width="120" height="74" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
-    <rect x="326" y="90" width="88" height="22" ${INK}/><path stroke="#b0261c" stroke-width="3" d="M352 88 v26"/>
+    <rect x="326" y="90" width="88" height="22" ${INK}/><path class="a-needle" stroke="#b0261c" stroke-width="3" d="M352 88 v26"/>
     <circle cx="346" cy="144" r="12" ${INK}/><circle cx="394" cy="144" r="12" ${INK}/>
     <path ${INK} d="M300 70 L340 26"/>
-    <path ${RED} d="M352 30 q12 -12 24 0 M346 18 q24 -22 48 0"/>
+    <path ${RED} class="a-pulse" d="M352 30 q12 -12 24 0"/><path ${RED} class="a-pulse" style="animation-delay:.4s" d="M346 18 q24 -22 48 0"/>
     <circle cx="500" cy="54" r="18" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/><circle cx="510" cy="48" r="16" fill="currentColor" opacity=".9"/>
     <path ${INK} d="M60 186 H540"/>`, "Ночь на 21 августа 1968 г.: Би-би-си сквозь глушилки"),
   talk: frame(`
     <ellipse cx="300" cy="150" rx="210" ry="22" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
     <path ${INK} d="M200 112 h44 l-4 34 h-36 z M244 120 q16 4 0 18"/><path ${INK} d="M350 112 h44 l-4 34 h-36 z M394 120 q16 4 0 18"/>
-    <path ${RED} d="M216 100 q6 -12 0 -22 M226 100 q6 -12 0 -22 M366 100 q6 -12 0 -22"/>
+    <path ${RED} class="a-steam" d="M216 100 q6 -12 0 -22"/><path ${RED} class="a-steam" style="animation-delay:.8s" d="M226 100 q6 -12 0 -22"/><path ${RED} class="a-steam" style="animation-delay:.4s" d="M366 100 q6 -12 0 -22"/>
     <rect x="272" y="96" width="56" height="74" fill="#f6f5ef" stroke="currentColor" stroke-width="3" transform="rotate(6 300 133)"/>
-    <path ${INK} d="M282 112 h34 M282 124 h30 M282 136 h36" transform="rotate(6 300 133)"/>
+    <path ${INK} class="a-write" d="M282 112 h34 M282 124 h30 M282 136 h36" transform="rotate(6 300 133)"/>
     <path ${INK} d="M60 192 H540"/>`, "Запись беседы с американским гостем — для ЦК"),
   paper: frame(`
     <path ${INK} d="M140 60 H420 L460 90 V184 H140 Z"/><path ${INK} d="M420 60 V90 H460"/>
     <text x="160" y="92" font-family="PT Serif, serif" font-size="28" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
     <path ${INK} d="M160 106 H440"/><rect x="160" y="116" width="120" height="58" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
-    <path ${INK} d="M296 120h140M296 134h130M296 148h140M296 162h110"/>
-    <path ${RED} d="M290 116 q-6 30 4 62"/>
+    <path ${INK} class="a-write" d="M296 120h140M296 134h130M296 148h140M296 162h110"/>
+    <path ${RED} class="a-draw" d="M290 116 q-6 30 4 62"/>
     <path ${INK} d="M60 192 H540"/>`, "«Известия»: текст под своей фамилией"),
   salt: frame(`
-    <path ${INK} d="M300 40 V172 M220 60 H380"/><path ${INK} d="M220 60 L190 120 H250 Z M380 60 L350 120 H410 Z"/>
-    <path ${INK} d="M260 172 H340"/>
-    <path fill="currentColor" d="M200 112 l6 -34 6 34 z M220 112 l6 -40 6 40 z"/>
-    <path fill="#b0261c" d="M362 112 l6 -34 6 34 z M382 112 l6 -40 6 40 z"/>
+    <path ${INK} d="M300 40 V172"/><path ${INK} d="M260 172 H340"/>
+    <g class="a-tilt">
+      <path ${INK} d="M220 60 H380"/><path ${INK} d="M220 60 L190 120 H250 Z M380 60 L350 120 H410 Z"/>
+      <path fill="currentColor" d="M200 112 l6 -34 6 34 z M220 112 l6 -40 6 40 z"/>
+      <path fill="#b0261c" d="M362 112 l6 -34 6 34 z M382 112 l6 -40 6 40 z"/>
+    </g>
     <path ${INK} d="M60 186 H540"/><rect x="60" y="188" width="480" height="8" fill="url(#hatch)"/>`, "Весы ОСВ: потолки, паритет, уровни"),
   lodge: frame(`
     <path ${INK} d="M90 186 V96 L300 34 L510 96 V186"/>
     <path ${INK} d="M90 120 H510 M90 150 H510" opacity=".45"/>
     <rect x="170" y="128" width="260" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
     <path ${INK} d="M190 142 v30 M410 142 v30"/>
-    ${[0,1,2,3,4].map(k => `<circle cx="${200 + k*50}" cy="118" r="8" ${INK}/>`).join('')}
+    ${[0,1,2,3,4].map(k => `<circle class="${k === 2 ? "a-nod" : ""}" cx="${200 + k*50}" cy="118" r="8" ${INK}/>`).join('')}
     <path ${INK} d="M130 70 q14 -14 28 0 M150 58 v-20 M138 42 l12 -6 12 6"/>
-    <path ${RED} d="M448 108 q10 -6 16 4 q6 12 -6 18 q-14 4 -14 -12 z"/>
+    <path ${INK} d="M440 186 V124 H480 V186"/>
+    <path class="a-fire" fill="#b0261c" d="M448 172 q8 -22 14 -30 q2 14 10 18 q4 -8 2 -14 q10 14 4 26 z"/>
     <path ${INK} d="M40 188 H560"/>`, "Завидово, 1975 г.: длинный стол, обсуждают раздел доклада"),
   soy: frame(`
-    <path ${INK} d="M300 190 C296 150 304 110 300 40"/>
-    ${[[300,70,-1],[300,96,1],[300,124,-1],[300,150,1]].map(([x,y,d]) => `<path ${INK} d="M${x} ${y} q${d*50} -24 ${d*80} 6 q${-d*40} 20 ${-d*80} -6"/>`).join('')}
-    ${[[312,84],[286,112],[314,138],[288,164]].map(([x,y]) => `<path fill="#c9b56a" stroke="currentColor" stroke-width="2.5" d="M${x} ${y} q10 -2 14 14 q-2 10 -10 6 q-8 -8 -4 -20z"/>`).join('')}
-    <path ${RED} d="M120 60 h80 M120 76 h60 M120 92 h70"/>
+    <g class="a-sway-b">
+      <path ${INK} d="M300 190 C296 150 304 110 300 40"/>
+      ${[[300,70,-1],[300,96,1],[300,124,-1],[300,150,1]].map(([x,y,d]) => `<path ${INK} d="M${x} ${y} q${d*50} -24 ${d*80} 6 q${-d*40} 20 ${-d*80} -6"/>`).join('')}
+      ${[[312,84],[286,112],[314,138],[288,164]].map(([x,y]) => `<path fill="#c9b56a" stroke="currentColor" stroke-width="2.5" d="M${x} ${y} q10 -2 14 14 q-2 10 -10 6 q-8 -8 -4 -20z"/>`).join('')}
+    </g>
+    <path ${RED} class="a-write" d="M120 60 h80 M120 76 h60 M120 92 h70"/>
     <path ${INK} d="M60 190 H540"/>`, "Соя: опыт американской фермы в записке для ЦК"),
   mountains: frame(`
+    <path fill="url(#hatch)" d="M40 186 L150 70 L220 140 L310 40 L420 150 L470 100 L560 186 Z" opacity=".5"/>
     <path ${INK} d="M40 186 L150 70 L220 140 L310 40 L420 150 L470 100 L560 186"/>
     <path fill="#f6f5ef" stroke="currentColor" stroke-width="3" d="M286 66 L310 40 L334 68 L320 62 L310 72 L298 62 Z"/>
-    <path fill="url(#hatch)" d="M40 186 L150 70 L220 140 L310 40 L420 150 L470 100 L560 186 Z" opacity=".5"/>
-    <path ${RED} d="M380 70 h50 M405 70 v8 M386 86 h34 l10 -8 M400 86 v6"/>
+    <g class="a-fly">
+      <path ${RED} d="M380 70 h50 M405 70 v8 M386 86 h34 l10 -8 M400 86 v6"/>
+      <path ${RED} class="a-rotor" d="M380 70 h50"/>
+    </g>
+    ${[0,1,2,3,4,5].map(k => `<circle class="a-snow" style="animation-delay:${k * .9}s" cx="${80 + k * 85}" cy="20" r="2.4" fill="currentColor"/>`).join('')}
     <path ${INK} d="M40 188 H560"/>`, "Декабрь 1979 г.: горы на южной границе"),
   archive: frame(`
-    <path ${INK} d="M180 70 H420 V186 H180 Z"/><path ${INK} d="M170 54 H430 V70 H170 Z"/>
+    <path ${INK} d="M180 70 H420 V186 H180 Z"/>
+    <g class="a-lid"><path ${INK} d="M170 54 H430 V70 H170 Z"/></g>
     <rect x="260" y="100" width="80" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
     <text x="300" y="126" text-anchor="middle" font-family="PT Mono, monospace" font-size="15" fill="currentColor">Ф. 5</text>
     <path ${INK} d="M286 152 h28"/>
-    <path ${RED} d="M196 40 q30 -16 60 0"/>
+    <path ${RED} class="a-draw" d="M196 40 q30 -16 60 0"/>
     <path ${INK} d="M60 190 H540"/>`, "Короб с делом. Через полвека его закажет историк")
 };
 
@@ -345,7 +441,7 @@ const SCENES = [
   text: s => `<p>Группу вывозят на дачу: к пленуму нужен доклад. Днём читки вслух, вечером бильярд, кино и обязательная «парткурица». Текст правят хором, каждое слово взвешивают.</p>
     <p>Абзац о международном положении поручили вам.</p>`,
   choices: s => [
-    { t: "Вписать смелую формулировку о мирном сосуществовании. Пусть вычёркивают.", fx: { pen: +2, con: +1, trust: -1 }, like: "Арбатов",
+    { t: "Вписать смелую формулировку о мирном сосуществовании. Пусть вычёркивают.", req: { pen: 5 }, fx: { pen: +2, con: +1, trust: -1 }, like: "Арбатов",
       res: "Формулировку сократили наполовину, но смысл остался. На читке кто-то из старших хмыкнул, и вы так и не поняли, одобрил он или предупредил.",
       ep: "вы спорили на дачных читках из-за каждого прилагательного" },
     { t: "Держаться рамки, а вечером играть со всеми в бильярд.", fx: { trust: +1, circ: +1 }, like: "Брутенц",
@@ -366,7 +462,7 @@ const SCENES = [
   text: s => `<p>Консультанты двух международных отделов пишут документ по поручению Хрущёва. Обычно секретари ЦК звонят по нескольку раз в день. Сегодня не звонит никто. И вчера тоже.</p>
     <p>Кто-то говорит то, о чём думают все: в Москве что-то происходит.</p>`,
   choices: s => [
-    { t: "Вызваться ехать в Москву на разведку.", fx: { circ: +1, trust: +1 }, set: { scout: true }, like: "Бурлацкий",
+    { t: "Вызваться ехать в Москву на разведку.", req: { circ: 4 }, fx: { circ: +1, trust: +1 }, set: { scout: true }, like: "Бурлацкий",
       res: "На Старой площади подозрительная тишина. В коридорах незнакомые рослые молодые люди в штатском. Коллега шёпотом говорит о заседании Президиума. 14 октября пленум отправляет Хрущёва на пенсию.",
       ep: "в октябре шестьдесят четвёртого вы первым увидели людей в штатском в коридорах ЦК" },
     { t: "Дописывать текст. Кто бы ни победил, документ понадобится.", fx: { pen: +1, con: -1 }, like: "Брутенц",
@@ -410,11 +506,11 @@ const SCENES = [
   text: s => `<p>Делюсин ведёт ${s.place === "out" ? "бывших коллег" : "группу"} на спектакль Любимова. Вы выходите из театра оглушённым: такого в Москве ещё не видели.</p>
     <p>Через пару лет над театром сгущаются тучи: говорят о снятии спектаклей и даже о закрытии. Любимов ищет заступников наверху.</p>`,
   choices: s => [
-    { t: "Сесть с Любимовым и сочинить письмо прямо Брежневу.", fx: { con: +2, circ: +2, trust: -1 }, set: { taganka: true }, like: "Бовин",
+    { t: "Сесть с Любимовым и сочинить письмо прямо Брежневу.", req: { circ: 5, pen: 4 }, fx: { con: +2, circ: +2, trust: -1 }, set: { taganka: true }, like: "Бовин",
       res: "Письмо уходит наверх. Театр живёт дальше. Чья в этом заслуга, никто точно не скажет, но в фойе вас теперь узнают.",
       ep: "вы писали с Любимовым письмо генсеку и до сих пор помните первую фразу" },
     { t: s.place === "out" ? "Попросить бывших коллег замолвить слово перед Андроповым." : "Замолвить слово перед Андроповым.",
-      fx: { con: +1, trust: -2 }, set: { taganka: true }, like: "Шахназаров",
+      req: { trust: 4 }, fx: { con: +1, trust: -2 }, set: { taganka: true }, like: "Шахназаров",
       res: "Андропов соглашается встретиться с Любимовым, а потом, похоже, получает выговор за вмешательство в «чужие владения». С тех пор он смотрит на вас холоднее.",
       ep: "вы заступились за Таганку перед Андроповым и заплатили за это его холодностью" },
     { t: "Ходить на премьеры, но ни во что не вмешиваться.", fx: { circ: +1, con: -1 }, like: "Черняев",
@@ -432,14 +528,14 @@ const SCENES = [
   text: s => `<p>Весна. Арбатов приводит вас в здание, отданное под будущий Институт США. Мебели ещё нет, в директорском кабинете гуляет эхо.</p>
     <p>${s.flags.backedArbatov ? "Он помнит, кто поддержал его два года назад." : "Ему нужны люди, которые умеют писать и для ЦК, и для журналов."} Вам предлагают возглавить направление.</p>`,
   choices: s => [
-    { t: "Пойти к Арбатову: американистика — дело на десятилетия.", fx: { circ: +2, pen: +1, trust: -1 }, set: { place: "inst" }, like: "Арбатов",
+    { t: "Пойти к Арбатову: американистика — дело на десятилетия.", req: s.flags.backedArbatov ? {} : { pen: 5 }, fx: { circ: +2, pen: +1, trust: -1 }, set: { place: "inst" }, like: "Арбатов",
       res: "Вы набираете отдел, спорите о названии будущего журнала и учитесь говорить с американскими гостями. Записки в ЦК теперь пишете из Хлебного переулка.",
       ep: "весной шестьдесят седьмого вы стояли с Арбатовым в пустом кабинете и решили остаться" },
     { t: s.place === "out" ? "Отказаться: в своём институте спокойнее." : "Остаться в аппарате: настоящие решения принимаются здесь.",
       fx: s.place === "out" ? { con: +1 } : { trust: +1 }, like: s.place === "out" ? null : "Петренко",
       res: s.place === "out" ? "Арбатов пожимает плечами. Институт растёт без вас, а вы пишете книгу, которую не торопятся издавать." : "Вы остаётесь на Старой площади. Ближе к решениям, дальше от науки.",
       ep: s.place === "out" ? "вы отказали Арбатову и не жалели об этом вслух" : "вы отказали Арбатову и остались на Старой площади" },
-    { t: "Перейти в консультантскую группу Пономарева, в Международный отдел.", fx: { trust: +1, circ: +1, con: -1 }, set: { place: "mo" }, like: "Брутенц",
+    { t: "Перейти в консультантскую группу Пономарева, в Международный отдел.", req: { trust: 5 }, fx: { trust: +1, circ: +1, con: -1 }, set: { place: "mo" }, like: "Брутенц",
       res: "«Конкурирующая фирма» встречает вас настороженно. Там свои порядки, свои дачи и свой спор о том, кто придумал консультантов.",
       ep: "вы перешли к Пономареву, в «конкурирующую фирму»" }
   ],
@@ -463,8 +559,9 @@ const SCENES = [
       { t: "Работать, но каждую ночь записывать, что видели.", fx: { pen: +1 }, set: { diary: true }, like: "Бовин",
         res: "Ваши записи по дням когда-нибудь станут источником. Пока они лежат в ящике стола, и вы надеетесь, что никто его не откроет.",
         ep: "в августе шестьдесят восьмого вы начали вести записи по дням" },
-      { t: "Сказаться больным.", fx: { trust: -2, con: +1 }, like: null,
-        res: "Отсутствие заметили. Болезнь — тоже позиция, и наверху её поняли именно так.",
+      { t: "Сказаться больным.", risk: { stat: "circ", base: 0.1, per: 0.08 }, fx: { trust: -1, con: +1 }, like: null,
+        res: "Врач из Кремлёвки, ваш давний знакомый, выписывает бюллетень без вопросов. Отсутствие заметили, но придраться не к чему.",
+        fail: { fx: { trust: -3, con: +1 }, res: "Отсутствие заметили. Болезнь — тоже позиция, и наверху её поняли именно так." },
         ep: "в августе шестьдесят восьмого вы сказались больным, и все поняли, чем вы больны" }
     ] : [
       { t: "До утра слушать Би-би-си с другом и говорить начистоту.", fx: { con: +1, circ: +1 }, like: "Брутенц",
@@ -495,7 +592,7 @@ const SCENES = [
     { t: "Сгладить острые места и добавить вывод «в духе линии».", fx: { trust: +1, con: -1 }, like: null,
       res: "Записка ложится в папку без пометок. Никто не спорит, никто не читает дальше первой страницы.",
       ep: "в шестьдесят девятом вы сгладили запись беседы, и её никто не дочитал" },
-    { t: "Дописать собственные рекомендации: что стоит перенять у американцев.", fx: { pen: +2, circ: +1 }, set: { transfer: true }, like: "Историк",
+    { t: "Дописать собственные рекомендации: что стоит перенять у американцев.", req: { pen: 6 }, fx: { pen: +2, circ: +1 }, set: { transfer: true }, like: "Историк",
       res: "Рекомендации вызывают спор. Через год похожая мысль появляется в докладе без вашей фамилии. Так в Москву приходят идеи.",
       ep: "в шестьдесят девятом вы дописали к записи беседы свои рекомендации, и через год их произнесли с трибуны" }
   ],
@@ -509,13 +606,16 @@ const SCENES = [
   text: s => `<p>Готовят тексты к визиту Никсона. ${inApp(s) ? "Вас взяли в Завидово в бригаду «речевиков»." : "Вас позвали в Завидово как приглашённого эксперта."} За общим столом генсек в хорошем настроении, рассказывает охотничью историю.</p>
     <p>Все смеются. Пауза. Ждут, кто подхватит.</p>`,
   choices: s => [
-    { t: "Пошутить с генсеком на равных.", fx: { circ: +1, trust: -3 }, set: inApp(s) ? { place: "izv", exiled: true } : {}, like: "Бовин",
+    { t: "Пошутить с генсеком на равных.", risk: { stat: "pen", base: 0.1, per: 0.06 }, fx: { circ: +1, trust: +2 }, like: "Александров-Агентов",
+      res: "Генсек хохочет до слёз и пересказывает вашу остроту весь вечер. Вас зовут сидеть ближе. Надолго ли, никто не знает.",
+      ep: "в Завидове вы рассмешили генсека, и полгода вам казалось, что это навсегда",
+      fail: { fx: { circ: +1, trust: -3 }, set: inApp(s) ? { place: "izv", exiled: true } : {}, like: "Бовин",
       res: inApp(s) ? "Стол замолкает. Через месяц вас переводят в «Известия». Формально это повышение, на деле — ссылка. Вы долго сидите в кафе неподалёку и думаете грустную думу." : "Стол замолкает. Больше в Завидово вас не зовут.",
-      ep: "в Завидове вы пошутили с генсеком на равных, и Старая площадь отпустила вас навсегда" },
+      ep: "в Завидове вы пошутили с генсеком на равных, и Старая площадь вас отпустила" } },
     { t: "Смеяться вместе со всеми и вернуться к тексту.", fx: { trust: +1, con: -1 }, like: "Александров-Агентов",
       res: "Генсек доволен вечером. Ваш абзац о визите остаётся в речи почти без правок.",
       ep: "в Завидове вы смеялись вместе со всеми" },
-    { t: "Попроситься в газету: «хочу писать под своей фамилией».", fx: { pen: +2, trust: -1 }, set: { place: "izv" }, like: "Бовин",
+    { t: "Попроситься в газету: «хочу писать под своей фамилией».", req: { pen: 6 }, fx: { pen: +2, trust: -1 }, set: { place: "izv" }, like: "Бовин",
       res: "Просьбу удовлетворяют неожиданно быстро. Главный редактор советует сначала осмотреться и «почувствовать атмосферу». Первую вашу статью снимают из номера, и вы идёте подписывать её к секретарю ЦК.",
       ep: "вы сами попросились в газету и впервые увидели свою фамилию под статьёй" }
   ],
@@ -535,7 +635,7 @@ const SCENES = [
     { t: "Учесть позицию военных: осторожная формула, ни шагу без гарантий.", fx: { trust: +1, con: -1 }, like: null,
       res: "Справку хвалят за взвешенность. Через неделю вы видите её в чужой папке с чужой подписью.",
       ep: "в семьдесят четвёртом вы написали осторожную справку, и её подписал другой" },
-    { t: "Предложить обсудить потолки неофициально, через Дартмутские встречи.", fx: { circ: +2, trust: -1 }, set: { dartmouth: true }, like: "Дартмут",
+    { t: "Предложить обсудить потолки неофициально, через Дартмутские встречи.", req: { circ: 6 }, fx: { circ: +2, trust: -1 }, set: { dartmouth: true }, like: "Дартмут",
       res: "Идею приняли без восторга, но в составе следующей делегации на встречу с американцами есть и ваша фамилия.",
       ep: "вы ездили на Дартмутские встречи и спорили с американцами, которые потом стали вам друзьями" }
   ],
@@ -545,11 +645,31 @@ const SCENES = [
     { who: "Дартмут", what: "Дартмутские встречи организовывали ИМЭМО и ИСКАН; советскую группу возглавлял сначала Иноземцев, затем Арбатов.", src: "Черкасов 2004, с. 445 (по Примакову)" }
   ] },
 
+{ year: "1974", ill: "phone", when: s => s.flags.exiled && !s.flags.returned && s.stats.pen >= 5, place: "Звонок по «вертушке»", title: "Вас зовут обратно",
+  text: s => `<p>Вы давно не на Старой площади. ${s.place === "izv" ? "Колонки в газете читают, на летучках вас цитируют." : "Книги выходят, на вас ссылаются."} И вдруг звонок: готовят большую речь, бригада не справляется, нужен человек с пером.</p>
+    <p>Опала, как выясняется, бывает с перерывами на работу.</p>`,
+  choices: s => [
+    { t: "Ехать в Завидово: писать речи, оставаясь на своей работе.", fx: { trust: +3, pen: +1, con: -1 }, set: { returned: true }, like: "Бовин",
+      res: "Вас встречают, будто вы и не уходили. Днём вы правите доклад, вечером возвращаетесь к своей колонке. Два стула оказываются удобнее одного.",
+      ep: "из опалы вас позвали обратно в Завидово, и вы писали речи, не уходя из газеты" },
+    { t: "Вежливо отказаться: у вас теперь своя фамилия.", fx: { con: +2, trust: -1 }, set: { returned: true }, like: null,
+      res: "На том конце провода долго молчат. Больше не звонят, но и не мешают.",
+      ep: "однажды вы отказались вернуться на Старую площадь, и это было приятно" },
+    { t: "Согласиться, но выговорить условие: свои абзацы вы пишете сами, без «доводки».", req: { pen: 7 }, fx: { trust: +1, pen: +2 }, set: { returned: true }, like: "Бовин",
+      res: "Условие принимают со смешком. Ваши абзацы правят меньше чужих, но правят всё равно.",
+      ep: "вы вернулись в Завидово на своих условиях, и их соблюдали почти всегда" }
+  ],
+  voices: [
+    { who: "Бовин", what: "После перевода в «Известия» — «отхожие промыслы» и возвращение в Завидово: снова работа над текстами Брежнева.", src: "Бовин, «XX век как жизнь», вступление к части об «Известиях», физ. 265–266" },
+    { who: "Александров-Агентов", what: "Бовина Брежнев «надолго отстранил» за фамильярность: опала была, но не навсегда.", src: "Александров-Агентов 1994, с. 279" }
+  ] },
+
 { year: "1975", ill: "lodge", place: "Завидово, ноябрь–декабрь", title: "Ангола",
   text: s => `<p>Готовят доклад к XXV съезду. В Завидове собрались работники ЦК, МИДа и приглашённые учёные. Обсуждают внешнеполитический раздел, и речь заходит об Анголе: кубинские войска, наша помощь.</p>
     <p>Генсек обводит взглядом стол.</p>`,
   choices: s => [
-    { t: "Сказать прямо: Ангола ударит по разрядке и по отношениям с США.", fx: { con: +2, pen: +1, trust: -1 }, set: { angola: true }, like: "Арбатов",
+    { t: "Сказать прямо: Ангола ударит по разрядке и по отношениям с США.", risk: { stat: "trust", base: 0.15, per: 0.08 }, fx: { con: +2, pen: +1, trust: -1 }, set: { angola: true }, like: "Арбатов",
+      fail: { fx: { con: +2, trust: -4 }, set: { angola: true }, res: "Генсек багровеет и обрывает разговор: «Вы что, за американцев?» Стол замолкает. В бригаду вас больше не включают.", ep: "в Завидове вы возразили генсеку из-за Анголы и больше туда не ездили" },
       res: "Спор выходит долгим и громким. Генсек не соглашается, но и не обрывает. Вечером к вам подходят двое и молча жмут руку.",
       ep: "в Завидове вы возразили генсеку из-за Анголы при двадцати свидетелях" },
     { t: "Промолчать за столом и поговорить потом с глазу на глаз.", fx: { trust: +1 }, like: "Арбатов",
@@ -570,7 +690,7 @@ const SCENES = [
   text: s => `<p>Стране не хватает кормового белка. ${s.place === "inst" ? "Институт готовит записку в ЦК о производстве и использовании сои в СССР с опорой на американский опыт." : "Вас просят отрецензировать записку Института США о сое для ЦК."}</p>
     <p>В записке Америка выглядит образцом: технологическая держава, у которой есть чему учиться. Это и сила текста, и его опасность.</p>`,
   choices: s => [
-    { t: "Прямо рекомендовать американские практики: сорта, технологии, переработку.", fx: { pen: +1, circ: +1, con: +1, trust: -1 }, set: { soy: true }, like: "Историк",
+    { t: "Прямо рекомендовать американские практики: сорта, технологии, переработку.", req: { pen: 5 }, fx: { pen: +1, circ: +1, con: +1, trust: -1 }, set: { soy: true }, like: "Историк",
       res: "Записку отправляют в Госплан и Минсельхоз. Через два года вы видите на опытном поле то, о чём писали.",
       ep: "вы писали записку о сое и однажды увидели на опытном поле то, о чём писали" },
     { t: "Завернуть опыт в формулы о преимуществах социалистического хозяйства.", fx: { trust: +1, con: -1 }, like: null,
@@ -589,7 +709,8 @@ const SCENES = [
   text: s => `<p>Решение о вводе войск в Афганистан принято узким кругом. Отделы узнают о нём, когда всё уже началось. ${s.place === "mo" ? "Международному отделу поручено добиться от компартий заявлений о поддержке." : s.place === "izv" ? "Редакция ждёт комментария." : "Наверху ждут «обоснования»."}</p>
     <p>За окном снег. Вы вспоминаете август шестьдесят восьмого.</p>`,
   choices: s => [
-    { t: "Подать записку с возражениями: война невыигрываемая, удар по разрядке.", fx: { con: +2, trust: -2 }, like: "Арбатов",
+    { t: "Подать записку с возражениями: война невыигрываемая, удар по разрядке.", risk: { stat: "trust", base: 0.1, per: 0.07 }, fx: { con: +2, trust: -2 }, like: "Арбатов",
+      fail: { fx: { con: +2, trust: -5 }, res: "Записку возвращают с резолюцией красным карандашом. Через неделю с вами беседуют в кабинете, где не предлагают сесть.", ep: "в декабре семьдесят девятого вы написали, что эту войну нельзя выиграть, и за это вас вычеркнули" },
       res: "Записку принимают без комментариев. Через месяц вас не включают в делегацию, где вы были бы нужнее всех.",
       ep: "в декабре семьдесят девятого вы написали, что эту войну нельзя выиграть, и оказались правы" },
     { t: s.place === "izv" ? "Написать комментарий, как велено." : "Делать, что поручено: объяснять решение друзьям и союзникам.", fx: { trust: +1, con: -2 }, like: "Брутенц",
@@ -609,9 +730,15 @@ const SCENES = [
 
 /* ——— Концовки ——— */
 const ENDINGS = [
+  { key: "fired", lost: true, test: s => s.flags.fired, title: "Освобождён от занимаемой должности",
+    real: "Уход из аппарата бывал разным: Бурлацкого вывели из ЦК в 1965 г., Делюсин ушёл в апреле того же года. Тех, у кого не было своего круга, мемуаристы почти не вспоминают.", src: "Петров 2023, с. 258–261; реестр консультантов, § 4" },
+  { key: "hollow", lost: true, test: s => s.flags.hollow, title: "Человек системы",
+    real: "«Человек системы» — название мемуаров Арбатова. Брутенц пишет о «двоемыслии и двоедушии» как общем состоянии людей аппарата после 1968 г.", src: "Арбатов, «Человек системы»; Брутенц 1998, с. 239–240" },
+  { key: "speech", test: s => s.flags.returned && s.place === "izv" && s.stats.trust >= 4, title: "Обозреватель и речевик",
+    real: "А. Е. Бовин после перевода в «Известия» продолжал работать над текстами Брежнева в Завидове: газетная колонка и речи генсека одновременно.", src: "Бовин, физ. 265–267; Александров-Агентов 1994, с. 279" },
   { key: "izv", test: s => s.place === "izv", title: "Политобозреватель",
     real: "А. Е. Бовин — консультант и спичрайтер Брежнева, затем политический обозреватель «Известий»; первую статью ему подписал Катушев.", src: "Бовин, физ. 266–267; страница «Бовин (А. Е.)» (справочные сведения — сверить)" },
-  { key: "inst", test: s => s.place === "inst" && s.stats.pen >= 6, title: "Институт в Хлебном переулке",
+  { key: "inst", test: s => s.place === "inst" && s.stats.pen >= 7 && s.stats.circ >= 6, title: "Институт в Хлебном переулке",
     real: "Г. А. Арбатов — консультант с мая 1964 г. до конца 1967 г., затем директор Института США АН СССР; спорил с Брежневым об Анголе в 1975 г.", src: "Арбатов, «Человек системы»; хронология вики" },
   { key: "out", test: s => s.place === "out", title: "Вне аппарата",
     real: "Ф. М. Бурлацкий, выведенный из ЦК в 1965 г., рассказал историю группы так, что она начинается с него. Л. П. Делюсин ушёл из отдела в апреле 1965 г.", src: "Бурлацкий 1990; Петров 2023, с. 258–261" },
@@ -627,6 +754,9 @@ const ENDINGS = [
 
 /* ——— Эпилог: художественный итог из ваших решений ——— */
 const OPEN = {
+  fired: "Август девяносто первого вы встречаете в областной библиотеке, где заведуете отделом краеведения. Сюда вас определили «с понижением» много лет назад. Радио на подоконнике говорит о Москве, и вы ловите себя на том, что знаете по именам половину тех, кого называют.",
+  hollow: "Август девяносто первого вы встречаете в своём кабинете. Вы давно не спорите и не пишете ничего, кроме того, что нужно. Когда по телевизору показывают танки, вы первым делом думаете, какую справку от вас попросят.",
+  speech: "Август девяносто первого вы встречаете в редакции. На столе гранки колонки, в шкафу папка с черновиками речей, которые произносил не вы. Двадцать лет вы жили на два стула и привыкли, что на обоих неудобно.",
   izv:  "Август девяносто первого вы встречаете в редакции. Телетайп стучит третьи сутки, и молодые сотрудники смотрят на вас так, будто вы что-то знаете. Вы действительно знаете: вы видели, как такие решения пишутся, только тогда их писали другие.",
   inst: "Август девяносто первого вы встречаете в кабинете, где когда-то гуляло эхо. Теперь здесь шкафы до потолка, американские журналы и телефон, который звонит не переставая. Звонят из Вашингтона и спрашивают, что будет. Вы отвечаете честно: не знаете.",
   out:  "Август девяносто первого вы встречаете на даче, у приёмника. Того самого, который слушали в шестьдесят восьмом. Би-би-си теперь не глушат, и это кажется вам самым невероятным из всего, что случилось.",
@@ -636,6 +766,9 @@ const OPEN = {
   dir:  "Август девяносто первого вы встречаете директором института. Сотрудники спрашивают, подписывать ли обращение, и впервые за всю вашу жизнь ответ не нужно согласовывать."
 };
 const CLOSE = {
+  fired: "Вечером вы достаёте папку с копиями старых записок. Их некому показать. Вы думаете, что у Бовина на вашем месте нашлись бы друзья в газете, а у вас нашлись только недоброжелатели наверху.",
+  hollow: "Справку от вас так и не попросили. Вы сидите до темноты и не можете вспомнить, когда в последний раз сказали «нет».",
+  speech: "Вечером вы перечитываете свою колонку и абзац из старой речи генсека, который тоже ваш. Они почти не отличаются, и вы не знаете, гордиться этим или стыдиться.",
   izv:  "Вечером вы садитесь за колонку. Пишете медленно, как не писали с шестьдесят четвёртого: никто её не согласует, и от этого страшнее, чем раньше.",
   inst: "Ночью вы перечитываете старые записки в ЦК. Многое в них сбылось, хотя почти ничего из этого не было сделано. Вы думаете, что это и есть судьба эксперта: быть правым в архиве.",
   out:  "Ваши книги стоят на полке, и все до одной подписаны только вашей фамилией. Мемуары вы начнёте завтра, и группа в них будет начинаться с вас.",
@@ -650,7 +783,7 @@ function epilogue(e) {
   const first = S.log[0];
   if (first && first.ep) pick.push(first.ep);
   for (const l of S.log) if (want.includes(l.title) && l.ep) pick.push(l.ep);
-  const extra = S.log.find(l => ["Добрый человек из Сезуана", "Острота за столом", "Записка о сое", "Записка об ОСВ"].includes(l.title) && l.ep);
+  const extra = S.log.find(l => ["Вас зовут обратно", "Добрый человек из Сезуана", "Острота за столом", "Записка о сое", "Записка об ОСВ"].includes(l.title) && l.ep);
   if (extra) pick.splice(2, 0, extra.ep);
   const memories = pick.slice(0, 6);
   const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
@@ -660,9 +793,9 @@ function epilogue(e) {
 }
 
 /* ——— Состояние и отрисовка ——— */
-const KEY = "konsultant-v2";
+const KEY = "konsultant-v3";
 let S;
-function fresh() { return { i: 0, phase: "ask", pick: null, place: "cand", stats: { ...START }, flags: {}, log: [] }; }
+function fresh() { return { i: 0, phase: "ask", pick: null, place: "cand", stats: { ...START }, flags: {}, log: [], prev: null }; }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 function load() { try { const v = JSON.parse(localStorage.getItem(KEY) || "null"); if (v && v.stats && v.i < SCENES.length) return v; } catch (e) {} return null; }
 
@@ -670,22 +803,75 @@ const $ = id => document.getElementById(id);
 const clamp = v => Math.max(0, Math.min(10, v));
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const val = (x, s) => typeof x === "function" ? x(s) : x;
+const shown = (sc, k) => !sc.when || k === S.i || S.log.some(l => l.title === sc.title) || (k > S.i && sc.when(S));
+
+/* Требования и риск */
+function missing(c) {
+  return Object.entries(c.req || {}).filter(([k, v]) => S.stats[k] < v).map(([k, v]) => `${STATS[k].short} ${v} (у вас ${S.stats[k]})`);
+}
+function chanceOf(c) {
+  if (!c.risk) return null;
+  const p = c.risk.base + c.risk.per * S.stats[c.risk.stat];
+  return Math.max(0.05, Math.min(0.95, p));
+}
+
+/* Последствия статов: увольнение, мягкая посадка, выгорание */
+function checks() {
+  const ev = [];
+  if (S.stats.pen <= 0) {
+    S.stats.trust = clamp(S.stats.trust - 2);
+    ev.push({ t: "Возвращено на доработку", x: "Ваши тексты третий раз подряд возвращают с пометкой «сыро». Наверху начинают сомневаться, зачем вы нужны. Доверие −2." });
+  }
+  if (S.stats.trust <= 0) {
+    const strong = S.stats.circ >= 6;
+    if (inApp(S)) {
+      if (strong) {
+        const to = S.stats.pen >= 5 ? "izv" : "inst";
+        S.place = to; S.stats.trust = 3; S.flags.exiled = true;
+        ev.push({ t: "Приказ: перевести на другую работу", x: to === "izv"
+          ? "Из аппарата вас убирают. Но друзья в «Известиях» успевают раньше кадровиков: вас берут политическим обозревателем. Формально это повышение. Круг спас вас."
+          : "Из аппарата вас убирают. Но старые знакомые из академического института успевают раньше кадровиков: вас берут заведовать сектором. Круг спас вас." });
+      } else {
+        S.flags.fired = true;
+        ev.push({ t: "Приказ: освободить от занимаемой должности", x: "Доверие исчерпано, а заступиться за вас некому: круг слишком мал. Вас отправляют в провинцию «на укрепление». Дело закрыто досрочно." });
+      }
+    } else if (S.place !== "cand") {
+      if (strong) {
+        S.stats.trust = 2;
+        ev.push({ t: "Вас прикрыли", x: "Сверху требуют «принять меры». Ваш директор или главный редактор берёт удар на себя: выговор без занесения. Круг спас вас и на этот раз." });
+      } else {
+        S.flags.fired = true;
+        ev.push({ t: "Приказ: освободить от занимаемой должности", x: "Сверху требуют «принять меры», и прикрыть вас некому. Вас увольняют по сокращению штатов. Дело закрыто досрочно." });
+      }
+    }
+  }
+  if (!S.flags.fired && S.stats.con <= 0) {
+    S.flags.hollow = true;
+    ev.push({ t: "Совесть: 0", x: "Однажды утром вы понимаете, что готовы подписать что угодно, и вам всё равно. Карьера продолжится, но играть дальше не за что. Дело закрыто досрочно." });
+  }
+  return ev;
+}
+const over = () => S.flags.fired || S.flags.hollow;
 
 function renderYears() {
   $("years").innerHTML = SCENES.map((sc, k) => {
+    if (!shown(sc, k)) return "";
     const cls = S.phase === "end" || k < S.i ? "done" : k === S.i ? "now" : "";
     return `<span class="${cls}" title="${esc(sc.title)}">${sc.year}</span>`;
   }).join("") + `<span class="${S.phase === "end" ? "now" : ""}">1991</span>`;
 }
 
+const WARN = { trust: "под угрозой увольнения", pen: "тексты возвращают", con: "почти ничего не осталось", circ: "заступиться будет некому" };
 function renderFile() {
   $("file").innerHTML = `<div class="lbl">Личное дело №&nbsp;117-К</div><h4>Консультант</h4>` +
     Object.entries(STATS).map(([k, m]) => {
-      const v = S.stats[k];
-      return `<div class="meter"><span>${m.name}</span><span class="val">${v}/10</span>
+      const v = S.stats[k], warn = v <= 1 || (k === "circ" && v < 6 && S.stats.trust <= 2);
+      return `<div class="meter${warn ? " warn" : ""}"><span class="name">${m.name}</span><span class="val">${v}/10</span>
         <span class="bar" aria-hidden="true">${"▮".repeat(v)}<i>${"▯".repeat(10 - v)}</i></span>
-        <span class="what">${m.what}</span></div>`;
-    }).join("") + `<div class="pos">Место службы: <b>${PLACES[S.place]}</b></div>`;
+        ${warn ? `<span class="warnline">${WARN[k]}</span>` : `<span class="what">${m.what}</span>`}</div>`;
+    }).join("") +
+    `<div class="pos">Место службы: <b>${PLACES[S.place]}</b></div>
+     <div class="pos">Правила: доверие 0 — увольнение, но при круге от 6 вас пристроят рядом. Совесть 0 — конец игры. Перо 0 — тексты возвращают.</div>`;
 }
 
 function voicesHTML(v, like) {
@@ -700,55 +886,82 @@ function fxHTML(fx) {
 
 function renderScene() {
   const sc = SCENES[S.i];
-  let html = `<div class="grif"><span class="secret">Секретно · экз. единств.</span><span>${sc.year} · лист ${S.i + 1} из ${SCENES.length}</span></div>
+  let html = `<div class="grif"><span class="secret">Секретно · экз. единств.</span><span>${sc.year} · ${esc(sc.title)}</span></div>
     ${ILL[sc.ill] || ""}
     <div class="place">${esc(val(sc.place, S))}</div><h2>${esc(sc.title)}</h2><div class="text">${sc.text(S)}</div>`;
   if (S.phase === "ask") {
-    html += `<div class="choices">${sc.choices(S).map((c, k) => `<button type="button" id="c${S.i}-${k}" data-k="${k}" data-n="${k + 1}.">${esc(c.t)}</button>`).join("")}</div>`;
+    html += `<div class="choices">${sc.choices(S).map((c, k) => {
+      const miss = missing(c), ch = chanceOf(c);
+      const note = miss.length ? `<span class="req">Недоступно. Нужно: ${esc(miss.join(", "))}</span>`
+        : ch !== null ? `<span class="risk">Риск: удастся примерно в ${Math.round(ch * 100)}% случаев (зависит от показателя «${STATS[c.risk.stat].short}»)</span>` : "";
+      return `<button type="button" id="c${S.i}-${k}" data-k="${k}" data-n="${k + 1}."${miss.length ? " disabled" : ""}>${esc(c.t)}${note}</button>`;
+    }).join("")}</div>`;
   } else {
     const p = S.pick;
+    const dice = p.chance !== null ? `<div class="dice">Шанс ${Math.round(p.chance * 100)}% · ${p.ok ? "удалось" : "не удалось"}</div>` : "";
     const likeLine = p.like ? `<div class="like">Так же поступили или похоже описывают: ${esc(p.like)} — см. ниже.</div>` : `<div class="like">Среди свидетельств к этой сцене такого выбора нет — это ваш собственный путь.</div>`;
-    html += `<div class="result"><div class="picked">${esc(p.t)}</div>${fxHTML(p.fx)}<p>${esc(p.res)}</p>${likeLine}</div>${voicesHTML(sc.voices, p.like)}
-      <button type="button" class="btn" id="next">${S.i + 1 < SCENES.length ? "Следующий лист →" : "Закрыть дело →"}</button>`;
+    const orders = (p.events || []).map(e => `<div class="order"><b>${esc(e.t)}</b>${esc(e.x)}</div>`).join("");
+    html += `<div class="result"><div class="picked">${esc(p.t)}</div>${dice}${fxHTML(p.fx)}<p>${esc(p.res)}</p>${likeLine}${orders}</div>${voicesHTML(sc.voices, p.like)}
+      <div class="row"><button type="button" class="btn" id="next">${over() || nextIndex() === null ? "Закрыть дело →" : "Следующий лист →"}</button>
+      ${over() && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть этот лист</button>` : ""}</div>`;
   }
   $("sheet").innerHTML = html;
-  $("sheet").querySelectorAll(".choices button").forEach(b => b.addEventListener("click", () => choose(+b.dataset.k)));
+  $("sheet").querySelectorAll(".choices button:not([disabled])").forEach(b => b.addEventListener("click", () => choose(+b.dataset.k)));
   const nx = $("next"); if (nx) nx.addEventListener("click", next);
+  const un = $("undo"); if (un) un.addEventListener("click", undo);
 }
 
 function choose(k) {
   const sc = SCENES[S.i];
   const c = sc.choices(S)[k];
-  const fx = c.fx || {};
+  if (missing(c).length) return;
+  S.prev = JSON.stringify({ ...S, prev: null });
+  const chance = chanceOf(c);
+  const ok = chance === null ? true : Math.random() < chance;
+  const o = ok ? c : { ...c, ...c.fail, like: c.fail && "like" in c.fail ? c.fail.like : c.like };
+  const fx = o.fx || {};
   for (const [s, d] of Object.entries(fx)) S.stats[s] = clamp(S.stats[s] + d);
-  const set = { ...(c.set || {}) };
+  const set = { ...(o.set || {}) };
   if (set.place) { S.place = set.place; delete set.place; }
   Object.assign(S.flags, set);
-  S.pick = { t: c.t, fx, res: c.res, like: c.like || null };
-  S.log.push({ year: sc.year, title: sc.title, t: c.t, ep: c.ep });
+  const events = checks();
+  S.pick = { t: c.t, fx, res: o.res, like: o.like || null, chance, ok, events };
+  S.log.push({ year: sc.year, title: sc.title, t: c.t, ep: o.ep });
   S.phase = "res";
   render();
 }
+function undo() {
+  if (!S.prev) return;
+  S = JSON.parse(S.prev); S.phase = "ask"; S.pick = null;
+  render(true);
+}
+function nextIndex() {
+  for (let k = S.i + 1; k < SCENES.length; k++) if (!SCENES[k].when || SCENES[k].when(S)) return k;
+  return null;
+}
 function next() {
-  if (S.i + 1 < SCENES.length) { S.i++; S.phase = "ask"; S.pick = null; } else S.phase = "end";
+  const n = over() ? null : nextIndex();
+  if (n !== null) { S.i = n; S.phase = "ask"; S.pick = null; } else S.phase = "end";
   render(true);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function renderEnd() {
   const e = ENDINGS.find(x => x.test(S));
-  $("sheet").innerHTML = `<div class="grif"><span class="secret">Дело закрыто</span><span>1963 → 1991</span></div>
+  $("sheet").innerHTML = `<div class="grif"><span class="secret">${e.lost ? "Дело закрыто досрочно" : "Дело закрыто"}</span><span>1963 → 1991</span></div>
     ${ILL.archive}
-    <div class="stamp">В архив</div>
+    <div class="stamp">${e.lost ? "Списать" : "В архив"}</div>
     <div class="place">Август 1991 года</div><h2>${esc(e.title)}</h2>
     <div class="epi">${epilogue(e)}</div>
     <div class="verdict">Так было на самом деле</div>
     <section class="voices" style="margin-top:0"><ul><li>${esc(e.real)}<span class="src">${esc(e.src)}</span></li></ul></section>
     <details class="path-wrap"><summary>Все решения по годам</summary>
       <ol class="path">${S.log.map(l => `<li><span>${l.year}</span><span>${esc(l.title)}: ${esc(l.t)}</span></li>`).join("")}</ol></details>
-    <p style="margin-top:16px;font-size:15px;color:var(--ink-soft)">Концовок семь, каждая списана с реальной траектории. Эпилог собирается из ваших решений.</p>
-    <div class="row"><button type="button" class="btn" id="again">Начать новое дело</button></div>`;
+    <p style="margin-top:16px;font-size:15px;color:var(--ink-soft)">${e.lost ? "Это одна из двух проигрышных концовок. Можно переиграть последний лист или начать новое дело." : "Концовок десять, из них две проигрышные. Эпилог собирается из ваших решений."}</p>
+    <div class="row"><button type="button" class="btn" id="again">Начать новое дело</button>
+      ${e.lost && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть последний лист</button>` : ""}</div>`;
   $("again").addEventListener("click", () => { S = fresh(); render(true); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  const un = $("undo"); if (un) un.addEventListener("click", undo);
 }
 
 function render(anim) {
