@@ -1,4 +1,7 @@
+<!doctype html>
+<html lang="ru">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Консультант ЦК</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +48,18 @@ body {
   align-items: start;
 }
 @media (max-width: 860px) { .wrap { grid-template-columns: minmax(0,1fr); } aside { order: -1; } }
+.file .rules summary { cursor: pointer; color: var(--folder-ink); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .file { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0 14px; padding: 12px 14px 12px; }
+  .file > :not(.meter) { grid-column: 1 / -1; }
+  .file h4 { margin-bottom: 8px; }
+  .meter { margin-bottom: 6px; }
+  .meter .name { font-size: 12px; }
+  .meter .bar { font-size: 11px; letter-spacing: 0; }
+  .meter .what { display: none; }
+  .meter .warnline { font-size: 15px; }
+  .file .pos { margin-top: 8px; padding-top: 6px; }
+}
 
 header.top { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; color: var(--paper); }
 header.top h1 { margin: 0; font-family: var(--f-type); font-weight: 400; font-size: 15px; letter-spacing: .28em; text-transform: uppercase; }
@@ -142,7 +157,10 @@ aside { min-width: 0; }
 .arch-list li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) auto; gap: 10px; border-bottom: 1px dotted var(--rule); padding: 3px 0; }
 .arch-quote, .arch-note, .arch-use { margin: 8px 0 0; }
 .arch-use { color: var(--pencil); }
-@media (max-width: 520px) { .archive dl { grid-template-columns: minmax(0, 1fr); } .archive dd { margin-bottom: 4px; } }
+@media (max-width: 520px) { .archive dl { grid-template-columns: minmax(0, 1fr); } .archive dd { margin-bottom: 4px; }
+  .archive { padding: 12px 12px; font-size: 13px; margin-left: -6px; margin-right: -6px; }
+  .arch-list li { grid-template-columns: 2.9em minmax(0, 1fr); gap: 0 8px; }
+  .arch-list li > :nth-child(3) { grid-column: 2; color: var(--ink-soft); font-size: 12px; } }
 .verdict { font-family: var(--f-hand); color: var(--pencil); font-size: 30px; line-height: 1.15; margin: 4px 0 14px; }
 .path { margin: 16px 0; padding: 0; list-style: none; font-family: var(--f-type); font-size: 13px; display: grid; gap: 6px; }
 .path li { display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 10px; }
@@ -1366,7 +1384,8 @@ function renderFile() {
     }).join("") +
     `<div class="pos">Место службы: <b>${PLACES[placeKey(S)]}</b>${S.flags.credo ? `<br>Кредо: <b>${CREDO[S.flags.credo].name}</b>` : ""}</div>
      ${PERKS.filter(x => has(x.k)).map(x => `<div class="perk"><b>${x.name}</b>${x.what}</div>`).join("")}
-     <div class="pos">Правила: доверие 0 — увольнение, но при круге от 6 вас пристроят рядом. Убеждения 0 — конец игры (двоемыслие). Перо 0 — тексты возвращают. Каждые два листа в аппарате слабеет круг, вне аппарата — доверие. Показатель 8 даёт особое умение.</div>`;
+     <details class="pos rules"${S.rulesOpen ?? window.innerWidth > 860 ? " open" : ""}><summary>Правила</summary>Доверие 0 — увольнение, но при круге от 6 вас пристроят рядом. Убеждения 0 — конец игры (двоемыслие). Перо 0 — тексты возвращают. Каждые два листа в аппарате слабеет круг, вне аппарата — доверие. Показатель 8 даёт особое умение.</details>`;
+  const d = $("file").querySelector("details.rules"); if (d) d.addEventListener("toggle", () => { S.rulesOpen = d.open; });
 }
 
 function voicesHTML(v, like) {
@@ -1461,7 +1480,8 @@ function next() {
     if (over()) { S.phase = "end"; }
   } else S.phase = "end";
   render(true);
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  const top = window.innerWidth <= 860 ? $("sheet").getBoundingClientRect().top + window.scrollY - 8 : 0;
+  window.scrollTo({ top, behavior: "smooth" });
 }
 
 /* ——— Архивная справка ——— */
