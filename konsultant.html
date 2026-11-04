@@ -1,0 +1,764 @@
+<meta charset="utf-8">
+<title>Консультант ЦК</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Marck+Script&display=swap">
+<style>
+/* Layout: зелёное сукно стола; на нём лист машинописи (сцена с гравюрой-заставкой) и «личное дело» (показатели); пометки красным карандашом, фиолетовый штамп. Единый образ, не зависит от темы. */
+:root {
+  --baize: #1d3a2e;
+  --baize-hi: #2a4d3d;
+  --paper: #ebeae2;
+  --paper-deep: #dfddd2;
+  --paper-edge: #d6d4c8;
+  --ink: #1b1d1f;
+  --ink-soft: #55594f;
+  --pencil: #b0261c;
+  --stamp: #5a3f8e;
+  --rule: #b9b7aa;
+  --folder: #d9cfb4;
+  --folder-ink: #5e5440;
+  --f-type: "PT Mono", "Courier New", ui-monospace, monospace;
+  --f-body: "PT Serif", Georgia, "Times New Roman", serif;
+  --f-hand: "Marck Script", "Segoe Script", cursive;
+  color-scheme: light;
+}
+html, body { min-height: 100%; }
+body {
+  background: var(--baize);
+  background-image:
+    radial-gradient(ellipse at 30% 0%, var(--baize-hi) 0%, transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0 2px, transparent 2px 4px);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 22px;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+}
+@media (max-width: 860px) { .wrap { grid-template-columns: minmax(0,1fr); } aside { order: -1; } }
+
+header.top { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; color: var(--paper); }
+header.top h1 { margin: 0; font-family: var(--f-type); font-weight: 400; font-size: 15px; letter-spacing: .28em; text-transform: uppercase; }
+header.top h1 b { font-weight: 400; color: #e7c9a0; }
+header.top .sub { font-family: var(--f-type); font-size: 12px; letter-spacing: .08em; opacity: .7; }
+
+.years { grid-column: 1 / -1; display: flex; gap: 4px; flex-wrap: wrap; font-family: var(--f-type); font-size: 12px; color: var(--paper); }
+.years span { padding: 2px 8px; border: 1px solid rgba(235,234,226,.25); opacity: .45; font-variant-numeric: tabular-nums; }
+.years span.done { opacity: .75; }
+.years span.now { opacity: 1; border-color: var(--paper); background: rgba(235,234,226,.1); }
+
+.sheet {
+  position: relative; min-width: 0;
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--paper-edge), 0 14px 30px rgba(0,0,0,.35);
+  padding: 34px clamp(20px, 5vw, 54px) 38px;
+}
+.sheet::before {
+  content: ""; position: absolute; top: -10px; left: 38px; width: 14px; height: 40px;
+  border: 2px solid #8c8f8a; border-radius: 8px; border-bottom-color: transparent;
+}
+.grif { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--f-type); font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+.grif .secret { letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+
+.illus { margin: 18px 0 6px; background: var(--paper-deep); color: var(--ink); border: 1px solid var(--rule); }
+.illus svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.illus figcaption { font-family: var(--f-type); font-size: 11.5px; color: var(--ink-soft); padding: 6px 10px; border-top: 1px solid var(--rule); letter-spacing: .04em; }
+
+.place { font-family: var(--f-type); font-size: 13px; color: var(--ink-soft); margin-top: 14px; }
+h2 { font-family: var(--f-type); font-weight: 400; font-size: clamp(20px, 3.2vw, 26px); line-height: 1.25; letter-spacing: .02em; margin: 6px 0 18px; text-wrap: balance; }
+.text p { margin: 0 0 12px; max-width: 64ch; }
+.text p.aside { font-style: italic; color: var(--ink-soft); font-size: 15px; }
+
+.choices { display: grid; gap: 10px; margin-top: 22px; }
+.choices button {
+  font: inherit; font-family: var(--f-type); font-size: 15px; line-height: 1.45; text-align: left;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); padding: 12px 14px 12px 44px; position: relative; cursor: pointer;
+}
+.choices button::before { content: attr(data-n); position: absolute; left: 14px; top: 12px; color: var(--stamp); }
+.choices button:hover { background: rgba(90,63,142,.06); border-color: var(--stamp); }
+.choices button:focus-visible, .btn:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+.result { margin-top: 22px; border-top: 1px dashed var(--rule); padding-top: 18px; }
+.result .picked { font-family: var(--f-type); font-size: 14px; color: var(--ink-soft); margin-bottom: 10px; }
+.result .picked::before { content: "Принято: "; color: var(--stamp); }
+.fx { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0 14px; font-family: var(--f-hand); font-size: 22px; color: var(--pencil); }
+.like { font-family: var(--f-type); font-size: 13px; color: var(--stamp); margin-top: 6px; }
+
+.voices { margin-top: 18px; padding: 16px 18px; background: rgba(176,38,28,.05); border-left: 2px solid var(--pencil); }
+.voices h3 { margin: 0 0 4px; font-family: var(--f-hand); font-weight: 400; font-size: 26px; color: var(--pencil); line-height: 1.1; }
+.voices .hint { font-size: 13px; color: var(--ink-soft); margin: 0 0 10px; }
+.voices ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.voices li { font-size: 15px; line-height: 1.45; padding: 4px 8px; margin-inline: -8px; }
+.voices li.match { background: rgba(90,63,142,.09); outline: 1px solid rgba(90,63,142,.35); }
+.voices li.match::after { content: "ваш выбор — как здесь"; display: block; font-family: var(--f-hand); font-size: 18px; color: var(--stamp); }
+.voices li b { font-family: var(--f-type); font-weight: 400; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); }
+.voices .src { display: block; font-family: var(--f-type); font-size: 12px; color: var(--ink-soft); }
+
+.btn {
+  font-family: var(--f-type); font-size: 14px; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); border: 0; padding: 12px 20px; cursor: pointer; margin-top: 20px;
+}
+.row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.stamp {
+  position: absolute; right: clamp(12px, 4vw, 40px); top: 54px; transform: rotate(-9deg);
+  font-family: var(--f-type); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--stamp);
+  border: 2px solid var(--stamp); padding: 4px 10px; opacity: .8; pointer-events: none; background: var(--paper);
+}
+@media (max-width: 520px) { .stamp { position: static; display: inline-block; margin-top: 12px; } }
+
+aside { min-width: 0; }
+.file { background: var(--folder); color: var(--ink); padding: 18px 18px 20px; box-shadow: 0 10px 24px rgba(0,0,0,.3); font-family: var(--f-type); font-size: 13px; }
+.file .lbl { letter-spacing: .2em; text-transform: uppercase; font-size: 11px; color: var(--folder-ink); }
+.file h4 { margin: 2px 0 12px; font-weight: 400; font-size: 17px; letter-spacing: .06em; }
+.meter { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin-bottom: 10px; }
+.meter .val { font-variant-numeric: tabular-nums; }
+.meter .bar { grid-column: 1 / -1; letter-spacing: 1px; font-size: 14px; white-space: nowrap; overflow: hidden; }
+.meter .bar i { font-style: normal; color: rgba(27,29,31,.25); }
+.meter .what { grid-column: 1 / -1; font-family: var(--f-body); font-size: 12px; color: var(--folder-ink); line-height: 1.35; }
+.file .pos { margin-top: 12px; border-top: 1px solid rgba(94,84,64,.4); padding-top: 10px; font-size: 12px; line-height: 1.5; }
+.file .pos b { font-weight: 400; color: var(--stamp); }
+.note { margin-top: 14px; color: var(--paper); opacity: .7; font-size: 12.5px; line-height: 1.5; font-family: var(--f-body); }
+
+.epi p { margin: 0 0 14px; max-width: 64ch; font-size: 17.5px; line-height: 1.65; }
+.epi p:first-child::first-letter { font-family: var(--f-type); font-size: 2.6em; float: left; line-height: .9; padding: 4px 8px 0 0; color: var(--stamp); }
+.verdict { font-family: var(--f-hand); color: var(--pencil); font-size: 30px; line-height: 1.15; margin: 4px 0 14px; }
+.path { margin: 16px 0; padding: 0; list-style: none; font-family: var(--f-type); font-size: 13px; display: grid; gap: 6px; }
+.path li { display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 10px; }
+.path li span:first-child { color: var(--stamp); font-variant-numeric: tabular-nums; }
+details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-size: 13px; color: var(--stamp); margin-top: 10px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sheet.enter { animation: slide .35s ease-out; }
+  .fx span { animation: pop .5s ease-out; display: inline-block; }
+}
+@keyframes slide { from { transform: translateY(8px); opacity: .6; } to { transform: none; opacity: 1; } }
+@keyframes pop { from { transform: scale(1.4) rotate(-6deg); opacity: 0; } to { transform: none; opacity: 1; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="lino" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#1b1d1f" stroke-width="1.1" opacity=".55"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Старая площадь · <b>Консультант</b></h1>
+    <span class="sub">Текстовая игра по мемуарам консультантов ЦК, 1963–1979</span>
+  </header>
+  <nav class="years" id="years" aria-label="Годы"></nav>
+  <main class="sheet" id="sheet" aria-live="polite"></main>
+  <aside>
+    <div class="file" id="file"></div>
+    <p class="note">Герой вымышлен. Обстановка, даты и поступки реальных людей — по мемуарам, документам и литературе из вики архива; везде пересказ, ссылки — на страницы изданий (у Бовина, Черняева и в главе Брутенца об Афганистане — физические страницы файлов). Блок «Как вспоминали» относится к сцене; строка, похожая на ваш выбор, отмечена.</p>
+  </aside>
+</div>
+
+<script>
+/* ——— Гравюры к сценам (inline SVG, 600×210; чернила + красный карандаш) ——— */
+const INK = 'fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
+const RED = 'fill="none" stroke="#b0261c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
+const frame = (body, cap) => `<figure class="illus"><svg viewBox="0 0 600 210" role="img" aria-label="${cap}"><g filter="url(#lino)">${body}</g></svg><figcaption>${cap}</figcaption></figure>`;
+const ILL = {
+  typewriter: frame(`
+    <path ${INK} d="M250 112 V36 H350 V112"/><path ${INK} d="M264 52h62M264 66h50M264 80h58"/>
+    <path ${RED} d="M262 94 q30 6 64 -2"/>
+    <rect x="196" y="104" width="208" height="14" rx="7" fill="currentColor"/>
+    <path ${INK} d="M214 118 L196 176 H404 L386 118"/>
+    <rect x="186" y="176" width="228" height="12" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    ${[0,1,2].map(r => [...Array(9 - r)].map((_, k) => `<circle cx="${236 + r*9 + k*17}" cy="${134 + r*14}" r="5" fill="currentColor"/>`).join('')).join('')}
+    <path ${INK} d="M60 186 H540"/>`, "Лист в машинке: анкета, автобиография, список трудов"),
+  phone: frame(`
+    <path ${INK} d="M210 170 L230 100 H370 L390 170 Z"/><rect x="210" y="170" width="180" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <circle cx="300" cy="138" r="26" ${INK}/><circle cx="300" cy="138" r="8" fill="currentColor"/>
+    ${[...Array(10)].map((_, k) => { const a = (k * 27 - 200) * Math.PI / 180; return `<circle cx="${300 + 18*Math.cos(a)}" cy="${138 + 18*Math.sin(a)}" r="3" fill="currentColor"/>`; }).join('')}
+    <path ${INK} d="M216 90 q84 -40 168 0 l-10 14 q-74 -28 -148 0 Z"/>
+    <path ${RED} d="M420 70 q14 18 0 36M440 58 q24 30 0 60M180 70 q-14 18 0 36M160 58 q-24 30 0 60"/>
+    <path ${INK} d="M300 184 V196 M60 196 H540"/>`, "«Вертушка»: правительственная связь, положенная консультанту"),
+  dacha: frame(`
+    <path ${INK} d="M200 180 V110 L300 58 L400 110 V180"/><path ${INK} d="M186 116 L300 50 L414 116"/>
+    <rect x="232" y="122" width="44" height="34" ${INK}/><rect x="324" y="122" width="44" height="34" fill="#f0d48a" stroke="currentColor" stroke-width="3"/>
+    <path ${INK} d="M254 122v34M232 139h44M346 122v34M324 139h44"/>
+    <path ${INK} d="M90 180 L120 70 L150 180 M100 140 h40 M106 112 h28"/><path ${INK} d="M470 180 L505 60 L540 180 M480 140 h50 M488 108 h34"/>
+    <path ${RED} d="M290 168 h20 v12 h-20z"/>
+    <path ${INK} d="M40 182 H560"/><rect x="40" y="184" width="520" height="10" fill="url(#hatch)"/>`, "Госдача: читки вслух, бильярд, «парткурица»"),
+  silent: frame(`
+    <path ${INK} d="M150 170 L166 112 H274 L290 170 Z"/><circle cx="220" cy="142" r="18" ${INK}/>
+    <path ${INK} d="M156 104 q64 -30 128 0 l-8 10 q-56 -20 -112 0 Z"/>
+    <path ${RED} d="M312 96 L352 136 M352 96 L312 136"/>
+    <circle cx="440" cy="110" r="56" ${INK}/><path ${INK} d="M440 110 V72 M440 110 L470 124"/>
+    ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${110 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${110 + 54*Math.sin(a)}"/>`; }).join('')}
+    <path ${INK} d="M60 186 H540"/>`, "Октябрь 1964 г.: звонки сверху прекратились"),
+  abolish: frame(`
+    <rect x="200" y="28" width="200" height="160" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
+    <path ${INK} d="M222 52h120M222 70h156M222 88h140M222 106h150M222 124h120M222 142h146"/>
+    <path ${RED} d="M214 160 L388 40"/>
+    <rect x="300" y="146" width="88" height="30" fill="none" stroke="#5a3f8e" stroke-width="3" transform="rotate(-8 344 161)"/>
+    <text x="344" y="167" text-anchor="middle" font-family="PT Mono, monospace" font-size="14" fill="#5a3f8e" transform="rotate(-8 344 161)">УПРАЗДН.</text>
+    <path ${INK} d="M60 192 H540"/>`, "12 мая 1965 г.: подотдел упразднён"),
+  theatre: frame(`
+    <path ${INK} d="M120 40 H480 V186 H120 Z"/>
+    <path fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 40 q40 70 0 146 Z M480 40 q-40 70 0 146 Z"/>
+    <path ${INK} d="M300 40 L230 186 M300 40 L370 186" opacity=".5"/>
+    <circle cx="300" cy="118" r="12" ${INK}/><path ${INK} d="M300 130 v34 M300 142 l-18 12 M300 142 l18 -10 M300 164 l-12 20 M300 164 l12 20"/>
+    <path ${RED} d="M300 46 L270 110 H330 Z" opacity=".55"/>
+    <path ${INK} d="M60 192 H540"/>`, "Таганка: свет на сцене, консультанты в зале"),
+  empty: frame(`
+    <path ${INK} d="M120 30 V186 H480 V30"/><path ${INK} d="M120 150 L60 196 M480 150 L540 196 M120 150 H480"/>
+    <rect x="250" y="52" width="100" height="70" ${INK}/><path ${INK} d="M300 52v70M250 87h100"/>
+    <path ${INK} d="M382 150 v-36 h30 v36 M382 132 h30 M412 114 v-34"/>
+    <path ${RED} d="M150 170 q20 -6 40 0"/>
+    <path ${INK} d="M60 196 H540"/>`, "Хлебный переулок, 1967 г.: кабинет без мебели"),
+  radio: frame(`
+    <rect x="170" y="70" width="260" height="110" rx="12" ${INK}/>
+    <rect x="190" y="88" width="120" height="74" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <rect x="326" y="90" width="88" height="22" ${INK}/><path stroke="#b0261c" stroke-width="3" d="M352 88 v26"/>
+    <circle cx="346" cy="144" r="12" ${INK}/><circle cx="394" cy="144" r="12" ${INK}/>
+    <path ${INK} d="M300 70 L340 26"/>
+    <path ${RED} d="M352 30 q12 -12 24 0 M346 18 q24 -22 48 0"/>
+    <circle cx="500" cy="54" r="18" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/><circle cx="510" cy="48" r="16" fill="currentColor" opacity=".9"/>
+    <path ${INK} d="M60 186 H540"/>`, "Ночь на 21 августа 1968 г.: Би-би-си сквозь глушилки"),
+  talk: frame(`
+    <ellipse cx="300" cy="150" rx="210" ry="22" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <path ${INK} d="M200 112 h44 l-4 34 h-36 z M244 120 q16 4 0 18"/><path ${INK} d="M350 112 h44 l-4 34 h-36 z M394 120 q16 4 0 18"/>
+    <path ${RED} d="M216 100 q6 -12 0 -22 M226 100 q6 -12 0 -22 M366 100 q6 -12 0 -22"/>
+    <rect x="272" y="96" width="56" height="74" fill="#f6f5ef" stroke="currentColor" stroke-width="3" transform="rotate(6 300 133)"/>
+    <path ${INK} d="M282 112 h34 M282 124 h30 M282 136 h36" transform="rotate(6 300 133)"/>
+    <path ${INK} d="M60 192 H540"/>`, "Запись беседы с американским гостем — для ЦК"),
+  paper: frame(`
+    <path ${INK} d="M140 60 H420 L460 90 V184 H140 Z"/><path ${INK} d="M420 60 V90 H460"/>
+    <text x="160" y="92" font-family="PT Serif, serif" font-size="28" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
+    <path ${INK} d="M160 106 H440"/><rect x="160" y="116" width="120" height="58" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <path ${INK} d="M296 120h140M296 134h130M296 148h140M296 162h110"/>
+    <path ${RED} d="M290 116 q-6 30 4 62"/>
+    <path ${INK} d="M60 192 H540"/>`, "«Известия»: текст под своей фамилией"),
+  salt: frame(`
+    <path ${INK} d="M300 40 V172 M220 60 H380"/><path ${INK} d="M220 60 L190 120 H250 Z M380 60 L350 120 H410 Z"/>
+    <path ${INK} d="M260 172 H340"/>
+    <path fill="currentColor" d="M200 112 l6 -34 6 34 z M220 112 l6 -40 6 40 z"/>
+    <path fill="#b0261c" d="M362 112 l6 -34 6 34 z M382 112 l6 -40 6 40 z"/>
+    <path ${INK} d="M60 186 H540"/><rect x="60" y="188" width="480" height="8" fill="url(#hatch)"/>`, "Весы ОСВ: потолки, паритет, уровни"),
+  lodge: frame(`
+    <path ${INK} d="M90 186 V96 L300 34 L510 96 V186"/>
+    <path ${INK} d="M90 120 H510 M90 150 H510" opacity=".45"/>
+    <rect x="170" y="128" width="260" height="14" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <path ${INK} d="M190 142 v30 M410 142 v30"/>
+    ${[0,1,2,3,4].map(k => `<circle cx="${200 + k*50}" cy="118" r="8" ${INK}/>`).join('')}
+    <path ${INK} d="M130 70 q14 -14 28 0 M150 58 v-20 M138 42 l12 -6 12 6"/>
+    <path ${RED} d="M448 108 q10 -6 16 4 q6 12 -6 18 q-14 4 -14 -12 z"/>
+    <path ${INK} d="M40 188 H560"/>`, "Завидово, 1975 г.: длинный стол, обсуждают раздел доклада"),
+  soy: frame(`
+    <path ${INK} d="M300 190 C296 150 304 110 300 40"/>
+    ${[[300,70,-1],[300,96,1],[300,124,-1],[300,150,1]].map(([x,y,d]) => `<path ${INK} d="M${x} ${y} q${d*50} -24 ${d*80} 6 q${-d*40} 20 ${-d*80} -6"/>`).join('')}
+    ${[[312,84],[286,112],[314,138],[288,164]].map(([x,y]) => `<path fill="#c9b56a" stroke="currentColor" stroke-width="2.5" d="M${x} ${y} q10 -2 14 14 q-2 10 -10 6 q-8 -8 -4 -20z"/>`).join('')}
+    <path ${RED} d="M120 60 h80 M120 76 h60 M120 92 h70"/>
+    <path ${INK} d="M60 190 H540"/>`, "Соя: опыт американской фермы в записке для ЦК"),
+  mountains: frame(`
+    <path ${INK} d="M40 186 L150 70 L220 140 L310 40 L420 150 L470 100 L560 186"/>
+    <path fill="#f6f5ef" stroke="currentColor" stroke-width="3" d="M286 66 L310 40 L334 68 L320 62 L310 72 L298 62 Z"/>
+    <path fill="url(#hatch)" d="M40 186 L150 70 L220 140 L310 40 L420 150 L470 100 L560 186 Z" opacity=".5"/>
+    <path ${RED} d="M380 70 h50 M405 70 v8 M386 86 h34 l10 -8 M400 86 v6"/>
+    <path ${INK} d="M40 188 H560"/>`, "Декабрь 1979 г.: горы на южной границе"),
+  archive: frame(`
+    <path ${INK} d="M180 70 H420 V186 H180 Z"/><path ${INK} d="M170 54 H430 V70 H170 Z"/>
+    <rect x="260" y="100" width="80" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
+    <text x="300" y="126" text-anchor="middle" font-family="PT Mono, monospace" font-size="15" fill="currentColor">Ф. 5</text>
+    <path ${INK} d="M286 152 h28"/>
+    <path ${RED} d="M196 40 q30 -16 60 0"/>
+    <path ${INK} d="M60 190 H540"/>`, "Короб с делом. Через полвека его закажет историк")
+};
+
+/* ——— Механика ——— */
+const STATS = {
+  trust: { name: "Доверие начальства", short: "Доверие", what: "Андропов, Толкунов, позже — секретари ЦК" },
+  pen:   { name: "Перо",               short: "Перо",    what: "Репутация автора текстов: «речевики» ценят формулировку" },
+  con:   { name: "Совесть",            short: "Совесть", what: "Сколько вы готовы подписать, не споря с собой" },
+  circ:  { name: "Круг",               short: "Круг",    what: "Наука, редакции, Таганка, американские коллеги" }
+};
+const START = { trust: 4, pen: 4, con: 6, circ: 3 };
+const PLACES = { cand: "Кандидат в консультанты", otdel: "Отдел ЦК по соцстранам", mo: "Международный отдел ЦК", inst: "Институт США АН СССР", out: "Вне аппарата (наука)", izv: "Редакция «Известий»" };
+const inApp = s => s.place === "otdel" || s.place === "mo";
+
+/* Каждая сцена: voices — что пишут о самом событии; у выбора like — кто из голосов поступил так же (подсвечивается), ep — фраза для эпилога. */
+const SCENES = [
+{ year: "1963", ill: "typewriter", place: "Москва", title: "Откуда вы пришли",
+  text: s => `<p>Вам тридцать пять. Кандидат наук, пишете быстро и, говорят, умеете думать. В отделе ЦК по связям с социалистическими странами, у Ю. В. Андропова, собирают людей «с головой».</p>
+    <p>Кем вы были до Старой площади? От этого зависит, кто за вас поручится и с кем вы будете своим.</p>`,
+  choices: s => [
+    { t: "Научный сотрудник академического института: статьи, конференции, библиотека.", fx: { circ: +2 }, set: { origin: "science" }, like: "Богомолов",
+      res: "В отделе к учёным относятся с любопытством и опаской. Зато у вас есть те, кому можно позвонить, если нужна справка или книга, которой нет в спецхране.",
+      ep: "вы пришли из науки и всю жизнь числили себя по ней" },
+    { t: "Сотрудник журнала «Коммунист»: умеете довести статью до печати.", fx: { pen: +2 }, set: { origin: "kommunist" }, like: "Петренко",
+      res: "Редакторская выучка здесь ценится: сырой текст никому не нужен.",
+      ep: "вы пришли из «Коммуниста» и до старости правили чужие тексты карандашом" },
+    { t: "Редакция «Проблем мира и социализма» в Праге: журнал компартий.", fx: { trust: +1, circ: +1 }, set: { origin: "prague" }, like: "Шахназаров",
+      res: "Прага — кузница кадров. Через журнал в ЦК шли многие, и Шахназаров стал консультантом не сразу, а после журнала.",
+      ep: "вы пришли из пражской редакции и навсегда сохранили привычку пить кофе стоя" }
+  ],
+  voices: [
+    { who: "Петренко", what: "Пришёл в группу из журнала «Коммунист» и дольше других проработал в аппарате ЦК.", src: "Бурлацкий 1990, с. 253–254" },
+    { who: "Богомолов", what: "Экономист, «выходец из Госплана»; консультант ещё до образования подотдела.", src: "Бурлацкий 1990, с. 254" },
+    { who: "Шахназаров", what: "В 1962 г. не прошёл сразу через отдел парторганов: сначала журнал «Проблемы мира и социализма», консультант — полгода спустя.", src: "Бурлацкий 1990, с. 250–251" },
+    { who: "Бовин", what: "У Пономарева в Праге, при журнале, свой «инкубатор» кадров.", src: "Бовин, «Старая площадь», физ. 115" }
+  ] },
+
+{ year: "1964", ill: "phone", place: "Старая площадь", title: "Приглашение",
+  text: s => `<p>Звонок от Ф. М. Бурлацкого. Его группе нужны люди, и Андропов с Толкуновым разрешили набирать по своему усмотрению. Анкета уйдёт в отдел парторганов, но решение, похоже, уже принято.</p>
+    <p class="aside">По документам Секретариата ЦК, подотдел информации учреждён 12 января 1964 г. Мемуаристы называют и другие даты.</p>`,
+  choices: s => [
+    { t: "Согласиться сразу. Такие предложения дважды не делают.", fx: { trust: +1 }, set: { place: "otdel" }, like: "Бовин",
+      res: "Вас оформляют быстро. Через месяц вы уже не замечаете, как говорите «у нас наверху».",
+      ep: "вы согласились по первому звонку" },
+    { t: "Попросить полгода, чтобы закончить монографию.", fx: { pen: +1, circ: +1, trust: -1 }, set: { place: "otdel" }, like: "Шахназаров",
+      res: "Книга выходит, коллеги вас уважают. Наверху ваше «подожду» запомнили, но место сохранили.",
+      ep: "вы заставили Старую площадь полгода подождать, пока допишете книгу" },
+    { t: "Осторожно спросить о должности и окладе.", fx: { con: -1 }, set: { place: "otdel", perks: true }, like: "Статус",
+      res: "Вам объясняют: консультант приравнен к заведующему сектором. Оклад 400 рублей, «вертушка», Кремлёвская поликлиника, столовая лечебного питания. Вы киваете и больше не спрашиваете.",
+      ep: "вы первым делом спросили про оклад, и вам это долго припоминали" }
+  ],
+  voices: [
+    { who: "Бурлацкий", what: "Толкунов предложил ему создать группу, подотдел, и возглавить её; формировать её дали по своему усмотрению.", src: "Бурлацкий 1990, с. 249–250" },
+    { who: "Бовин", what: "Бурлацкий привлёк в группу Шахназарова и Арбатова, Петренко «переманил» из «Коммуниста». Сам Бовин «прошёл без всяких трудностей».", src: "Бовин, «Старая площадь», физ. 113–115; Бурлацкий 1990, с. 252" },
+    { who: "Шахназаров", what: "Пришёл не сразу: сначала журнал, полгода спустя — консультант.", src: "Бурлацкий 1990, с. 250–251" },
+    { who: "Статус", what: "Руководитель группы равен замзаву отдела, консультант — завсектором; 400 руб., «вертушка», поликлиника, столовая лечебного питания.", src: "Бовин, «Старая площадь», физ. 115" },
+    { who: "Документы", what: "Подотдел информации — 12.01.1964; группа консультантов — 12.05.1965. Арбатов датирует создание группы 1961 г., Брутенц отдаёт первенство Пономареву (1963).", src: "Петров 2023, с. 209, 260–261; Брутенц 1998, с. 225" }
+  ] },
+
+{ year: "1964", ill: "dacha", place: "Подмосковье, госдача", title: "Дачное сидение",
+  text: s => `<p>Группу вывозят на дачу: к пленуму нужен доклад. Днём читки вслух, вечером бильярд, кино и обязательная «парткурица». Текст правят хором, каждое слово взвешивают.</p>
+    <p>Абзац о международном положении поручили вам.</p>`,
+  choices: s => [
+    { t: "Вписать смелую формулировку о мирном сосуществовании. Пусть вычёркивают.", fx: { pen: +2, con: +1, trust: -1 }, like: "Арбатов",
+      res: "Формулировку сократили наполовину, но смысл остался. На читке кто-то из старших хмыкнул, и вы так и не поняли, одобрил он или предупредил.",
+      ep: "вы спорили на дачных читках из-за каждого прилагательного" },
+    { t: "Держаться рамки, а вечером играть со всеми в бильярд.", fx: { trust: +1, circ: +1 }, like: "Брутенц",
+      res: "Абзац прошёл без правок. За бильярдом вы узнаёте о группе больше, чем за месяц на Старой площади.",
+      ep: "вы играли на дачах в бильярд и проигрывали тем, кому стоило проиграть" },
+    { t: "Сочинить шуточную «Инструкцию по составлению документов исторического значения».", fx: { pen: +1, circ: +2, trust: -1 }, set: { joker: true }, like: "Бовин",
+      res: "«Инструкцию» читают вслух и хохочут. Наверх она, к счастью, не уходит. Вы становитесь своим, но начальство запоминает, что вам смешно.",
+      ep: "вы сочинили шуточную «Инструкцию», которую потом пересказывали без вашей фамилии" }
+  ],
+  voices: [
+    { who: "Брутенц", what: "Дачные «сидения» — давний жанр аппаратной окололитературной работы: «парткурица», фильмы, бильярд, прогулки. Первый заезд — осень 1963 г.", src: "Брутенц 1998, с. 168, 191" },
+    { who: "Бовин", what: "Трёхмесячное сидение в Волынском-1, дрова, будто бы колотые Сталиным, которые консультанты сожгли, и шуточная «Инструкция»: такой иронии над жанром у других нет.", src: "Бовин, «Старая площадь», физ. 147–152" },
+    { who: "Арбатов", what: "В Завидове спорили откровенно и горячо: Сталин и нэп, реформа, XX съезд, интеллигенция.", src: "Арбатов, «Человек системы», гл. «Дворцовый переворот»" },
+    { who: "Бурлацкий", what: "Стиль сложился ещё в конце 1950-х, когда авторов учебника Куусинена собирали на даче.", src: "Бурлацкий 1990, с. 39" }
+  ] },
+
+{ year: "1964", ill: "silent", place: "Дача, середина октября", title: "Телефоны замолчали",
+  text: s => `<p>Консультанты двух международных отделов пишут документ по поручению Хрущёва. Обычно секретари ЦК звонят по нескольку раз в день. Сегодня не звонит никто. И вчера тоже.</p>
+    <p>Кто-то говорит то, о чём думают все: в Москве что-то происходит.</p>`,
+  choices: s => [
+    { t: "Вызваться ехать в Москву на разведку.", fx: { circ: +1, trust: +1 }, set: { scout: true }, like: "Бурлацкий",
+      res: "На Старой площади подозрительная тишина. В коридорах незнакомые рослые молодые люди в штатском. Коллега шёпотом говорит о заседании Президиума. 14 октября пленум отправляет Хрущёва на пенсию.",
+      ep: "в октябре шестьдесят четвёртого вы первым увидели людей в штатском в коридорах ЦК" },
+    { t: "Дописывать текст. Кто бы ни победил, документ понадобится.", fx: { pen: +1, con: -1 }, like: "Брутенц",
+      res: "Вы правы: документ понадобился, только подписывать его будет другой человек. Заменить одну фамилию на другую — минутное дело.",
+      ep: "в октябре шестьдесят четвёртого вы дописывали доклад, не зная, чьим именем он будет подписан" },
+    { t: "Позвонить знакомому из аппарата с дачного телефона.", fx: { circ: +1, trust: -1 }, like: "Арбатов",
+      res: "Знакомый отвечает односложно и кладёт трубку. Через неделю вам дают понять, что звонок заметили. Аппарат осторожен даже дома.",
+      ep: "в октябре шестьдесят четвёртого вы позвонили не тому человеку" }
+  ],
+  voices: [
+    { who: "Бурлацкий", what: "Изнутри, на даче: звонки прекратились, Кусков послал его в Москву. Заговор, по Бурлацкому, начала «молодёжь» Шелепина.", src: "Бурлацкий 1990, с. 271–272, 275" },
+    { who: "Бовин", what: "Та же сцена, но кто поехал на разведку, Бурлацкий или Иноземцев, не помнит. Хрущёва, по Бовину, сняли «за дело».", src: "Бовин, «Старая площадь», физ. 126–127" },
+    { who: "Арбатов", what: "Незнакомые люди в штатском в коридорах; аппарат осторожен даже дома; «дворцовый переворот» чистейшей воды.", src: "Арбатов, гл. «Дворцовый переворот»" },
+    { who: "Брутенц", what: "Сама смена — фоном; главное, что после неё внешняя политика стала предметом борьбы.", src: "Брутенц 1998, с. 246, 248" },
+    { who: "Шахназаров", what: "Был в отъезде с делегацией Брежнева в ГДР и узнал, что «летал с новым генсеком», только на следующий день.", src: "Шахназаров 2001, с. 215–216" }
+  ] },
+
+{ year: "1965", ill: "abolish", place: "Старая площадь, май", title: "Подотдел упразднён",
+  text: s => `<p>12 мая Секретариат упраздняет подотдел и создаёт вместо него группу консультантов. Бурлацкий уходит из ЦК. Ещё в апреле отдел покинул Л. П. Делюсин.</p>
+    <p>Кто возглавит группу, решают сейчас. В курилке называют Арбатова.</p>`,
+  choices: s => [
+    { t: "Уйти вместе с Бурлацким в знак протеста.", fx: { con: +2, trust: -3, circ: +1 }, set: { place: "out", left: true }, like: "Бурлацкий",
+      res: "Пропуск сдан. Вы снова в науке, а в аппарате о вас говорят «тот, что ушёл с Федей». Дверь закрылась, но Старая площадь помнит ваш телефон.",
+      ep: "в шестьдесят пятом вы сдали пропуск в знак протеста, и это был ваш лучший и самый дорогой поступок" },
+    { t: "Промолчать и остаться.", fx: { trust: +1, con: -1 }, like: "Арбатов",
+      res: "Вы остаётесь. В группе новый руководитель и новые порядки. О Бурлацком вслух не вспоминают.",
+      ep: "в шестьдесят пятом вы промолчали, когда разгоняли подотдел" },
+    { t: "Сказать, что лучшего преемника, чем Арбатов, не найти.", fx: { trust: +2, circ: -1, con: -1 }, set: { backedArbatov: true }, like: "Бовин",
+      res: "Фразу передали наверх в тот же день. Арбатов кивает вам в коридоре. Бурлацкий потом назовёт похожую реплику первой акцией по расколу группы.",
+      ep: "в шестьдесят пятом вы вовремя назвали имя преемника" }
+  ],
+  voices: [
+    { who: "Документы", what: "12.05.1965 подотдел упразднён; по Млечину, Бурлацкий «не понравился новому начальству».", src: "Петров 2023, с. 260–261; Млечин 2008, с. 108" },
+    { who: "Бурлацкий", what: "Ушёл сам, в знак протеста против поворота вспять.", src: "Бурлацкий 1990, с. 309, 321–322" },
+    { who: "Бовин", what: "Его реплику о «хорошем преемнике в лице Арбатова» Бурлацкий назвал первой акцией по расколу группы. Сам Бовин даёт Бурлацкому жёсткий портрет: хотелось «порулить», а к рулю не пускали.", src: "Бурлацкий 1990, с. 325; Бовин, физ. 118" },
+    { who: "Шахназаров", what: "«Размолвка», «неосторожный порыв»; группой Бурлацкий почти не занимался.", src: "Шахназаров 2001, с. 101, 134" },
+    { who: "Арбатов", what: "Преемник об уходе Бурлацкого в найденных местах молчит.", src: "Матрица «событие × мемуарист», § 3" }
+  ] },
+
+{ year: "1966", ill: "theatre", place: "Театр на Таганке", title: "Добрый человек из Сезуана",
+  text: s => `<p>Делюсин ведёт ${s.place === "out" ? "бывших коллег" : "группу"} на спектакль Любимова. Вы выходите из театра оглушённым: такого в Москве ещё не видели.</p>
+    <p>Через пару лет над театром сгущаются тучи: говорят о снятии спектаклей и даже о закрытии. Любимов ищет заступников наверху.</p>`,
+  choices: s => [
+    { t: "Сесть с Любимовым и сочинить письмо прямо Брежневу.", fx: { con: +2, circ: +2, trust: -1 }, set: { taganka: true }, like: "Бовин",
+      res: "Письмо уходит наверх. Театр живёт дальше. Чья в этом заслуга, никто точно не скажет, но в фойе вас теперь узнают.",
+      ep: "вы писали с Любимовым письмо генсеку и до сих пор помните первую фразу" },
+    { t: s.place === "out" ? "Попросить бывших коллег замолвить слово перед Андроповым." : "Замолвить слово перед Андроповым.",
+      fx: { con: +1, trust: -2 }, set: { taganka: true }, like: "Шахназаров",
+      res: "Андропов соглашается встретиться с Любимовым, а потом, похоже, получает выговор за вмешательство в «чужие владения». С тех пор он смотрит на вас холоднее.",
+      ep: "вы заступились за Таганку перед Андроповым и заплатили за это его холодностью" },
+    { t: "Ходить на премьеры, но ни во что не вмешиваться.", fx: { circ: +1, con: -1 }, like: "Черняев",
+      res: "Вас видят в зале, но не в списке заступников. Вы сохраняете и билеты, и должность.",
+      ep: "вы ходили на Таганку как зритель и ни разу не подписали письма" }
+  ],
+  voices: [
+    { who: "Бурлацкий", what: "Делюсин познакомил группу с Любимовым и повёл на «Доброго человека из Сезуана»; консультанты стали ходатаями за театр перед Андроповым.", src: "Бурлацкий 1990, с. 254–255" },
+    { who: "Бовин", what: "В 1968 или 1969 г. вместе с Любимовым и Делюсиным сочинил письмо Брежневу. Дату нужно сверить.", src: "Бовин, «Старая площадь», физ. 375–380" },
+    { who: "Шахназаров", what: "Андропов согласился встретиться с Любимовым, но, видимо, получил выговор, и заступничество испортило его отношение к Шахназарову.", src: "Шахназаров 2001, с. 180–181" },
+    { who: "Черняев", what: "Перечисляет номенклатурный «актив Таганки»: Арбатов, Бовин, Шишлин, Шахназаров и другие.", src: "Черняев 1995, физ. 263–265" }
+  ] },
+
+{ year: "1967", ill: "empty", place: "Хлебный переулок", title: "Пустой кабинет",
+  text: s => `<p>Весна. Арбатов приводит вас в здание, отданное под будущий Институт США. Мебели ещё нет, в директорском кабинете гуляет эхо.</p>
+    <p>${s.flags.backedArbatov ? "Он помнит, кто поддержал его два года назад." : "Ему нужны люди, которые умеют писать и для ЦК, и для журналов."} Вам предлагают возглавить направление.</p>`,
+  choices: s => [
+    { t: "Пойти к Арбатову: американистика — дело на десятилетия.", fx: { circ: +2, pen: +1, trust: -1 }, set: { place: "inst" }, like: "Арбатов",
+      res: "Вы набираете отдел, спорите о названии будущего журнала и учитесь говорить с американскими гостями. Записки в ЦК теперь пишете из Хлебного переулка.",
+      ep: "весной шестьдесят седьмого вы стояли с Арбатовым в пустом кабинете и решили остаться" },
+    { t: s.place === "out" ? "Отказаться: в своём институте спокойнее." : "Остаться в аппарате: настоящие решения принимаются здесь.",
+      fx: s.place === "out" ? { con: +1 } : { trust: +1 }, like: s.place === "out" ? null : "Петренко",
+      res: s.place === "out" ? "Арбатов пожимает плечами. Институт растёт без вас, а вы пишете книгу, которую не торопятся издавать." : "Вы остаётесь на Старой площади. Ближе к решениям, дальше от науки.",
+      ep: s.place === "out" ? "вы отказали Арбатову и не жалели об этом вслух" : "вы отказали Арбатову и остались на Старой площади" },
+    { t: "Перейти в консультантскую группу Пономарева, в Международный отдел.", fx: { trust: +1, circ: +1, con: -1 }, set: { place: "mo" }, like: "Брутенц",
+      res: "«Конкурирующая фирма» встречает вас настороженно. Там свои порядки, свои дачи и свой спор о том, кто придумал консультантов.",
+      ep: "вы перешли к Пономареву, в «конкурирующую фирму»" }
+  ],
+  voices: [
+    { who: "Бовин", what: "Инициатива лично Арбатова: «сам себе придумал институт». Сцена в пустом кабинете в Хлебном переулке, весна 1967 г.", src: "Бовин, «Старая площадь», физ. 114" },
+    { who: "Арбатов", what: "Ушёл из аппарата в декабре 1967 г. и занялся институтом. Если здание выделили весной, институт создавался, пока он был в ЦК (гипотеза).", src: "Арбатов, «Человек системы» (глава — уточнить); матрица, § 7" },
+    { who: "Черняев", what: "Институт создан по инициативе Арбатова при поддержке Брежнева.", src: "Черняев 1995, физ. 281" },
+    { who: "Петренко", what: "Дольше других проработал в аппарате ЦК.", src: "Бурлацкий 1990, с. 253–254" },
+    { who: "Брутенц", what: "13 лет в консультантской группе Международного отдела.", src: "Брутенц 1998, с. 241" }
+  ] },
+
+{ year: "1968", ill: "radio", place: "Ночь на 21 августа", title: "Ночь на 21 августа",
+  text: s => {
+    const where = { inst: "Вы в институте, в Хлебном переулке.", mo: "Вы в Международном отделе.", out: "Вы дома, давно вне аппарата.", otdel: "Вы дежурите в отделе по соцстранам." }[s.place];
+    return `<p>${where} Войска стран Варшавского договора входят в Чехословакию.</p>
+      <p>${s.place === "otdel" ? "Из Праги идут телеграммы, одна тревожнее другой. Команда отдела работает до утра." : "По радио сквозь глушилки слышно Би-би-си. Телефон молчит."}</p>`; },
+  choices: s => s.place === "otdel" ? [
+      { t: "Работать в ночной команде: разбирать телеграммы, готовить справки.", fx: { trust: +2, con: -2 }, like: "Бовин",
+        res: "К утру справки готовы. Вас благодарят. Домой вы едете молча.",
+        ep: "в ночь на двадцать первое августа вы разбирали пражские телеграммы и готовили справки" },
+      { t: "Работать, но каждую ночь записывать, что видели.", fx: { pen: +1 }, set: { diary: true }, like: "Бовин",
+        res: "Ваши записи по дням когда-нибудь станут источником. Пока они лежат в ящике стола, и вы надеетесь, что никто его не откроет.",
+        ep: "в августе шестьдесят восьмого вы начали вести записи по дням" },
+      { t: "Сказаться больным.", fx: { trust: -2, con: +1 }, like: null,
+        res: "Отсутствие заметили. Болезнь — тоже позиция, и наверху её поняли именно так.",
+        ep: "в августе шестьдесят восьмого вы сказались больным, и все поняли, чем вы больны" }
+    ] : [
+      { t: "До утра слушать Би-би-си с другом и говорить начистоту.", fx: { con: +1, circ: +1 }, like: "Брутенц",
+        res: "Вы впервые говорите вслух то, что думаете. Друг потом скажет, что этой ночью началась эра двоемыслия.",
+        ep: "в ночь на двадцать первое августа вы до утра слушали Би-би-си и впервые говорили вслух" },
+      { t: s.place === "out" ? "Написать бывшим коллегам записку о последствиях для разрядки." : "Написать записку наверх о последствиях для отношений с США.",
+        fx: { pen: +2, trust: +1, con: -1 }, like: "Арбатов",
+        res: "Записку прочли и даже процитировали. Вы объясняли, как смягчить удар, а не почему ввод войск был ошибкой.",
+        ep: "в августе шестьдесят восьмого вы написали записку о том, как смягчить удар, и её прочли" },
+      { t: "Промолчать и наутро прийти на работу как обычно.", fx: { con: -1, trust: +1 }, like: null,
+        res: "Утром все на местах. Никто не смотрит друг другу в глаза.",
+        ep: "в августе шестьдесят восьмого вы наутро пришли на работу как ни в чём не бывало" }
+    ],
+  voices: [
+    { who: "Бовин", what: "Изнутри: записи по дням, ночь на 21 августа в команде отдела; из Праги — «панические телеграммы».", src: "Бовин, «Старая площадь», физ. 191–193" },
+    { who: "Брутенц", what: "Ночь у приёмника, Би-би-си, разговор с Черняевым до утра; с этого начинается «эра особого политического двоемыслия».", src: "Брутенц 1998, с. 239–240" },
+    { who: "Арбатов", what: "Как принималось решение о вводе войск, не знает; Брежнев долго его оттягивал.", src: "Арбатов, гл. «Дворцовый переворот»" },
+    { who: "Александров-Агентов", what: "Брежнев месяцами колебался, потом оставил колебания. Та же формула, что у Арбатова: возможно, общая и поздняя.", src: "Александров-Агентов 1994, с. 149, 153" }
+  ] },
+
+{ year: "1969", ill: "talk", place: s => s.place === "inst" ? "Хлебный переулок" : "Гостиница «Советская»", title: "Запись беседы",
+  text: s => `<p>В Москву приехал американец: генерал в отставке, теперь консультант крупной фирмы. Он хочет поговорить о торговле, технологиях и о том, как в Вашингтоне видят Москву.</p>
+    <p>${s.place === "inst" ? "Институт поручает беседу вам. Запись уйдёт в ЦК." : "Вас просят присутствовать и подготовить запись для ЦК."} Он говорит откровенно, иногда неприятно.</p>`,
+  choices: s => [
+    { t: "Записать всё как было, включая неудобные оценки СССР.", fx: { pen: +1, con: +1, trust: -1 }, like: "Записи бесед",
+      res: "Записку читают внимательно, кто-то подчёркивает абзацы. Вам советуют в следующий раз «отделять мнения от фактов».",
+      ep: "в шестьдесят девятом вы записали разговор с американцем дословно, и его прочли целиком" },
+    { t: "Сгладить острые места и добавить вывод «в духе линии».", fx: { trust: +1, con: -1 }, like: null,
+      res: "Записка ложится в папку без пометок. Никто не спорит, никто не читает дальше первой страницы.",
+      ep: "в шестьдесят девятом вы сгладили запись беседы, и её никто не дочитал" },
+    { t: "Дописать собственные рекомендации: что стоит перенять у американцев.", fx: { pen: +2, circ: +1 }, set: { transfer: true }, like: "Историк",
+      res: "Рекомендации вызывают спор. Через год похожая мысль появляется в докладе без вашей фамилии. Так в Москву приходят идеи.",
+      ep: "в шестьдесят девятом вы дописали к записи беседы свои рекомендации, и через год их произнесли с трибуны" }
+  ],
+  voices: [
+    { who: "Документы", what: "Записи бесед Института США 1969 г. в РГАНИ: беседа с генералом Дж. Гэвином и справка о фирме «Артур Д. Литтл»; беседа с Ч. Торнтоном («Литтон Индастриз»).", src: "Вики: «РГАНИ — ИСКРАН — 1969 — беседа с генералом Гэвином…», «… Торнтон — Литтон Индастриз»" },
+    { who: "Записи бесед", what: "Записи бесед американистов с американскими учёными, политиками и бизнесменами — неформальный канал общения элит.", src: "Тарбеев 2021, «Трансфер идей» (по аннотации)" },
+    { who: "Историк", what: "Информационная записка 1969 г. о беседе с американским бизнесменом — кейс трансфера идей.", src: "Тарбеев 2021, «Трансфер идей» (по аннотации)" }
+  ] },
+
+{ year: "1972", ill: "paper", place: "Завидово, весна", title: "Острота за столом",
+  text: s => `<p>Готовят тексты к визиту Никсона. ${inApp(s) ? "Вас взяли в Завидово в бригаду «речевиков»." : "Вас позвали в Завидово как приглашённого эксперта."} За общим столом генсек в хорошем настроении, рассказывает охотничью историю.</p>
+    <p>Все смеются. Пауза. Ждут, кто подхватит.</p>`,
+  choices: s => [
+    { t: "Пошутить с генсеком на равных.", fx: { circ: +1, trust: -3 }, set: inApp(s) ? { place: "izv", exiled: true } : {}, like: "Бовин",
+      res: inApp(s) ? "Стол замолкает. Через месяц вас переводят в «Известия». Формально это повышение, на деле — ссылка. Вы долго сидите в кафе неподалёку и думаете грустную думу." : "Стол замолкает. Больше в Завидово вас не зовут.",
+      ep: "в Завидове вы пошутили с генсеком на равных, и Старая площадь отпустила вас навсегда" },
+    { t: "Смеяться вместе со всеми и вернуться к тексту.", fx: { trust: +1, con: -1 }, like: "Александров-Агентов",
+      res: "Генсек доволен вечером. Ваш абзац о визите остаётся в речи почти без правок.",
+      ep: "в Завидове вы смеялись вместе со всеми" },
+    { t: "Попроситься в газету: «хочу писать под своей фамилией».", fx: { pen: +2, trust: -1 }, set: { place: "izv" }, like: "Бовин",
+      res: "Просьбу удовлетворяют неожиданно быстро. Главный редактор советует сначала осмотреться и «почувствовать атмосферу». Первую вашу статью снимают из номера, и вы идёте подписывать её к секретарю ЦК.",
+      ep: "вы сами попросились в газету и впервые увидели свою фамилию под статьёй" }
+  ],
+  voices: [
+    { who: "Александров-Агентов", what: "Бовина Брежнев «надолго отстранил» за фамильярность. Сам он о Завидове: за большим столом генсек всегда ел вместе со всеми.", src: "Александров-Агентов 1994, с. 224, 279" },
+    { who: "Бовин", what: "В «Известиях» главный редактор Толкунов посоветовал осмотреться; полтора месяца он сидел в кафе «Север» с обидой на то, что его «выбросили». Первую статью сняли, и Бовин добился подписи Катушева.", src: "Бовин, гл. «„Известия“ как судьба», физ. 266–267" },
+    { who: "Документы", what: "Подготовка визита Никсона в СССР, 1972 г.: подборки фонда Брежнева в РГАНИ.", src: "Вики: «РГАНИ — Визит Никсона в СССР — 1972 — Ф. 50, Оп. 1»" }
+  ] },
+
+{ year: "1974", ill: "salt", place: "Осень, накануне Владивостока", title: "Записка об ОСВ",
+  text: s => `<p>Готовится встреча с новым президентом США Фордом. Нужно обосновать, почему потолки на стратегические вооружения выгодны. ${s.place === "inst" ? "Институт пишет записку в ЦК." : "Вас просят подготовить справку."}</p>
+    <p>Военные против любых уступок. Генсек, говорят, готов спорить с ними сам.</p>`,
+  choices: s => [
+    { t: "Доказывать, что паритет достигнут, и разрядка выгоднее гонки.", fx: { pen: +2, con: +1, trust: -1 }, like: "Историк",
+      res: "Записку читают в трёх кабинетах. В одном её цитируют, в другом называют «прекраснодушной».",
+      ep: "в семьдесят четвёртом вы доказывали в записке, что разрядка выгоднее гонки вооружений" },
+    { t: "Учесть позицию военных: осторожная формула, ни шагу без гарантий.", fx: { trust: +1, con: -1 }, like: null,
+      res: "Справку хвалят за взвешенность. Через неделю вы видите её в чужой папке с чужой подписью.",
+      ep: "в семьдесят четвёртом вы написали осторожную справку, и её подписал другой" },
+    { t: "Предложить обсудить потолки неофициально, через Дартмутские встречи.", fx: { circ: +2, trust: -1 }, set: { dartmouth: true }, like: "Дартмут",
+      res: "Идею приняли без восторга, но в составе следующей делегации на встречу с американцами есть и ваша фамилия.",
+      ep: "вы ездили на Дартмутские встречи и спорили с американцами, которые потом стали вам друзьями" }
+  ],
+  voices: [
+    { who: "Историк", what: "Экспертные записки Института США по ограничению стратегических вооружений, конец 1960-х – начало 1970-х гг.: аргументы в пользу разрядки и возможная востребованность у Брежнева, Андропова, Громыко.", src: "Тарбеев 2025, «Проблема ограничения гонки вооружений» (по аннотации)" },
+    { who: "Арбатов", what: "Во время визита Форда в конце 1974 г. Брежнев долго и громко спорил с военным руководством по ВЧ; позднее Гречко приезжал извиняться.", src: "Арбатов, «Человек системы» (глава — уточнить)" },
+    { who: "Дартмут", what: "Дартмутские встречи организовывали ИМЭМО и ИСКАН; советскую группу возглавлял сначала Иноземцев, затем Арбатов.", src: "Черкасов 2004, с. 445 (по Примакову)" }
+  ] },
+
+{ year: "1975", ill: "lodge", place: "Завидово, ноябрь–декабрь", title: "Ангола",
+  text: s => `<p>Готовят доклад к XXV съезду. В Завидове собрались работники ЦК, МИДа и приглашённые учёные. Обсуждают внешнеполитический раздел, и речь заходит об Анголе: кубинские войска, наша помощь.</p>
+    <p>Генсек обводит взглядом стол.</p>`,
+  choices: s => [
+    { t: "Сказать прямо: Ангола ударит по разрядке и по отношениям с США.", fx: { con: +2, pen: +1, trust: -1 }, set: { angola: true }, like: "Арбатов",
+      res: "Спор выходит долгим и громким. Генсек не соглашается, но и не обрывает. Вечером к вам подходят двое и молча жмут руку.",
+      ep: "в Завидове вы возразили генсеку из-за Анголы при двадцати свидетелях" },
+    { t: "Промолчать за столом и поговорить потом с глазу на глаз.", fx: { trust: +1 }, like: "Арбатов",
+      res: "Собеседник выслушивает, не спорит, но и не соглашается. Раздел остаётся прежним.",
+      ep: "об Анголе вы говорили только с глазу на глаз" },
+    { t: "Вписать в доклад формулу о солидарности с освободительной борьбой.", fx: { trust: +2, con: -2 }, like: null,
+      res: "Формулу приняли с первого раза. Через несколько лет её будут повторять, объясняя Эфиопию, Йемен и Афганистан.",
+      ep: "вы написали формулу о солидарности, которую потом повторяли много лет" }
+  ],
+  voices: [
+    { who: "Арбатов", what: "В ноябре или декабре 1975 г. в Завидове, при подготовке документов к XXV съезду, сказал Брежневу при группе работников ЦК, МИД и учёных, что участие кубинцев в Анголе и наша помощь вредят разрядке. До этого говорил о том же с другими руководителями, в том числе с Громыко, с глазу на глаз.", src: "Арбатов, «Человек системы» (гл. «От разрядки…» — сверить)" },
+    { who: "Арбатов", what: "После Анголы — «ступени» эскалации: Эфиопия, Йемен, Афганистан; общее у них — примитивно понятый интернациональный долг.", src: "Арбатов, «Человек системы» (глава — уточнить)" },
+    { who: "Черняев", what: "Дневник, 23.08.1975: «ещё одна неделя» в Ново-Огарёве вместе с Брутенцем.", src: "Дневники Черняева, 1975, физ. 32" },
+    { who: "Брутенц", what: "География «сидений»: Волынское-1, Ново-Огарёво, Завидово.", src: "Брутенц 1998, с. 214, 254" }
+  ] },
+
+{ year: "1976", ill: "soy", place: s => s.place === "inst" ? "Хлебный переулок" : "Москва", title: "Записка о сое",
+  text: s => `<p>Стране не хватает кормового белка. ${s.place === "inst" ? "Институт готовит записку в ЦК о производстве и использовании сои в СССР с опорой на американский опыт." : "Вас просят отрецензировать записку Института США о сое для ЦК."}</p>
+    <p>В записке Америка выглядит образцом: технологическая держава, у которой есть чему учиться. Это и сила текста, и его опасность.</p>`,
+  choices: s => [
+    { t: "Прямо рекомендовать американские практики: сорта, технологии, переработку.", fx: { pen: +1, circ: +1, con: +1, trust: -1 }, set: { soy: true }, like: "Историк",
+      res: "Записку отправляют в Госплан и Минсельхоз. Через два года вы видите на опытном поле то, о чём писали.",
+      ep: "вы писали записку о сое и однажды увидели на опытном поле то, о чём писали" },
+    { t: "Завернуть опыт в формулы о преимуществах социалистического хозяйства.", fx: { trust: +1, con: -1 }, like: null,
+      res: "Записка проходит гладко. В ней всё правильно, и ничего не меняется.",
+      ep: "вы завернули американский опыт в правильные формулы, и ничего не изменилось" },
+    { t: "Предложить обмен специалистами и поездку агрономов в США.", fx: { circ: +2, trust: -1 }, like: null,
+      res: "Поездку одобряют через год, в урезанном составе. Вас в списке нет.",
+      ep: "вы добивались поездки агрономов в Америку и не попали в список сами" }
+  ],
+  voices: [
+    { who: "Историк", what: "Экспертная записка Института США и Канады в ЦК КПСС (1976) о производстве и использовании сои: трансфер американских практик; образ США как технологической державы; американский опыт модернизации как образец.", src: "Тарбеев 2024, «Американская соя в СССР» (по аннотации)" },
+    { who: "Документы", what: "РГАНИ: ИСКАН, 1976–1977, «Соя в СССР» (35 ф.); 1976, «О с/х производстве и беседа с советником» (3 ф.; связь с запиской — уточнить).", src: "Вики: «РГАНИ — ИСКРАН — 1976-1977 — Соя в СССР»" }
+  ] },
+
+{ year: "1979", ill: "mountains", place: "Декабрь", title: "Южная граница",
+  text: s => `<p>Решение о вводе войск в Афганистан принято узким кругом. Отделы узнают о нём, когда всё уже началось. ${s.place === "mo" ? "Международному отделу поручено добиться от компартий заявлений о поддержке." : s.place === "izv" ? "Редакция ждёт комментария." : "Наверху ждут «обоснования»."}</p>
+    <p>За окном снег. Вы вспоминаете август шестьдесят восьмого.</p>`,
+  choices: s => [
+    { t: "Подать записку с возражениями: война невыигрываемая, удар по разрядке.", fx: { con: +2, trust: -2 }, like: "Арбатов",
+      res: "Записку принимают без комментариев. Через месяц вас не включают в делегацию, где вы были бы нужнее всех.",
+      ep: "в декабре семьдесят девятого вы написали, что эту войну нельзя выиграть, и оказались правы" },
+    { t: s.place === "izv" ? "Написать комментарий, как велено." : "Делать, что поручено: объяснять решение друзьям и союзникам.", fx: { trust: +1, con: -2 }, like: "Брутенц",
+      res: "Вы делаете это хорошо. Позже вы признаетесь себе, что в шестьдесят восьмом вас мучила совесть, а в семьдесят девятом уже нет.",
+      ep: "в декабре семьдесят девятого вы объясняли решение, не споря с ним, и потом не могли себе этого простить" },
+    { t: "Записать в дневник всё, что думаете, и промолчать.", fx: { pen: +1 }, set: { diary: true }, like: "Черняев",
+      res: "Запись выходит короткой и злой. Дневник вы прячете на даче.",
+      ep: "в декабре семьдесят девятого вы написали в дневнике то, что не сказали вслух" }
+  ],
+  voices: [
+    { who: "Брутенц", what: "Никаких планов «рывка к тёплым морям» не видел; решение выросло из ошибочных расчётов. Признаёт, что в 1979 г. в его собственной позиции не было морального компонента, который был в 1968 г.", src: "Брутенц 1998, гл. «Об афганском походе», физ. 509–511" },
+    { who: "Брутенц", what: "При таких акциях, как чехословацкая и афганская, все силы отдела шли на то, чтобы добиться от компартий заявлений о поддержке.", src: "Брутенц 1998, физ. 129" },
+    { who: "Арбатов", what: "Афганистан — последняя ступень эскалации, начатой Анголой; война бессмысленная.", src: "Арбатов, «Человек системы» (глава — уточнить)" },
+    { who: "Черняев", what: "Вёл дневник все годы в Международном отделе; дневники за 1970-е есть в архиве.", src: "Вики: «Дневники Черняева»" }
+  ] }
+];
+
+/* ——— Концовки ——— */
+const ENDINGS = [
+  { key: "izv", test: s => s.place === "izv", title: "Политобозреватель",
+    real: "А. Е. Бовин — консультант и спичрайтер Брежнева, затем политический обозреватель «Известий»; первую статью ему подписал Катушев.", src: "Бовин, физ. 266–267; страница «Бовин (А. Е.)» (справочные сведения — сверить)" },
+  { key: "inst", test: s => s.place === "inst" && s.stats.pen >= 6, title: "Институт в Хлебном переулке",
+    real: "Г. А. Арбатов — консультант с мая 1964 г. до конца 1967 г., затем директор Института США АН СССР; спорил с Брежневым об Анголе в 1975 г.", src: "Арбатов, «Человек системы»; хронология вики" },
+  { key: "out", test: s => s.place === "out", title: "Вне аппарата",
+    real: "Ф. М. Бурлацкий, выведенный из ЦК в 1965 г., рассказал историю группы так, что она начинается с него. Л. П. Делюсин ушёл из отдела в апреле 1965 г.", src: "Бурлацкий 1990; Петров 2023, с. 258–261" },
+  { key: "aide", test: s => inApp(s) && s.stats.trust >= 7, title: "Помощник",
+    real: "Г. Х. Шахназаров и А. С. Черняев, оба из консультантов, стали помощниками М. С. Горбачёва.", src: "Страницы людей в вики (справочные сведения — сверить)" },
+  { key: "mo", test: s => s.place === "mo", title: "Тридцать лет на Старой площади",
+    real: "К. Н. Брутенц — 13 лет в консультантской группе Пономарева, потом заместитель заведующего Международным отделом; в мемуарах беспощаден к себе образца 1979 г.", src: "Брутенц 1998, с. 241; физ. 511" },
+  { key: "long", test: s => s.place === "otdel", title: "Долгожитель аппарата",
+    real: "Ф. Ф. Петренко, по Бурлацкому, «дольше других проработал в аппарате ЦК». О «молчащих» консультантах почти нет данных, кроме мемуаров коллег.", src: "Бурлацкий 1990, с. 253–254; реестр консультантов, § 4" },
+  { key: "dir", test: s => true, title: "Академический директор",
+    real: "О. Т. Богомолов, консультант ещё до подотдела, стал директором ИЭМСС АН СССР.", src: "Бурлацкий 1990, с. 254; страница «Богомолов (О. Т.)»" }
+];
+
+/* ——— Эпилог: художественный итог из ваших решений ——— */
+const OPEN = {
+  izv:  "Август девяносто первого вы встречаете в редакции. Телетайп стучит третьи сутки, и молодые сотрудники смотрят на вас так, будто вы что-то знаете. Вы действительно знаете: вы видели, как такие решения пишутся, только тогда их писали другие.",
+  inst: "Август девяносто первого вы встречаете в кабинете, где когда-то гуляло эхо. Теперь здесь шкафы до потолка, американские журналы и телефон, который звонит не переставая. Звонят из Вашингтона и спрашивают, что будет. Вы отвечаете честно: не знаете.",
+  out:  "Август девяносто первого вы встречаете на даче, у приёмника. Того самого, который слушали в шестьдесят восьмом. Би-би-си теперь не глушат, и это кажется вам самым невероятным из всего, что случилось.",
+  aide: "Август девяносто первого вы встречаете рядом с человеком, которому пишете речи. Мысли, которые двадцать лет лежали в черновиках, наконец стали словами с трибуны, и теперь вы смотрите, как их пытаются отменить танками.",
+  mo:   "Август девяносто первого вы встречаете в опустевшем здании на Старой площади. Вахтёр ещё проверяет пропуска, но по коридорам уже ходят люди, которых вы не знаете. Вы складываете в портфель записные книжки за тридцать лет.",
+  long: "Август девяносто первого вы встречаете на пенсии. Здание, в котором вы провели жизнь, опечатано. По телевизору говорят про «аппарат», и вы не сразу понимаете, что говорят про вас.",
+  dir:  "Август девяносто первого вы встречаете директором института. Сотрудники спрашивают, подписывать ли обращение, и впервые за всю вашу жизнь ответ не нужно согласовывать."
+};
+const CLOSE = {
+  izv:  "Вечером вы садитесь за колонку. Пишете медленно, как не писали с шестьдесят четвёртого: никто её не согласует, и от этого страшнее, чем раньше.",
+  inst: "Ночью вы перечитываете старые записки в ЦК. Многое в них сбылось, хотя почти ничего из этого не было сделано. Вы думаете, что это и есть судьба эксперта: быть правым в архиве.",
+  out:  "Ваши книги стоят на полке, и все до одной подписаны только вашей фамилией. Мемуары вы начнёте завтра, и группа в них будет начинаться с вас.",
+  aide: "Перед сном вы открываете ящик, где лежат дачные черновики шестидесятых, и думаете, что всю жизнь готовились к трём дням, на которые вас никто не позвал.",
+  mo:   "Дома вы долго сидите над чистым листом. Если писать мемуары, придётся писать и о себе образца семьдесят девятого. Вы решаете, что напишете и это.",
+  long: "Мемуаров вы не напишете. Через полвека историк найдёт ваше имя только в чужих воспоминаниях, с инициалами, перепутанными у двух мемуаристов по-разному.",
+  dir:  "Вы подписываете. Потом долго стоите у окна и вспоминаете, что первым делом спросили на Старой площади. Хорошо, что этого уже никто не помнит."
+};
+function epilogue(e) {
+  const pick = [];
+  const want = ["Подотдел упразднён", "Ночь на 21 августа", "Ангола", "Южная граница"];
+  const first = S.log[0];
+  if (first && first.ep) pick.push(first.ep);
+  for (const l of S.log) if (want.includes(l.title) && l.ep) pick.push(l.ep);
+  const extra = S.log.find(l => ["Добрый человек из Сезуана", "Острота за столом", "Записка о сое", "Записка об ОСВ"].includes(l.title) && l.ep);
+  if (extra) pick.splice(2, 0, extra.ep);
+  const memories = pick.slice(0, 6);
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+  const mem = memories.length ? `Вы вспоминаете всё сразу, как бывает в такие дни. ${cap(memories[0])}. ${memories.slice(1).map(cap).join(". ")}.` : "";
+  const diary = S.flags.diary ? " Дневник, который вы вели все эти годы, лежит в столе. Вы решаете, что когда-нибудь отдадите его в архив, но не сейчас." : "";
+  return `<p>${OPEN[e.key]}</p><p>${mem}</p><p>${CLOSE[e.key]}${diary}</p>`;
+}
+
+/* ——— Состояние и отрисовка ——— */
+const KEY = "konsultant-v2";
+let S;
+function fresh() { return { i: 0, phase: "ask", pick: null, place: "cand", stats: { ...START }, flags: {}, log: [] }; }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function load() { try { const v = JSON.parse(localStorage.getItem(KEY) || "null"); if (v && v.stats && v.i < SCENES.length) return v; } catch (e) {} return null; }
+
+const $ = id => document.getElementById(id);
+const clamp = v => Math.max(0, Math.min(10, v));
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const val = (x, s) => typeof x === "function" ? x(s) : x;
+
+function renderYears() {
+  $("years").innerHTML = SCENES.map((sc, k) => {
+    const cls = S.phase === "end" || k < S.i ? "done" : k === S.i ? "now" : "";
+    return `<span class="${cls}" title="${esc(sc.title)}">${sc.year}</span>`;
+  }).join("") + `<span class="${S.phase === "end" ? "now" : ""}">1991</span>`;
+}
+
+function renderFile() {
+  $("file").innerHTML = `<div class="lbl">Личное дело №&nbsp;117-К</div><h4>Консультант</h4>` +
+    Object.entries(STATS).map(([k, m]) => {
+      const v = S.stats[k];
+      return `<div class="meter"><span>${m.name}</span><span class="val">${v}/10</span>
+        <span class="bar" aria-hidden="true">${"▮".repeat(v)}<i>${"▯".repeat(10 - v)}</i></span>
+        <span class="what">${m.what}</span></div>`;
+    }).join("") + `<div class="pos">Место службы: <b>${PLACES[S.place]}</b></div>`;
+}
+
+function voicesHTML(v, like) {
+  return `<section class="voices"><h3>Как вспоминали</h3>
+    <p class="hint">Что пишут именно об этой сцене участники, документы и историки (пересказ)</p>
+    <ul>${v.map(x => `<li class="${like && x.who === like ? "match" : ""}"><b>${esc(x.who)}.</b> ${esc(x.what)}<span class="src">${esc(x.src)}</span></li>`).join("")}</ul></section>`;
+}
+function fxHTML(fx) {
+  const parts = Object.entries(fx).filter(([, d]) => d !== 0).map(([k, d]) => `<span>${STATS[k].short} ${d > 0 ? "+" : "−"}${Math.abs(d)}</span>`);
+  return parts.length ? `<div class="fx">${parts.join("")}</div>` : "";
+}
+
+function renderScene() {
+  const sc = SCENES[S.i];
+  let html = `<div class="grif"><span class="secret">Секретно · экз. единств.</span><span>${sc.year} · лист ${S.i + 1} из ${SCENES.length}</span></div>
+    ${ILL[sc.ill] || ""}
+    <div class="place">${esc(val(sc.place, S))}</div><h2>${esc(sc.title)}</h2><div class="text">${sc.text(S)}</div>`;
+  if (S.phase === "ask") {
+    html += `<div class="choices">${sc.choices(S).map((c, k) => `<button type="button" id="c${S.i}-${k}" data-k="${k}" data-n="${k + 1}.">${esc(c.t)}</button>`).join("")}</div>`;
+  } else {
+    const p = S.pick;
+    const likeLine = p.like ? `<div class="like">Так же поступили или похоже описывают: ${esc(p.like)} — см. ниже.</div>` : `<div class="like">Среди свидетельств к этой сцене такого выбора нет — это ваш собственный путь.</div>`;
+    html += `<div class="result"><div class="picked">${esc(p.t)}</div>${fxHTML(p.fx)}<p>${esc(p.res)}</p>${likeLine}</div>${voicesHTML(sc.voices, p.like)}
+      <button type="button" class="btn" id="next">${S.i + 1 < SCENES.length ? "Следующий лист →" : "Закрыть дело →"}</button>`;
+  }
+  $("sheet").innerHTML = html;
+  $("sheet").querySelectorAll(".choices button").forEach(b => b.addEventListener("click", () => choose(+b.dataset.k)));
+  const nx = $("next"); if (nx) nx.addEventListener("click", next);
+}
+
+function choose(k) {
+  const sc = SCENES[S.i];
+  const c = sc.choices(S)[k];
+  const fx = c.fx || {};
+  for (const [s, d] of Object.entries(fx)) S.stats[s] = clamp(S.stats[s] + d);
+  const set = { ...(c.set || {}) };
+  if (set.place) { S.place = set.place; delete set.place; }
+  Object.assign(S.flags, set);
+  S.pick = { t: c.t, fx, res: c.res, like: c.like || null };
+  S.log.push({ year: sc.year, title: sc.title, t: c.t, ep: c.ep });
+  S.phase = "res";
+  render();
+}
+function next() {
+  if (S.i + 1 < SCENES.length) { S.i++; S.phase = "ask"; S.pick = null; } else S.phase = "end";
+  render(true);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderEnd() {
+  const e = ENDINGS.find(x => x.test(S));
+  $("sheet").innerHTML = `<div class="grif"><span class="secret">Дело закрыто</span><span>1963 → 1991</span></div>
+    ${ILL.archive}
+    <div class="stamp">В архив</div>
+    <div class="place">Август 1991 года</div><h2>${esc(e.title)}</h2>
+    <div class="epi">${epilogue(e)}</div>
+    <div class="verdict">Так было на самом деле</div>
+    <section class="voices" style="margin-top:0"><ul><li>${esc(e.real)}<span class="src">${esc(e.src)}</span></li></ul></section>
+    <details class="path-wrap"><summary>Все решения по годам</summary>
+      <ol class="path">${S.log.map(l => `<li><span>${l.year}</span><span>${esc(l.title)}: ${esc(l.t)}</span></li>`).join("")}</ol></details>
+    <p style="margin-top:16px;font-size:15px;color:var(--ink-soft)">Концовок семь, каждая списана с реальной траектории. Эпилог собирается из ваших решений.</p>
+    <div class="row"><button type="button" class="btn" id="again">Начать новое дело</button></div>`;
+  $("again").addEventListener("click", () => { S = fresh(); render(true); window.scrollTo({ top: 0, behavior: "smooth" }); });
+}
+
+function render(anim) {
+  renderYears(); renderFile();
+  if (S.phase === "end") renderEnd(); else renderScene();
+  const sh = $("sheet");
+  if (anim) { sh.classList.remove("enter"); void sh.offsetWidth; sh.classList.add("enter"); }
+  save();
+}
+function start(data) { S = (data && data.S) || load() || fresh(); render(); }
+window.claude?.hot?.snapshot?.(() => ({ S }));
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+</script>
