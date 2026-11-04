@@ -1335,7 +1335,7 @@ function checks() {
     const strong = S.stats.circ >= 6;
     if (inApp(S)) {
       if (strong) {
-        const to = S.stats.pen >= 5 ? "izv" : "inst";
+        const to = S.stats.pen >= 5 ? "izv" : "out";
         S.place = to; S.stats.trust = has("circ") ? 5 : 3; S.flags.exiled = true;
         ev.push({ t: "Приказ: перевести на другую работу", x: to === "izv"
           ? "Из аппарата вас убирают. Но друзья в «Известиях» успевают раньше кадровиков: вас берут политическим обозревателем. Формально это повышение. Круг спас вас."
