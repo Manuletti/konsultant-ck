@@ -1476,7 +1476,7 @@ function renderScene() {
       const note = miss.length ? `<span class="req">Недоступно. Нужно: ${esc(miss.join(", "))}</span>`
         : ch !== null ? `<span class="risk">Риск: удастся примерно в ${Math.round(ch * 100)}% случаев (зависит от показателя «${STATS[c.risk.stat].short}»)</span>` : "";
       return `<button type="button" id="c${S.i}-${k}" data-k="${k}" data-n="${k + 1}."${miss.length ? " disabled" : ""}>${esc(c.t)}${note}</button>`;
-    }).join("")}</div>`;
+    }).join("")}</div>${S.log.length > 2 ? `<div class="row"><button type="button" class="btn ghost" id="restart">Начать заново</button></div>` : ""}`;
   } else {
     const p = S.pick;
     const dice = p.chance !== null ? `<div class="dice">Шанс ${Math.round(p.chance * 100)}% · ${p.ok ? "удалось" : "не удалось"}</div>` : "";
@@ -1485,12 +1485,21 @@ function renderScene() {
     const credLine = p.fx.con ? `<div class="dice">Убеждения ${p.fx.con > 0 ? "укрепились" : "пошатнулись"}: для ${CREDO[S.flags.credo].gen} это ${p.fx.con > 0 ? "решение по убеждению" : "решение вопреки себе"}.</div>` : "";
     html += `<div class="result"><div class="picked">${esc(p.t)}</div>${dice}${fxHTML(p.fx)}${credLine}<p>${esc(p.res)}</p>${likeLine}${orders}</div>${voicesHTML(sc.voices, p.like)}
       <div class="row"><button type="button" class="btn" id="next">${over() || nextIndex() === null ? "Закрыть дело →" : "Следующий лист →"}</button>
-      ${over() && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть этот лист</button>` : ""}</div>`;
+      ${over() && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть этот лист</button>` : ""}
+      <button type="button" class="btn ghost" id="restart">Начать заново</button></div>`;
   }
   $("sheet").innerHTML = html;
   $("sheet").querySelectorAll(".choices button:not([disabled])").forEach(b => b.addEventListener("click", () => choose(+b.dataset.k)));
   const nx = $("next"); if (nx) nx.addEventListener("click", next);
   const un = $("undo"); if (un) un.addEventListener("click", undo);
+  bindRestart();
+}
+function bindRestart() {
+  const b = $("restart"); if (!b) return;
+  b.addEventListener("click", () => {
+    if (!b.dataset.sure) { b.dataset.sure = "1"; b.textContent = "Точно? Дело начнётся с 1963 года"; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = "Начать заново"; } }, 4000); return; }
+    S = fresh(); render(true); window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 function choose(k) {
