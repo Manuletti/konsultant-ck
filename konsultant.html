@@ -196,7 +196,23 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   .a-rotor { animation: rotor .18s linear infinite alternate; }
   .a-snow { animation: snow 6s linear infinite; }
   .a-lid { animation: lid 3s ease-in-out infinite; }
+  .a-lift { animation: lift 2.6s ease-in-out infinite; }
+  .a-roll { animation: spin 3s linear infinite; }
+  .a-roll-r { animation: spin 2s linear infinite reverse; }
+  .a-sheet { animation: sheet 3.6s linear infinite; opacity: 0; }
+  .a-snow-s { animation: snows 3.2s linear infinite; }
+  .a-face-l { animation: facel 6s ease-in-out infinite; }
+  .a-face-r { animation: facer 6s ease-in-out infinite; }
+  .a-tv { animation: tv 2.2s steps(1, end) infinite; }
+  .a-pen { animation: pen 1.4s ease-in-out infinite; }
 }
+@keyframes lift { 0%, 40%, 100% { transform: translateY(0) rotate(0); } 55%, 85% { transform: translateY(-14px) rotate(-6deg); } }
+@keyframes sheet { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateX(150px); opacity: 0; } }
+@keyframes snows { from { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } to { transform: translateY(90px); opacity: 0; } }
+@keyframes facel { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-10px); } }
+@keyframes facer { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+@keyframes tv { 0% { opacity: 1; } 30% { opacity: .55; } 34% { opacity: 1; } 70% { opacity: .8; } }
+@keyframes pen { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-14px, 4px); } }
 @keyframes carriage { from { transform: translateX(30px); } to { transform: translateX(-30px); } }
 @keyframes key { to { transform: translateY(2px); } }
 @keyframes shake { 0%, 55%, 100% { transform: rotate(0); } 60% { transform: rotate(-4deg); } 65% { transform: rotate(4deg); } 70% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } 80% { transform: rotate(0); } }
@@ -389,7 +405,116 @@ const ILL = {
     <text x="300" y="126" text-anchor="middle" font-family="PT Mono, monospace" font-size="15" fill="currentColor">Ф. 5</text>
     <path ${INK} d="M286 152 h28"/>
     <path ${RED} class="a-draw" d="M196 40 q30 -16 60 0"/>
-    <path ${INK} d="M60 190 H540"/>`, "Короб с делом. Через полвека его закажет историк")
+    <path ${INK} d="M60 190 H540"/>`, "Короб с делом. Через полвека его закажет историк"),
+  /* ——— сцены без повторов ——— */
+  kitchen: frame(`
+    <path ${INK} d="M300 0 V38"/>
+    <path class="a-flicker" fill="#f0d48a" opacity=".35" d="M266 66 L196 184 H404 L334 66 Z"/>
+    <path fill="#f6f5ef" stroke="currentColor" stroke-width="3" d="M262 68 L282 38 H318 L338 68 Z"/>
+    <rect x="70" y="40" width="90" height="100" ${INK}/><path ${INK} d="M115 40 v100 M70 90 h90"/>
+    <path fill="currentColor" d="M138 58 a12 12 0 1 0 8 20 a10 10 0 1 1 -8 -20z"/>
+    <path ${INK} d="M120 184 H480"/><rect x="120" y="186" width="360" height="8" fill="url(#hatch)"/>
+    <path ${INK} d="M212 150 h34 l-4 30 h-26 z M246 158 q12 4 0 14"/><path ${INK} d="M356 150 h34 l-4 30 h-26 z M390 158 q12 4 0 14"/>
+    <ellipse cx="300" cy="178" rx="22" ry="6" ${INK}/><path stroke="currentColor" stroke-width="3" d="M300 176 L326 168"/>
+    <path ${RED} class="a-steam" d="M328 164 q6 -14 0 -26"/><path ${RED} class="a-steam" style="animation-delay:1.1s" d="M332 160 q-6 -14 2 -28"/>
+    <path ${INK} d="M440 120 h40 v60 h-40 z M444 132 h32 M444 144 h28 M444 156 h32"/>`, "Кухня, 1963 г.: спор до ночи о том, каким быть социализму"),
+  recall: frame(`
+    <path ${INK} d="M150 172 L166 116 H274 L290 172 Z"/><rect x="150" y="172" width="140" height="12" fill="url(#hatch)" stroke="currentColor" stroke-width="2"/>
+    <circle cx="220" cy="146" r="20" ${INK}/><circle cx="220" cy="146" r="6" fill="currentColor"/>
+    <g class="a-lift"><path fill="#b0261c" stroke="currentColor" stroke-width="3" d="M160 92 q60 -36 120 0 l-8 12 q-52 -24 -104 0 Z"/></g>
+    <path ${INK} d="M166 110 q-20 20 -6 40 q14 20 -6 34" stroke-dasharray="4 5"/>
+    <path ${RED} class="a-pulse" d="M300 70 q14 18 0 36"/><path ${RED} class="a-pulse" style="animation-delay:.3s" d="M318 58 q24 30 0 60"/>
+    <path ${INK} d="M380 172 h170 l-8 -24 h-36 l-16 -20 h-60 l-16 20 h-26 z"/>
+    <path ${INK} d="M412 148 l12 -18 M470 148 l-8 -18"/>
+    <g class="a-roll"><circle cx="412" cy="176" r="12" ${INK}/><path stroke="currentColor" stroke-width="2.5" d="M402 176 h20 M412 166 v20"/></g>
+    <g class="a-roll"><circle cx="520" cy="176" r="12" ${INK}/><path stroke="currentColor" stroke-width="2.5" d="M510 176 h20 M520 166 v20"/></g>
+    <path ${INK} d="M40 190 H560"/>`, "Звонок по «вертушке» и машина у подъезда: из опалы зовут обратно"),
+
+  /* ——— концовки ——— */
+  endFired: frame(`
+    <rect x="70" y="30" width="250" height="156" ${INK}/>
+    <path ${INK} d="M70 82 H320 M70 134 H320"/>
+    ${[0,1,2].map(r => [...Array(14)].map((_, k) => `<rect x="${78 + k*17}" y="${38 + r*52}" width="${10 + (k*7 + r*3) % 5}" height="${40 - (k*5 + r) % 12}" transform="translate(0 ${(k*5 + r) % 12})" fill="${(k + r*2) % 9 === 4 ? "#b0261c" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
+    <rect x="380" y="40" width="150" height="110" ${INK}/><path ${INK} d="M455 40 v110 M380 95 h150"/>
+    <path ${INK} d="M392 140 v-18 l14 -10 l14 10 v18 M430 140 v-26 h22 v26 M466 140 v-14 l12 -8 l12 8 v14"/>
+    ${[0,1,2,3].map(k => `<circle class="a-snow-s" style="animation-delay:${k * .8}s" cx="${400 + k * 34}" cy="48" r="2.2" fill="currentColor"/>`).join('')}
+    <path ${INK} d="M360 186 h190 M380 186 v-24 h150 v24"/>
+    <path ${INK} d="M512 162 v-22"/><path fill="#b0261c" stroke="currentColor" stroke-width="2.5" d="M502 122 h20 l8 18 h-36 z"/><path class="a-flicker" fill="#f0d48a" opacity=".5" d="M496 140 h32 l14 22 h-60 z"/>
+    <path ${INK} d="M40 190 H560"/>`, "Областная библиотека, отдел краеведения: сюда определили «с понижением»"),
+  endHollow: frame(`
+    <g class="a-face-l"><path ${INK} d="M296 34 C262 34 250 62 252 80 L238 98 L252 104 C250 120 250 132 262 140 L266 162 C280 170 290 172 296 172"/><circle cx="270" cy="78" r="3" fill="currentColor"/></g>
+    <g class="a-face-r"><path ${INK} d="M304 34 C338 34 350 62 348 80 L362 98 L348 104 C350 120 350 132 338 140 L334 162 C320 170 310 172 304 172"/><circle cx="330" cy="78" r="3" fill="currentColor"/></g>
+    <path stroke="#b0261c" stroke-width="2" stroke-dasharray="6 6" d="M300 24 V184"/>
+    <rect x="96" y="90" width="90" height="70" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/><path ${INK} d="M108 106 h66 M108 120 h58 M108 134 h66 M108 148 h50"/>
+    <rect x="414" y="90" width="90" height="70" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/><path ${INK} d="M426 106 h66 M426 120 h58 M426 134 h66 M426 148 h50"/>
+    <path ${INK} d="M40 190 H560"/>`, "Два профиля, два одинаковых текста: в режиме двоемыслия"),
+  endSpeech: frame(`
+    <path ${INK} d="M150 70 V176 M150 132 H226 V176 M150 70 h10 V132"/>
+    <path ${INK} d="M450 70 V176 M450 132 H374 V176 M450 70 h-10 V132"/>
+    <rect x="156" y="112" width="66" height="18" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="189" y="125" text-anchor="middle" font-family="PT Serif, serif" font-size="11" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
+    <g class="a-nod"><rect x="376" y="106" width="66" height="24" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
+    <text x="409" y="123" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" fill="#f6f5ef">ДОКЛАД</text></g>
+    <g class="a-sway-b"><circle cx="300" cy="66" r="14" ${INK}/><path ${INK} d="M300 80 V136 M300 96 L252 116 M300 96 L348 116 M300 136 L284 176 M300 136 L316 176"/></g>
+    <path ${INK} d="M40 180 H560"/><rect x="40" y="182" width="520" height="8" fill="url(#hatch)"/>`, "Два стула: газетная колонка и речи генсека"),
+  endIzv: frame(`
+    <g class="a-roll"><circle cx="170" cy="100" r="40" ${INK}/><path stroke="currentColor" stroke-width="3" d="M130 100 h80 M170 60 v80 M142 72 l56 56 M198 72 l-56 56"/></g>
+    <g class="a-roll-r"><circle cx="270" cy="150" r="30" ${INK}/><path stroke="currentColor" stroke-width="3" d="M240 150 h60 M270 120 v60"/></g>
+    <path ${INK} d="M120 140 Q170 190 240 120 Q300 100 330 150 L560 150"/>
+    ${[0,1,2].map(k => `<g class="a-sheet" style="animation-delay:${k * 1.2}s"><rect x="360" y="120" width="56" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/><path stroke="currentColor" stroke-width="2" d="M368 132 h40 M368 142 h30"/></g>`).join('')}
+    <path ${INK} d="M40 190 H560"/>`, "Ротационная машина: ваша колонка уходит в тираж"),
+  endInst: frame(`
+    <rect x="380" y="30" width="170" height="156" ${INK}/><path ${INK} d="M380 82 H550 M380 134 H550"/>
+    ${[0,1,2].map(r => [...Array(9)].map((_, k) => `<rect x="${388 + k*18}" y="${40 + r*52}" width="12" height="38" fill="none" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
+    <path ${INK} d="M60 150 H330 M80 150 v36 M310 150 v36"/>
+    <rect x="96" y="96" width="70" height="52" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
+    <text x="131" y="122" text-anchor="middle" font-family="PT Serif, serif" font-size="16" font-weight="700" fill="currentColor">США</text>
+    <path stroke="#b0261c" stroke-width="2.5" d="M106 132 h50"/>
+    <g class="a-shake"><path ${INK} d="M220 148 L232 112 H300 L312 148 Z"/><path ${INK} d="M222 106 q44 -24 88 0 l-6 8 q-38 -16 -76 0 Z"/><circle cx="266" cy="132" r="10" ${INK}/></g>
+    <path ${RED} class="a-pulse" d="M326 96 q12 14 0 28 M204 96 q-12 14 0 28"/>
+    <path ${INK} d="M40 190 H560"/>`, "Хлебный переулок, 1991 г.: полки до потолка, звонят из Вашингтона"),
+  endOut: frame(`
+    <path ${INK} d="M80 60 H420 M100 60 V186 M400 60 V186 M80 60 L250 24 L420 60"/>
+    <path ${INK} d="M160 140 H340 M180 140 v46 M320 140 v46"/>
+    <rect x="216" y="104" width="68" height="36" rx="5" ${INK}/><circle cx="268" cy="122" r="7" ${INK}/><path ${INK} d="M226 114 h28 M226 124 h28"/>
+    <path ${RED} class="a-pulse" d="M296 96 q10 -10 20 0"/><path ${RED} class="a-pulse" style="animation-delay:.4s" d="M290 84 q22 -20 42 0"/>
+    <circle cx="510" cy="50" r="20" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
+    <g class="a-sway-b"><path ${INK} d="M500 186 V120 M500 140 q-30 -10 -40 -34 M500 128 q26 -8 34 -30"/><circle cx="462" cy="104" r="16" ${INK}/><circle cx="536" cy="96" r="14" ${INK}/><circle cx="470" cy="112" r="4" fill="#b0261c"/></g>
+    <path ${INK} d="M40 188 H560"/>`, "Веранда дачи, август 1991 г.: Би-би-си больше не глушат"),
+  endAide: frame(`
+    <path ${INK} d="M120 186 V120 H200 V186 M128 120 V96 H192 V120 M138 96 V74 H182 V96 M146 74 L160 34 L174 74"/>
+    <path ${INK} d="M140 150 h20 v36 h-20z"/>
+    <path class="a-pulse" fill="#b0261c" d="M160 18 l4 9 10 1 -8 6 3 10 -9 -6 -9 6 3 -10 -8 -6 10 -1z"/>
+    <path ${INK} d="M360 186 L380 120 H500 L520 186"/>
+    <path ${INK} d="M440 120 V80 M440 80 q0 -12 10 -12"/><ellipse cx="452" cy="66" rx="8" ry="5" fill="currentColor"/>
+    <g class="a-nod"><rect x="396" y="100" width="40" height="26" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5" transform="rotate(-8 416 113)"/><path stroke="currentColor" stroke-width="2" d="M402 108 h28 M402 116 h22" transform="rotate(-8 416 113)"/></g>
+    <path ${INK} d="M40 190 H560"/>`, "Трибуна и черновики: ваши мысли стали словами генсека"),
+  endMo: frame(`
+    <path ${INK} d="M80 186 V50 H520 V186"/><path ${INK} d="M70 50 H530 M80 72 H520"/>
+    ${[0,1,2,3].map(r => [...Array(11)].map((_, k) => `<rect class="${r === 2 && k === 7 ? "a-flicker" : ""}" x="${96 + k*38}" y="${84 + r*24}" width="18" height="14" fill="${r === 2 && k === 7 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
+    <path ${INK} d="M270 186 v-26 h60 v26"/>
+    <g class="a-nod"><rect x="420" y="160" width="60" height="26" rx="4" fill="#3a2e22" stroke="currentColor" stroke-width="2.5"/><path stroke="#f6f5ef" stroke-width="2" d="M440 160 v-6 h20 v6"/></g>
+    <path ${RED} d="M480 172 h10"/>
+    <path ${INK} d="M40 190 H560"/>`, "Старая площадь, август 1991 г.: портфель с записными книжками"),
+  endLong: frame(`
+    <path ${INK} d="M100 186 V110 q0 -30 30 -30 h60 q30 0 30 30 V186 M90 140 h20 M210 140 h20 M110 150 h100"/>
+    <rect x="290" y="80" width="120" height="86" rx="8" ${INK}/>
+    <rect class="a-tv" x="302" y="92" width="96" height="62" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
+    <path fill="currentColor" d="M318 140 h58 v-8 h-12 l-6 -6 h-20 v6 h-20 z M346 126 h30 v-3 h-30z"/>
+    <path ${INK} d="M330 166 l-10 20 M370 166 l10 20"/>
+    <rect x="470" y="40" width="70" height="146" ${INK}/><circle cx="530" cy="116" r="3" fill="currentColor"/>
+    <path stroke="currentColor" stroke-width="2" d="M470 104 q-10 12 6 22"/>
+    <g class="a-stamp"><circle cx="476" cy="126" r="9" fill="#b0261c"/></g>
+    <path ${INK} d="M40 190 H560"/>`, "Пенсия: по телевизору танки, дверь в кабинет опечатана"),
+  endDir: frame(`
+    <rect x="370" y="30" width="150" height="100" ${INK}/><path ${INK} d="M445 30 v100 M370 80 h150"/>
+    <circle class="a-pulse" cx="490" cy="56" r="12" fill="#f0d48a" stroke="currentColor" stroke-width="2"/>
+    <path ${INK} d="M80 150 H500 M100 150 v36 M480 150 v36"/>
+    <rect x="180" y="70" width="140" height="78" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
+    <text x="250" y="90" text-anchor="middle" font-family="PT Mono, monospace" font-size="12" fill="currentColor">ОБРАЩЕНИЕ</text>
+    <path ${INK} class="a-write" d="M192 104 h116 M192 116 h104 M192 128 h110"/>
+    <g class="a-pen"><path stroke="#b0261c" stroke-width="5" stroke-linecap="round" d="M276 142 L312 112"/></g>
+    <path ${INK} d="M40 190 H560"/>`, "Кабинет директора: подпись, которую не нужно согласовывать")
 };
 
 /* ——— Механика ——— */
@@ -427,7 +552,7 @@ const SCENES = [
     { who: "Бовин", what: "У Пономарева в Праге, при журнале, свой «инкубатор» кадров.", src: "Бовин, «Старая площадь», физ. 115" }
   ] },
 
-{ year: "1963", ill: "typewriter", place: "Москва, кухня, поздний вечер", title: "Во что вы верите",
+{ year: "1963", ill: "kitchen", place: "Москва, кухня, поздний вечер", title: "Во что вы верите",
   text: s => `<p>Спорят до ночи. Сталин осуждён, Хрущёв обещает коммунизм к 1980 году, с Америкой то Карибский кризис, то договор о запрещении испытаний. Ваши друзья согласны в одном: социализм — это всерьёз и надолго. А вот каким ему быть, каждый понимает по-своему.</p>
     <p>Решите, во что верит ваш герой. От этого зависит, какие решения укрепят его убеждения, а какие придётся принимать, споря с собой.</p>`,
   choices: s => [
@@ -693,7 +818,7 @@ const SCENES = [
     { side: "us", who: "Washington Post", what: "Рецензия на «Endgame» С. Тэлботта: попытки Киссинджера превратить владивостокскую договорённость в договор администрация Форда в 1976 г. отложила под внутриполитическим давлением; потом мешали Ангола, Китай и другое.", src: "Washington Post (подборка «Arbatov — Washington Post»), рецензия на Talbott, Endgame (1979)" }
   ] },
 
-{ year: "1974", ill: "phone", when: s => s.flags.exiled && !s.flags.returned && s.stats.pen >= 5, place: "Звонок по «вертушке»", title: "Вас зовут обратно",
+{ year: "1974", ill: "recall", when: s => s.flags.exiled && !s.flags.returned && s.stats.pen >= 5, place: "Звонок по «вертушке»", title: "Вас зовут обратно",
   text: s => `<p>Вы давно не на Старой площади. ${s.place === "izv" ? "Колонки в газете читают, на летучках вас цитируют." : "Книги выходят, на вас ссылаются."} И вдруг звонок: готовят большую речь, бригада не справляется, нужен человек с пером.</p>
     <p>Опала, как выясняется, бывает с перерывами на работу.</p>`,
   choices: s => [
@@ -793,25 +918,25 @@ const SCENES = [
 
 /* ——— Концовки ——— */
 const ENDINGS = [
-  { key: "fired", lost: true, test: s => s.flags.fired, title: "Освобождён от занимаемой должности",
+  { key: "fired", ill: "endFired", lost: true, test: s => s.flags.fired, title: "Освобождён от занимаемой должности",
     real: "Уход из аппарата бывал разным: Бурлацкого вывели из ЦК в 1965 г., Делюсин ушёл в апреле того же года. Тех, у кого не было своего круга, мемуаристы почти не вспоминают.", src: "Петров 2023, с. 258–261; реестр консультантов, § 4" },
-  { key: "hollow", lost: true, test: s => s.flags.hollow, title: "В режиме двоемыслия",
+  { key: "hollow", ill: "endHollow", lost: true, test: s => s.flags.hollow, title: "В режиме двоемыслия",
     real: "«Двоемыслие» — слово самих мемуаристов: Брутенц пишет об «эре особого политического двоемыслия и двоедушия» после 1968 г., глава Черняева о Международном отделе называется «В режиме двоемыслия».", src: "Брутенц 1998, с. 239–240; Черняев 1995, гл. VII" },
-  { key: "speech", test: s => s.flags.returned && s.place === "izv" && s.stats.trust >= 4, title: "Обозреватель и речевик",
+  { key: "speech", ill: "endSpeech", test: s => s.flags.returned && s.place === "izv" && s.stats.trust >= 4, title: "Обозреватель и речевик",
     real: "А. Е. Бовин после перевода в «Известия» продолжал работать над текстами Брежнева в Завидове: газетная колонка и речи генсека одновременно.", src: "Бовин, физ. 265–267; Александров-Агентов 1994, с. 279" },
-  { key: "izv", test: s => s.place === "izv", title: "Политобозреватель",
+  { key: "izv", ill: "endIzv", test: s => s.place === "izv", title: "Политобозреватель",
     real: "А. Е. Бовин — консультант и спичрайтер Брежнева, затем политический обозреватель «Известий»; первую статью ему подписал Катушев.", src: "Бовин, физ. 266–267; страница «Бовин (А. Е.)» (справочные сведения — сверить)" },
-  { key: "inst", test: s => s.place === "inst" && s.stats.pen >= 7 && s.stats.circ >= 6, title: "Институт в Хлебном переулке",
+  { key: "inst", ill: "endInst", test: s => s.place === "inst" && s.stats.pen >= 7 && s.stats.circ >= 6, title: "Институт в Хлебном переулке",
     real: "Г. А. Арбатов — консультант с мая 1964 г. до конца 1967 г., затем директор Института США АН СССР; спорил с Брежневым об Анголе в 1975 г.", src: "Арбатов, «Человек системы»; хронология вики" },
-  { key: "out", test: s => s.place === "out", title: "Вне аппарата",
+  { key: "out", ill: "endOut", test: s => s.place === "out", title: "Вне аппарата",
     real: "Ф. М. Бурлацкий, выведенный из ЦК в 1965 г., рассказал историю группы так, что она начинается с него. Л. П. Делюсин ушёл из отдела в апреле 1965 г.", src: "Бурлацкий 1990; Петров 2023, с. 258–261" },
-  { key: "mo", test: s => s.place === "mo" && (s.flags.credo === "i" || s.stats.trust < 7), title: "Тридцать лет на Старой площади",
+  { key: "mo", ill: "endMo", test: s => s.place === "mo" && (s.flags.credo === "i" || s.stats.trust < 7), title: "Тридцать лет на Старой площади",
     real: "К. Н. Брутенц — 13 лет в консультантской группе Пономарева, потом заместитель заведующего Международным отделом; в мемуарах беспощаден к себе образца 1979 г.", src: "Брутенц 1998, с. 241; физ. 511" },
-  { key: "aide", test: s => inApp(s) && s.stats.trust >= 7, title: "Помощник",
+  { key: "aide", ill: "endAide", test: s => inApp(s) && s.stats.trust >= 7, title: "Помощник",
     real: "Г. Х. Шахназаров и А. С. Черняев, оба из консультантов, стали помощниками М. С. Горбачёва.", src: "Страницы людей в вики (справочные сведения — сверить)" },
-  { key: "long", test: s => s.place === "otdel", title: "Долгожитель аппарата",
+  { key: "long", ill: "endLong", test: s => s.place === "otdel", title: "Долгожитель аппарата",
     real: "Ф. Ф. Петренко, по Бурлацкому, «дольше других проработал в аппарате ЦК». О «молчащих» консультантах почти нет данных, кроме мемуаров коллег.", src: "Бурлацкий 1990, с. 253–254; реестр консультантов, § 4" },
-  { key: "dir", test: s => true, title: "Академический директор",
+  { key: "dir", ill: "endDir", test: s => true, title: "Академический директор",
     real: "О. Т. Богомолов, консультант ещё до подотдела, стал директором ИЭМСС АН СССР.", src: "Бурлацкий 1990, с. 254; страница «Богомолов (О. Т.)»" }
 ];
 
@@ -1062,7 +1187,7 @@ function next() {
 function renderEnd() {
   const e = ENDINGS.find(x => x.test(S));
   $("sheet").innerHTML = `<div class="grif"><span class="secret">${e.lost ? "Дело закрыто досрочно" : "Дело закрыто"}</span><span>1963 → 1991</span></div>
-    ${ILL.archive}
+    ${ILL[e.ill] || ILL.archive}
     <div class="stamp">${e.lost ? "Списать" : "В архив"}</div>
     <div class="place">Август 1991 года</div><h2>${esc(e.title)}</h2>
     <div class="epi">${epilogue(e)}</div>
