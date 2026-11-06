@@ -268,8 +268,8 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   .a-sheetl { animation: sheetl 4s ease-in infinite; opacity: 0; }
   .a-sheetr { animation: sheetr 4s ease-in 2s infinite; opacity: 0; }
   .a-fly { animation: flyp 4.8s ease-in-out infinite; opacity: 0; }
-  .a-lower { animation: lowerf 9s ease-in-out infinite; }
-  .a-raise { animation: raisef 9s ease-in-out infinite; transform: translateY(54px); }
+  .a-lower { animation: lowerf 10s ease-in-out infinite; }
+  .a-raise { animation: raisef 10s ease-in-out infinite; transform: translateY(46px); opacity: 0; }
   .a-drift { animation: drift 9s linear infinite; }
   .a-surf { animation: surf 3s ease-in-out infinite alternate; }
   .a-beam2 { animation: beam 6s ease-in-out infinite; }
@@ -305,8 +305,8 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 @keyframes sheetl { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(-150px, 20px); opacity: 0; } }
 @keyframes sheetr { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(160px, 10px); opacity: 0; } }
 @keyframes flyp { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(230px, -10px) rotate(25deg); opacity: 0; } }
-@keyframes lowerf { 0%, 15% { transform: translateY(0); } 55%, 100% { transform: translateY(54px); } }
-@keyframes raisef { 0%, 45% { transform: translateY(54px); } 85%, 100% { transform: translateY(0); } }
+@keyframes lowerf { 0% { transform: translateY(0); opacity: 0; } 5%, 12% { transform: translateY(0); opacity: 1; } 34% { transform: translateY(32px); opacity: 1; } 44%, 100% { transform: translateY(46px); opacity: 0; } }
+@keyframes raisef { 0%, 48% { transform: translateY(46px); opacity: 0; } 58% { transform: translateY(32px); opacity: 1; } 85%, 95% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(0); opacity: 0; } }
 @keyframes nod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes fire { from { transform: scaleY(.8) skewX(-3deg); } to { transform: scaleY(1.1) skewX(3deg); } }
 @keyframes fly { from { transform: translateX(-460px); } to { transform: translateX(260px); } }
@@ -726,16 +726,15 @@ const ILL = {
     <path ${INK} d="M190 186 V128 H410 V186"/>
     <path ${INK} d="M180 128 H420"/>
     ${[0,1,2,3,4,5,6,7].map(k => `<path stroke="currentColor" stroke-width="2.5" d="M${206 + k*26} 140 V186"/>`).join('')}
+    <path ${INK} d="M300 66 V14"/><circle cx="300" cy="13" r="3" fill="currentColor"/>
+    <g class="a-lower"><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M301 18 h46 v28 h-46 z"/><g fill="none" stroke="#f0d48a" stroke-width="1.6" stroke-linecap="round"><path d="M308 33 a5.5 5.5 0 1 0 7 -7"/><path d="M307 36 l8 -8 M313 26 l4 4"/></g><path fill="#f0d48a" d="M318 21 l.8 1.6 h1.7 l-1.3 1.1 .5 1.7 -1.7 -1 -1.7 1 .5 -1.7 -1.3 -1.1 h1.7 z"/></g>
+    <g class="a-raise"><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M301 18 h46 v9 h-46 z"/><path fill="#3a5ba0" d="M301 27 h46 v9 h-46 z"/><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M301 36 h46 v10 h-46 z"/></g>
     <path fill="#c9d3cf" stroke="currentColor" stroke-width="3" d="M236 128 Q236 70 300 64 Q364 70 364 128 Z"/>
-    <circle cx="300" cy="62" r="5" fill="currentColor"/>
-    <path ${INK} d="M258 104 V18 M342 104 V18"/>
-    <g class="a-lower"><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M256 22 h-40 q-6 12 0 24 h40 z"/><path fill="#f0d48a" d="M228 28 l2 4 h4 l-3 3 1 4 -4 -2 -4 2 1 -4 -3 -3 h4 z"/></g>
-    <g class="a-raise"><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M344 22 h40 v8 h-40 z"/><path fill="#3a5ba0" d="M344 30 h40 v8 h-40 z"/><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M344 38 h40 v8 h-40 z"/></g>
     <rect x="460" y="120" width="96" height="66" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
     <path stroke="currentColor" stroke-width="1.5" d="M470 134 h70 M470 144 h60 M470 154 h70 M470 164 h40"/>
     <text x="508" y="130" text-anchor="middle" font-family="PT Mono, monospace" font-size="7" fill="currentColor">РЕГЛАМЕНТ</text>
     ${[0,1,2,3,4].map(k => `<circle class="a-snow" style="animation-delay:${k * 1.1}s" cx="${70 + k * 110}" cy="20" r="2.4" fill="currentColor"/>`).join('')}
-    <path ${INK} d="M30 188 H570"/>`, "25 декабря 1991 г.: над Кремлём спускают красный флаг и поднимают триколор; на столе регламент от 17 декабря"),
+    <path ${INK} d="M30 188 H570"/>`, "25 декабря 1991 г.: над Кремлём на том же флагштоке красный флаг сменяется триколором; на столе регламент от 17 декабря"),
   foros: frame(`
     <path ${INK} d="M80 186 V118 h40 V186 M86 118 V94 h28 V118 M90 94 L100 54 L110 94"/>
     <circle cx="100" cy="134" r="8" ${INK}/><path ${INK} d="M100 134 v-5 M100 134 h4"/>
@@ -2209,13 +2208,15 @@ const LOG_URL = "https://script.google.com/macros/s/AKfycbx1hJ_J8LcKeFGm5xlMdT2l
 function playerId() {
   try { let v = localStorage.getItem("konsultant-player"); if (!v) { v = Math.random().toString(36).slice(2, 10); localStorage.setItem("konsultant-player", v); } return v; } catch (err) { return "без-хранилища"; }
 }
+let logQ = Promise.resolve();
 function sendLog(name) {
   if (!LOG_URL) return false;
   const e = ENDINGS.find(x => x.test(S));
   const body = { id: S.gid, player: playerId(), name: (name || "").trim().slice(0, 60), ending: e.title, key: e.key, lost: !!e.lost,
     credo: ({ r: "шестидесятник", s: "государственник", i: "интернационалист" })[S.flags.credo] || "", dec: S.flags.dec || "",
     stats: S.stats, steps: S.log.length, path: S.log.map(l => l.year + " " + l.title).join("; "), version: KEY };
-  try { fetch(LOG_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body) }); } catch (err) { return false; }
+  const go = () => fetch(LOG_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body) }).catch(() => {});
+  try { logQ = logQ.then(go, go); } catch (err) { return false; }
   return true;
 }
 function logEnd() {
@@ -2228,6 +2229,7 @@ function logEnd() {
 }
 function bindLog() {
   const b = $("logsend"); if (!b) return;
+  $("logname").addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); b.click(); } });
   b.addEventListener("click", () => {
     const v = $("logname").value.trim(); if (!v) { $("logmsg").textContent = "Впишите имя или оставьте дело без подписи."; return; }
     if (sendLog(v)) { S.logName = v; save(); $("logmsg").textContent = "Дело подписано: " + v + "."; }
