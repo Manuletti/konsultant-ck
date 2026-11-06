@@ -596,20 +596,27 @@ const ILL = {
     <path fill="#b0261c" d="M540 60 l4 -10 l4 10 l10 0 l-8 6 l3 10 l-9 -6 l-9 6 l3 -10 l-8 -6 z" opacity=".8"/>
     <path ${INK} d="M536 186 V110 h16 V186 M530 110 h28 M534 96 h20 v14 M540 80 h8 v16"/>`, "Черновик с вашей правкой и трибуна: ваши мысли стали словами президента"),
   intro: frame(`
-    <rect x="0" y="0" width="600" height="210" fill="#1f2a33" opacity=".9"/>
-    ${[[40,24],[120,40],[200,18],[520,30],[560,60],[460,16],[330,26]].map(([x,y],k) => `<circle class="a-blink" style="animation-delay:${k * .7}s" cx="${x}" cy="${y}" r="1.6" fill="#f6f5ef"/>`).join('')}
-    <circle cx="90" cy="46" r="14" fill="#f0d48a" opacity=".9"/>
-    <path fill="#2e3a44" stroke="#c9d3cf" stroke-width="2" d="M40 186 V64 H320 V186 Z"/>
-    <path stroke="#c9d3cf" stroke-width="2" d="M30 64 H330 M40 78 H320"/>
-    ${[0,1,2,3].map(r => [0,1,2,3,4,5].map(k => { const lit = r === 1 && k === 3; return `<rect x="${58 + k*44}" y="${90 + r*22}" width="22" height="14" fill="${lit ? "#f0d48a" : "#3a4652"}" stroke="#c9d3cf" stroke-width="1.5"${lit ? ' class="a-flicker"' : ""}/>`; }).join('')).join('')}
-    <g class="a-carriage"><path stroke="#1f1d1a" stroke-width="2" d="M194 120 h16"/></g>
-    ${[0,1,2].map(k => `<g class="a-fly" style="animation-delay:${k * 1.6}s"><rect x="210" y="104" width="16" height="20" fill="#f6f5ef" stroke="#1f1d1a" stroke-width="1"/><path stroke="#1f1d1a" stroke-width="1" d="M213 110 h10 M213 114 h10 M213 118 h6"/></g>`).join('')}
-    <path fill="none" stroke="#c9d3cf" stroke-width="1.5" stroke-dasharray="3 7" d="M228 112 C320 60 400 60 452 104"/>
-    <path fill="#2e3a44" stroke="#c9d3cf" stroke-width="2.5" d="M430 186 L444 118 H524 L538 186 Z"/>
-    <path stroke="#c9d3cf" stroke-width="2.5" d="M436 118 H532"/>
-    <path fill="none" stroke="#c9d3cf" stroke-width="2.5" d="M508 118 q8 -24 -6 -38"/><circle cx="500" cy="78" r="5" fill="#c9d3cf"/>
-    <circle cx="484" cy="104" r="9" fill="none" stroke="#c9d3cf" stroke-width="2.5"/><path stroke="#c9d3cf" stroke-width="2.5" d="M484 113 V118"/>
-    <path stroke="#c9d3cf" stroke-width="2" d="M20 188 H580"/>`, "Старая площадь, ночью: горит одно окно. Текст, который вы пишете, утром произнесёт другой"),
+    <path ${INK} d="M30 188 H570"/>
+    <path ${INK} d="M50 186 V150 H250 V186 M60 150 V186 M240 150 V186"/>
+    <rect x="80" y="40" width="130" height="108" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="145" y="56" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">ПРОЕКТ</text>
+    <path stroke="currentColor" stroke-width="1.5" d="M90 68 h110 M90 78 h110 M90 88 h60 M90 98 h110 M90 108 h90 M90 118 h110 M90 128 h70"/>
+    <path stroke="#b0261c" stroke-width="2" d="M154 86 l44 4 M150 88 h50"/>
+    <path class="a-write" fill="none" stroke="#b0261c" stroke-width="2" d="M154 84 q10 -10 22 -2 q10 6 22 -4"/>
+    <rect x="88" y="94" width="114" height="18" fill="#f0d48a" opacity=".45"/>
+    <g class="a-pen"><path stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M222 70 L200 92"/></g>
+    <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" d="M214 102 C270 80 310 80 350 100"/>
+    <path ${INK} d="M344 94 l8 7 l-10 4"/>
+    <rect x="360" y="30" width="190" height="150" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="455" y="54" text-anchor="middle" font-family="PT Mono, monospace" font-size="18" font-weight="700" fill="currentColor">ПРАВДА</text>
+    <path stroke="currentColor" stroke-width="2" d="M370 62 H540"/>
+    <rect x="372" y="70" width="44" height="54" fill="#c9d3cf" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="394" cy="90" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" fill="none" d="M378 122 q16 -18 32 0"/>
+    <text x="478" y="80" text-anchor="middle" font-family="PT Mono, monospace" font-size="7" fill="currentColor">ДОКЛАД</text>
+    <text x="478" y="90" text-anchor="middle" font-family="PT Mono, monospace" font-size="7" fill="currentColor">ГЕНЕРАЛЬНОГО СЕКРЕТАРЯ</text>
+    <path stroke="currentColor" stroke-width="1.5" d="M426 100 h104 M426 108 h104 M372 134 h158 M372 150 h158 M372 158 h110 M372 166 h158"/>
+    <rect class="a-pulse" x="370" y="138" width="162" height="10" fill="#f0d48a" opacity=".6"/>
+    <path stroke="currentColor" stroke-width="1.5" d="M376 143 h150"/>`, "Ваш абзац и его доклад: завтра ваши слова прочтут с трибуны под чужой фамилией"),
   endMo: frame(`
     <path ${INK} d="M40 186 V54 H300 V186"/><path ${INK} d="M30 54 H310 M40 70 H300"/>
     <rect x="204" y="152" width="40" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
@@ -632,14 +639,14 @@ const ILL = {
     <path ${INK} d="M90 186 V114 q0 -30 30 -30 h60 q30 0 30 30 V186 M80 144 h20 M200 144 h20 M100 154 h100"/>
     <rect x="270" y="80" width="130" height="90" rx="8" ${INK}/>
     <rect class="a-tv" x="282" y="92" width="106" height="66" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
-    <g class="a-sway-b"><circle cx="335" cy="106" r="5" fill="currentColor"/><path ${INK} d="M335 111 V130 M335 116 l-16 -8 M335 116 l16 -8 M335 130 l-10 18 M335 130 l12 14"/><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M318 128 q17 -8 34 0 q-17 8 -34 0 z"/></g>
+    <g class="a-sway-b">${[0,1,2,3].map(k => { const x = 298 + k*24; return `<circle cx="${x}" cy="108" r="3.2" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M${x} 111 V128 M${x} 128 l-3 18 M${x} 128 l3 18"/><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.2" d="M${x - 9} 127 q9 -5 18 0 q-9 5 -18 0 z"/>`; }).join('')}<path stroke="currentColor" stroke-width="1.6" fill="none" d="M290 120 L302 116 L314 120 L326 116 L338 120 L350 116 L362 120 L374 116 L380 118"/></g>
     <path ${INK} d="M300 170 l-10 16 M370 170 l10 16"/>
     <rect x="460" y="58" width="70" height="86" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
     <rect x="460" y="58" width="70" height="20" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
     <text x="495" y="72" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="#f6f5ef">АВГУСТ</text>
     <text x="495" y="118" text-anchor="middle" font-family="PT Mono, monospace" font-size="34" font-weight="700" fill="currentColor">19</text>
     <text x="495" y="136" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">ПОНЕДЕЛЬНИК</text>
-    <circle cx="495" cy="52" r="3" fill="currentColor"/>`, "Пенсия, 19 августа: по всем программам «Лебединое озеро»"),
+    <circle cx="495" cy="52" r="3" fill="currentColor"/>`, "Пенсия, 19 августа: по всем программам «Лебединое озеро», танец маленьких лебедей"),
   endDir: frame(`
     <path ${INK} d="M30 186 H570"/>
     <path ${INK} d="M120 186 V148 H380 V186 M132 148 V186 M368 148 V186"/>
@@ -2192,7 +2199,7 @@ function renderIntro() {
     ${ILL.intro}
     <div class="place">Москва, Старая площадь</div><h2>Консультант ЦК</h2>
     <div class="epi">
-      <p>Вы — молодой учёный-американист, и вас зовут в группу консультантов ЦК КПСС. Такие люди писали доклады генсеков, записки о разрядке и ОСВ, речи для трибуны ООН. Их фамилий в текстах нет: утром ваши слова произнесёт другой.</p>
+      <p>Вас, молодого человека, который умеет писать и думать, зовут в группу консультантов ЦК КПСС. Кто вы — учёный из академического института, журналист «Коммуниста» или сотрудник пражского журнала компартий, — решит первый выбор. Такие люди писали доклады генсеков, записки о разрядке и ОСВ, речи для трибуны ООН. Их фамилий в текстах нет: утром ваши слова произнесёт другой.</p>
       <p>Впереди почти тридцать лет, от хрущёвской оттепели до флага, который спустят над Кремлём в декабре девяносто первого. В каждой сцене нужно выбрать: что вписать в текст, что вычеркнуть, когда промолчать, а когда спорить. Доверие начальства, перо, круг друзей и собственные убеждения тянут в разные стороны, и удержать всё сразу не удастся никому.</p>
       <p>Герой вымышлен, а всё вокруг него — нет. После каждого решения открывается «Как вспоминали»: что в той же ситуации сделали и написали Арбатов, Бовин, Черняев, Шахназаров, Брутенц, Александров-Агентов, — со ссылками на страницы мемуаров и документов. Игра о том, как в советской системе думали, писали и спорили люди, которые служили ей и одновременно пытались её изменить.</p>
     </div>
