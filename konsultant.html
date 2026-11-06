@@ -263,6 +263,8 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   .a-sheetl { animation: sheetl 4s ease-in infinite; opacity: 0; }
   .a-sheetr { animation: sheetr 4s ease-in 2s infinite; opacity: 0; }
   .a-fly { animation: flyp 4.8s ease-in-out infinite; opacity: 0; }
+  .a-lower { animation: lowerf 9s ease-in-out infinite; }
+  .a-raise { animation: raisef 9s ease-in-out infinite; transform: translateY(54px); }
   .a-drift { animation: drift 9s linear infinite; }
   .a-surf { animation: surf 3s ease-in-out infinite alternate; }
   .a-beam2 { animation: beam 6s ease-in-out infinite; }
@@ -298,6 +300,8 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 @keyframes sheetl { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(-150px, 20px); opacity: 0; } }
 @keyframes sheetr { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(160px, 10px); opacity: 0; } }
 @keyframes flyp { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(230px, -10px) rotate(25deg); opacity: 0; } }
+@keyframes lowerf { 0%, 15% { transform: translateY(0); } 55%, 100% { transform: translateY(54px); } }
+@keyframes raisef { 0%, 45% { transform: translateY(54px); } 85%, 100% { transform: translateY(0); } }
 @keyframes nod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes fire { from { transform: scaleY(.8) skewX(-3deg); } to { transform: scaleY(1.1) skewX(3deg); } }
 @keyframes fly { from { transform: translateX(-460px); } to { transform: translateX(260px); } }
@@ -342,6 +346,7 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 /* ——— Гравюры к сценам (inline SVG, 600×210; чернила + красный карандаш) ——— */
 const INK = 'fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
 const RED = 'fill="none" stroke="#b0261c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
+const pine = (x, b, h, d = 0) => `<g class="a-sway-b" style="animation-delay:${d}s"><path stroke="currentColor" stroke-width="3" d="M${x} ${b} V${b - h * .2}"/>${[0, 1, 2].map(k => { const y = b - h * (.18 + k * .27), w = h * (.36 - k * .09); return `<path fill="#3f6b3a" fill-opacity=".28" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" d="M${x - w} ${y} L${x} ${y - h * .4} L${x + w} ${y} Z"/>`; }).join("")}</g>`;
 const frame = (body, cap) => `<figure class="illus"><svg viewBox="0 0 600 210" role="img" aria-label="${cap}"><g filter="url(#lino)">${body}</g></svg><figcaption>${cap}</figcaption></figure>`;
 const ILL = {
   typewriter: frame(`
@@ -365,23 +370,30 @@ const ILL = {
     <path ${RED} class="a-pulse" style="animation-delay:.3s" d="M440 58 q24 30 0 60M160 58 q-24 30 0 60"/>
     <path ${INK} d="M300 184 V196 M60 196 H540"/>`, "«Вертушка»: правительственная связь, положенная консультанту"),
   dacha: frame(`
-    <path ${INK} d="M350 82 V52 H368 V92"/>
-    ${[0, 1, 2].map(k => `<circle class="a-rise" style="animation-delay:${k}s" cx="${360 + k*6}" cy="${38 - k*8}" r="${6 + k*3}" fill="none" stroke="currentColor" stroke-width="2"/>`).join('')}
-    <path ${INK} d="M200 180 V110 L300 58 L400 110 V180"/><path ${INK} d="M186 116 L300 50 L414 116"/>
-    <rect x="232" y="122" width="44" height="34" ${INK}/><rect class="a-flicker" x="324" y="122" width="44" height="34" fill="#f0d48a" stroke="currentColor" stroke-width="3"/>
-    <path ${INK} d="M254 122v34M232 139h44M346 122v34M324 139h44"/>
-    <g class="a-sway-b"><path ${INK} d="M90 180 L120 70 L150 180 M100 140 h40 M106 112 h28"/></g>
-    <g class="a-sway-b" style="animation-delay:-1.5s"><path ${INK} d="M470 180 L505 60 L540 180 M480 140 h50 M488 108 h34"/></g>
-    <path ${RED} d="M290 168 h20 v12 h-20z"/>
-    <path ${INK} d="M40 182 H560"/><rect x="40" y="184" width="520" height="10" fill="url(#hatch)"/>`, "Госдача: читки вслух, бильярд, «парткурица»"),
+    <path ${INK} d="M356 70 V46 H372 V78"/>
+    ${[0, 1, 2].map(k => `<circle class="a-rise" style="animation-delay:${k}s" cx="${364 + k*6}" cy="${34 - k*8}" r="${6 + k*3}" fill="none" stroke="currentColor" stroke-width="2"/>`).join('')}
+    <path fill="#efe9d8" stroke="currentColor" stroke-width="3" d="M180 186 V100 H420 V186 Z"/>
+    <path ${INK} d="M166 102 L300 52 L434 102 Z"/>
+    <path ${INK} d="M262 186 V128 M282 186 V128 M318 186 V128 M338 186 V128 M254 128 H346 M254 128 L300 106 L346 128"/>
+    <rect x="196" y="116" width="52" height="40" fill="#c9d3cf" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="202" y="136" width="40" height="12" fill="#3f6b3a" stroke="currentColor" stroke-width="1.5"/><circle cx="212" cy="140" r="1.8" fill="#f6f5ef"/><circle cx="226" cy="143" r="1.8" fill="#b0261c"/><circle cx="234" cy="139" r="1.8" fill="#f6f5ef"/>
+    <path stroke="currentColor" stroke-width="2" d="M216 130 l14 8"/>
+    <rect class="a-flicker" x="352" y="116" width="52" height="40" fill="#f0d48a" stroke="currentColor" stroke-width="2.5"/>
+    ${[0,1,2].map(k => `<circle cx="${364 + k*14}" cy="140" r="4.5" fill="currentColor"/><path fill="currentColor" d="M${357 + k*14} 156 q7 -12 14 0 z"/>`).join('')}
+    <circle cx="300" cy="84" r="8" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/>
+    ${pine(86, 186, 120)}${pine(130, 186, 90, -1.2)}${pine(480, 186, 110, -2)}${pine(526, 186, 130, -0.6)}
+    <path ${INK} d="M40 186 H560"/><rect x="40" y="188" width="520" height="8" fill="url(#hatch)"/>`, "Госдача: читки вслух, бильярд в гостиной, ели вокруг"),
   silent: frame(`
-    <path ${INK} d="M150 170 L166 112 H274 L290 170 Z"/><circle cx="220" cy="142" r="18" ${INK}/>
-    <path ${INK} d="M156 104 q64 -30 128 0 l-8 10 q-56 -20 -112 0 Z"/>
-    <path ${RED} class="a-blink" d="M312 96 L352 136 M352 96 L312 136"/>
-    <circle cx="440" cy="110" r="56" ${INK}/><path ${INK} d="M440 110 V72"/>
-    <path ${INK} class="a-spin" d="M440 110 L476 110"/>
-    ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${110 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${110 + 54*Math.sin(a)}"/>`; }).join('')}
-    <path ${INK} d="M60 186 H540"/>`, "Октябрь 1964 г.: звонки сверху прекратились"),
+    <path ${INK} d="M60 150 H330 M80 150 V186 M310 150 V186"/>
+    <path ${INK} d="M120 150 L134 108 H226 L240 150 Z"/><circle cx="180" cy="128" r="14" ${INK}/>
+    <path ${INK} d="M136 104 v-8 h16 M224 104 v-8 h-16"/>
+    <path fill="none" stroke="currentColor" stroke-width="2" d="M232 132 q20 4 22 20 q2 10 -4 12 q-6 2 -4 10 q2 8 -4 10"/>
+    <path ${INK} d="M232 176 q-18 -10 -4 -26 l6 4 q-10 10 2 18 z"/>
+    <path ${RED} class="a-blink" d="M262 70 L298 106 M298 70 L262 106"/>
+    <circle cx="440" cy="104" r="56" ${INK}/><path ${INK} d="M440 104 V66"/>
+    <path ${INK} class="a-spin" d="M440 104 L476 104"/>
+    ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${104 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${104 + 54*Math.sin(a)}"/>`; }).join('')}
+    <path ${INK} d="M40 186 H560"/>`, "Октябрь 1964 г.: трубка снята, а сверху больше не звонят"),
   abolish: frame(`
     <rect x="200" y="28" width="200" height="160" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
     <path ${INK} d="M222 52h120M222 70h156M222 88h140M222 106h150M222 124h120M222 142h146"/>
@@ -392,13 +404,15 @@ const ILL = {
     </g>
     <path ${INK} d="M60 192 H540"/>`, "12 мая 1965 г.: подотдел упразднён"),
   theatre: frame(`
-    <path ${INK} d="M120 40 H480 V186 H120 Z"/>
-    <path class="a-curtain-l" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 40 q40 70 0 146 Z"/>
-    <path class="a-curtain-r" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M480 40 q-40 70 0 146 Z"/>
-    <path class="a-beam" fill="#b0261c" opacity=".35" d="M300 40 L262 186 H338 Z"/>
-    <circle cx="300" cy="118" r="12" ${INK}/><path ${INK} d="M300 130 v34 M300 164 l-12 20 M300 164 l12 20"/>
-    <g class="a-wave"><path ${INK} d="M300 142 l-18 12 M300 142 l20 -14"/></g>
-    <path ${INK} d="M60 192 H540"/>`, "Таганка: свет на сцене, консультанты в зале"),
+    <path ${INK} d="M120 30 H480 V140 H120 Z"/>
+    <path class="a-curtain-l" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 30 q40 56 0 110 Z"/>
+    <path class="a-curtain-r" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M480 30 q-40 56 0 110 Z"/>
+    <path class="a-beam" fill="#b0261c" opacity=".35" d="M300 30 L266 140 H334 Z"/>
+    <circle cx="300" cy="86" r="10" ${INK}/><path ${INK} d="M300 96 v24 M300 120 l-10 18 M300 120 l10 18"/>
+    <g class="a-wave"><path ${INK} d="M300 104 l-16 10 M300 104 l18 -12"/></g>
+    <path ${INK} d="M100 140 H500 V150 H100 Z"/>
+    ${[0,1,2,3,4,5,6,7,8].map(k => `<circle class="a-flicker" style="animation-delay:${k * .3}s" cx="${130 + k*42}" cy="145" r="2.5" fill="#f0d48a"/>`).join('')}
+    ${[0,1,2,3,4,5,6,7,8,9,10].map(k => `<g><circle cx="${90 + k*42}" cy="168" r="9" fill="currentColor"/><path fill="currentColor" d="M${74 + k*42} 192 q16 -22 32 0 z"/></g>`).join('')}`, "Таганка: свет на сцене, консультанты в зале"),
   empty: frame(`
     <path ${INK} d="M120 30 V186 H480 V30"/><path ${INK} d="M120 150 L60 196 M480 150 L540 196 M120 150 H480"/>
     <path class="a-flicker" fill="#f0d48a" opacity=".35" d="M250 122 H350 L400 196 H200 Z"/>
@@ -450,11 +464,14 @@ const ILL = {
     <path ${INK} d="M30 188 H570"/>`, "Завидово, 1975 г.: на карте Ангола, через океан — кубинские войска"),
   soy: frame(`
     <g class="a-sway-b">
-      <path ${INK} d="M300 190 C296 150 304 110 300 40"/>
-      ${[[300,70,-1],[300,96,1],[300,124,-1],[300,150,1]].map(([x,y,d]) => `<path ${INK} d="M${x} ${y} q${d*50} -24 ${d*80} 6 q${-d*40} 20 ${-d*80} -6"/>`).join('')}
-      ${[[312,84],[286,112],[314,138],[288,164]].map(([x,y]) => `<path fill="#c9b56a" stroke="currentColor" stroke-width="2.5" d="M${x} ${y} q10 -2 14 14 q-2 10 -10 6 q-8 -8 -4 -20z"/>`).join('')}
+      <path ${INK} d="M360 190 C356 150 364 110 360 40"/>
+      ${[[360,70,-1],[360,96,1],[360,124,-1],[360,150,1]].map(([x,y,d]) => `<path ${INK} d="M${x} ${y} q${d*50} -24 ${d*80} 6 q${-d*40} 20 ${-d*80} -6"/>`).join('')}
+      ${[[372,84],[346,112],[374,138],[348,164]].map(([x,y]) => `<path fill="#c9b56a" stroke="currentColor" stroke-width="2.5" d="M${x} ${y} q10 -2 14 14 q-2 10 -10 6 q-8 -8 -4 -20z"/>`).join('')}
     </g>
-    <path ${RED} class="a-write" d="M120 60 h80 M120 76 h60 M120 92 h70"/>
+    <rect x="90" y="50" width="130" height="126" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5" transform="rotate(-3 155 113)"/>
+    <text x="155" y="70" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor" transform="rotate(-3 155 113)">ЗАПИСКА</text>
+    <g transform="rotate(-3 155 113)"><path stroke="currentColor" stroke-width="1.5" d="M102 84 h106 M102 94 h106 M102 104 h70 M102 114 h106 M102 124 h90 M102 134 h106 M102 144 h60"/>
+    <path class="a-write" fill="none" stroke="#b0261c" stroke-width="2" d="M102 108 h70"/></g>
     <path ${INK} d="M60 190 H540"/>`, "Соя: опыт американской фермы в записке для ЦК"),
   mountains: frame(`
     <path fill="url(#hatch)" opacity=".28" d="M150 186 L250 96 L310 140 L390 64 L470 128 L520 100 L580 186 Z"/>
@@ -562,23 +579,24 @@ const ILL = {
     <path ${INK} d="M40 190 H560"/>`, "Хлебный переулок, 1991 г.: полки до потолка, звонят из Вашингтона"),
   endOut: frame(`
     <path ${INK} d="M30 186 H570"/>
-    <path fill="#c9b48a" opacity=".35" d="M150 186 V104 H290 V186 Z"/>
-    <path ${INK} d="M150 186 V104 H290 V186"/>
-    <path ${INK} d="M136 106 L220 50 L304 106"/>
-    <rect x="206" y="70" width="28" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="1.5" d="M220 70 V92 M206 81 H234"/>
-    ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="1" d="M150 ${116 + k*12} H290"/>`).join('')}
-    <path ${INK} d="M290 186 V122 H392 V186"/><path ${INK} d="M284 124 L300 112 H392"/>
-    ${[0,1,2,3].map(k => `<rect x="${298 + k*23}" y="128" width="19" height="26" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/>`).join('')}
-    <path ${INK} d="M296 158 H392"/>
-    <rect x="352" y="146" width="22" height="12" rx="2" fill="#3a2e22" stroke="currentColor" stroke-width="1.5"/>
-    <g class="a-pulse"><path ${RED} d="M380 140 q6 -6 0 -12 M386 144 q10 -10 0 -20"/></g>
-    <path ${INK} d="M300 186 v-10 h20 v-8 h20"/>
-    <rect x="186" y="140" width="26" height="46" fill="#3a2e22" stroke="currentColor" stroke-width="2"/>
-    ${[0,1,2,3,4,5,6,7,8,9,10,11].map(k => `<path ${INK} d="M${410 + k*13} 186 V164 l4 -5 l4 5 V186"/>`).join('')}
-    <path ${INK} d="M406 172 H566"/>
-    <path fill="#f6f5ef" stroke="currentColor" stroke-width="2" d="M92 186 V60 h7 V186 Z"/>
-    ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="2" d="M92 ${74 + k*18} h4"/>`).join('')}
-    <g class="a-sway-b"><path stroke="#3f6b3a" stroke-width="2" fill="none" d="M96 70 q-30 10 -40 34 M96 84 q26 4 40 28 M96 60 q-14 -16 -34 -12"/></g>`, "Дача: веранда, приёмник шестьдесят восьмого года, Би-би-си больше не глушат"),
+    <path fill="#c9b48a" opacity=".35" d="M250 186 V108 H390 V186 Z"/>
+    <path ${INK} d="M250 186 V108 H390 V186"/>
+    ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="1.2" d="M250 ${120 + k*12} H390"/>`).join('')}
+    <path fill="#efe9d8" stroke="currentColor" stroke-width="3" d="M236 110 L320 46 L404 110 Z"/>
+    <rect x="306" y="72" width="28" height="24" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="1.5" d="M320 72 V96 M306 84 H334"/>
+    <rect x="336" y="128" width="34" height="30" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="1.5" d="M353 128 V158 M336 143 H370"/>
+    <path stroke="currentColor" stroke-width="2" d="M330 128 v30 M376 128 v30"/>
+    <path ${INK} d="M120 124 L250 114"/><path ${INK} d="M126 186 V124 M250 186 V118"/>
+    <path ${INK} d="M126 150 H250"/>
+    ${[0,1,2,3,4].map(k => `<path stroke="currentColor" stroke-width="1.5" d="M${150 + k*24} 124 V150"/>`).join('')}
+    <path ${INK} d="M150 186 V166 H204 V186 M156 166 V186"/>
+    <rect x="164" y="152" width="26" height="14" rx="2" fill="#3a2e22" stroke="currentColor" stroke-width="1.5"/><circle cx="183" cy="159" r="3" fill="#f0d48a"/>
+    <path ${INK} d="M177 152 l-6 -10"/>
+    <g class="a-pulse"><path ${RED} d="M194 146 q6 -6 0 -12 M200 150 q12 -12 0 -24"/></g>
+    <path ${INK} d="M214 186 v-18 q0 -8 8 -8 h12 q8 0 8 8 v18 M210 172 h36"/>
+    ${pine(462, 186, 118)}${pine(520, 186, 96, -1.4)}
+    ${[0,1,2,3,4,5,6,7,8].map(k => `<path stroke="currentColor" stroke-width="2" d="M${404 + k*18} 186 V170"/>`).join('')}
+    <path stroke="currentColor" stroke-width="2" d="M400 176 H566"/>`, "Дача: веранда, приёмник шестьдесят восьмого года, Би-би-си больше не глушат"),
   endAide: frame(`
     <path ${INK} d="M30 186 H570"/>
     <path ${INK} d="M60 186 V150 H270 V186 M70 150 V186 M260 150 V186"/>
@@ -657,7 +675,7 @@ const ILL = {
     <g class="a-pen"><path stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M318 118 L300 142"/></g>
     <path ${INK} d="M440 186 V60 H530 V186"/>
     <path fill="#c9d3cf" stroke="currentColor" stroke-width="2.5" d="M440 60 L470 70 V186 L440 186 Z"/>
-    ${[0,1,2].map(k => `<g class="a-nod" style="animation-delay:${k * .4}s"><circle cx="${488 + k*16}" cy="${96 + (k%2)*4}" r="7" ${INK}/><path ${INK} d="M${488 + k*16} ${103 + (k%2)*4} V140"/></g>`).join('')}
+    ${[0,1,2].map(k => `<g class="a-nod" style="animation-delay:${k * .4}s"><circle cx="${486 + k*18}" cy="${104 + (k%2)*6}" r="8" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/><path fill="${["#3a2e22","#5a6470","#3a2e22"][k]}" stroke="currentColor" stroke-width="2" d="M${472 + k*18} ${186} V${136 + (k%2)*6} q0 -20 14 -20 q14 0 14 20 V186 z"/></g>`).join('')}
     <rect x="440" y="34" width="90" height="20" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5"/>
     <text x="485" y="48" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">ДИРЕКТОР</text>`, "Кабинет директора: сотрудники ждут в дверях, подпись не нужно согласовывать"),
   obit: frame(`
@@ -697,24 +715,22 @@ const ILL = {
     <path ${INK} d="M266 62 h68 M272 44 h56 M272 80 h56"/>
     <path ${INK} d="M250 186 L262 118 H338 L350 186"/>
     <path ${INK} d="M300 118 V100 q0 -6 8 -8"/><ellipse cx="312" cy="90" rx="6" ry="4" fill="currentColor"/>
-    ${[0,1,2,3,4].map(k => `<circle class="${k % 2 ? "a-nod" : ""}" style="animation-delay:${k * .3}s" cx="${70 + k*30}" cy="160" r="9" ${INK}/>`).join('')}
-    ${[0,1,2,3,4].map(k => `<circle class="${k % 2 ? "" : "a-nod"}" style="animation-delay:${k * .3}s" cx="${410 + k*30}" cy="160" r="9" ${INK}/>`).join('')}
-    <path ${INK} d="M56 176 H224 M376 176 H544"/>
-    <path ${INK} d="M40 190 H560"/>`, "Декабрь 1988 г.: трибуна Генеральной ассамблеи"),
+    ${[0,1].map(side => [0,1,2,3].map(k => { const x = (side ? 392 : 52) + k*40; const lbl = (side ? ["USA","UK","FRA","CHN"] : ["DDR","IND","CUB","JPN"])[k]; return `<g class="${(k + side) % 2 ? "a-nod" : ""}" style="animation-delay:${k * .3}s"><circle cx="${x + 16}" cy="140" r="8" ${INK}/><path fill="none" stroke="currentColor" stroke-width="2.5" d="M${x + 4} 162 q12 -14 24 0"/></g><rect x="${x}" y="160" width="32" height="16" fill="#efe9d8" stroke="currentColor" stroke-width="2"/><rect x="${x + 6}" y="164" width="20" height="7" fill="#f6f5ef" stroke="currentColor" stroke-width="1"/><text x="${x + 16}" y="170" text-anchor="middle" font-family="PT Mono, monospace" font-size="5" fill="currentColor">${lbl}</text>`; }).join('')).join('')}
+    <path ${INK} d="M40 186 H560"/>`, "Декабрь 1988 г.: трибуна Генеральной ассамблеи"),
   flag: frame(`
     <path ${INK} d="M190 186 V128 H410 V186"/>
     <path ${INK} d="M180 128 H420"/>
     ${[0,1,2,3,4,5,6,7].map(k => `<path stroke="currentColor" stroke-width="2.5" d="M${206 + k*26} 140 V186"/>`).join('')}
     <path fill="#c9d3cf" stroke="currentColor" stroke-width="3" d="M236 128 Q236 70 300 64 Q364 70 364 128 Z"/>
-    <path ${INK} d="M300 64 V20"/>
-    <g class="a-sway-b"><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M302 22 h40 v8 h-40 z"/><path fill="#3a5ba0" d="M302 30 h40 v8 h-40 z"/><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M302 38 h40 v8 h-40 z"/></g>
-    <g opacity=".85"><path fill="#b0261c" stroke="currentColor" stroke-width="2" d="M296 100 h-44 v-26 h44 z" transform="rotate(8 296 100)"/></g>
-    <path stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 5" d="M296 92 V50"/>
+    <circle cx="300" cy="62" r="5" fill="currentColor"/>
+    <path ${INK} d="M258 104 V18 M342 104 V18"/>
+    <g class="a-lower"><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M256 22 h-40 q-6 12 0 24 h40 z"/><path fill="#f0d48a" d="M228 28 l2 4 h4 l-3 3 1 4 -4 -2 -4 2 1 -4 -3 -3 h4 z"/></g>
+    <g class="a-raise"><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M344 22 h40 v8 h-40 z"/><path fill="#3a5ba0" d="M344 30 h40 v8 h-40 z"/><path fill="#b0261c" stroke="currentColor" stroke-width="1.5" d="M344 38 h40 v8 h-40 z"/></g>
     <rect x="460" y="120" width="96" height="66" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
     <path stroke="currentColor" stroke-width="1.5" d="M470 134 h70 M470 144 h60 M470 154 h70 M470 164 h40"/>
     <text x="508" y="130" text-anchor="middle" font-family="PT Mono, monospace" font-size="7" fill="currentColor">РЕГЛАМЕНТ</text>
     ${[0,1,2,3,4].map(k => `<circle class="a-snow" style="animation-delay:${k * 1.1}s" cx="${70 + k * 110}" cy="20" r="2.4" fill="currentColor"/>`).join('')}
-    <path ${INK} d="M30 188 H570"/>`, "25 декабря 1991 г.: флаг над куполом Сенатского дворца, регламент от 17 декабря"),
+    <path ${INK} d="M30 188 H570"/>`, "25 декабря 1991 г.: над Кремлём спускают красный флаг и поднимают триколор; на столе регламент от 17 декабря"),
   foros: frame(`
     <path ${INK} d="M80 186 V118 h40 V186 M86 118 V94 h28 V118 M90 94 L100 54 L110 94"/>
     <circle cx="100" cy="134" r="8" ${INK}/><path ${INK} d="M100 134 v-5 M100 134 h4"/>
@@ -733,7 +749,6 @@ const ILL = {
     ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="2.5" d="M${432 + k*22} 118 V150"/>`).join('')}
     <path ${INK} d="M426 118 H554"/>
     <rect x="474" y="104" width="30" height="12" rx="3" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
-    <circle cx="574" cy="30" r="10" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/>
     <path ${INK} d="M30 188 H570"/>`, "19 августа 1991 г.: Москва — Форос, связь оборвана"),
   tvstudio: frame(`
     <rect x="300" y="44" width="200" height="130" rx="14" ${INK}/>
@@ -758,11 +773,19 @@ const ILL = {
   tvportrait: frame(`
     <rect x="80" y="40" width="200" height="134" rx="14" ${INK}/>
     <rect x="96" y="54" width="168" height="106" rx="8" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
-    <g class="a-tv"><circle cx="180" cy="96" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path ${INK} d="M146 152 q34 -38 68 0"/><path ${INK} d="M166 88 h6 M188 88 h6 M172 106 h16"/></g>
+    <g class="a-tv">
+      ${[0,1,2,3,4].map(k => `<path stroke="currentColor" stroke-width="1.5" fill="none" d="M${108 + k*12} 158 V118 M${108 + k*12} 132 q-6 -2 -8 -8 M${108 + k*12} 124 q6 -2 8 -8"/>`).join('')}
+      <path fill="#f6f5ef" stroke="currentColor" stroke-width="2" d="M170 158 q0 -26 26 -26 q26 0 26 26 z"/>
+      <circle cx="196" cy="108" r="16" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+      <path stroke="currentColor" stroke-width="2" d="M180 108 q-4 0 -4 5 M212 108 q4 0 4 5 M188 103 h6 M199 103 h6 M190 107 h3 M200 107 h3 M191 118 h10"/>
+      <path ${INK} d="M218 140 L236 112"/>
+      <path fill="currentColor" d="M228 108 q8 -12 16 0 z"/><path stroke="currentColor" stroke-width="2.5" d="M222 109 h28"/>
+      ${[0,1,2,3,4,5,6].map(k => `<rect x="${100 + k*24}" y="57" width="8" height="4" fill="currentColor" opacity=".5"/>`).join('')}
+    </g>
     <path ${INK} d="M140 174 l-12 14 M220 174 l12 14"/>
     <path ${INK} d="M500 186 V90 q20 -16 40 0 V186 M500 120 h40 M500 150 h40"/>
     ${[0,1,2,3,4].map(k => `<g class="a-sway-b" style="animation-delay:${k * .4}s"><path ${INK} d="M${330 + k*32} 186 V110"/><path stroke="currentColor" stroke-width="2.5" fill="none" d="M${330 + k*32} 160 q-16 -4 -20 -18 M${330 + k*32} 140 q16 -4 20 -18 M${330 + k*32} 120 q-12 -4 -14 -14"/><path fill="#f0d48a" stroke="currentColor" stroke-width="2" d="M${330 + k*32} 132 q8 -14 0 -26 q-8 12 0 26z"/></g>`).join('')}
-    <path ${INK} d="M40 190 H560"/>`, "1985 г.: на экране — портрет, за кадром — кукуруза фермы Гарста"),
+    <path ${INK} d="M40 190 H560"/>`, "1985 г.: на экране — плёнка 1959 года, Хрущёв со шляпой в руке; за кадром — кукуруза фермы Гарста"),
   endImemo: frame(`
     <path ${INK} d="M210 186 V30 H330 V186"/><path ${INK} d="M200 30 H340"/>
     ${[0,1,2,3,4,5,6].map(r => [0,1,2,3].map(k => `<rect class="${r === 1 && k === 2 ? "a-flicker" : ""}" x="${222 + k*27}" y="${42 + r*20}" width="15" height="11" fill="${r === 1 && k === 2 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
