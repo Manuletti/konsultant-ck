@@ -455,14 +455,14 @@ const ILL = {
     <path ${INK} stroke-dasharray="8 7" d="M120 186 C200 176 240 166 290 158 C330 152 350 146 372 140"/>
     ${[0,1,2,3,4,5,6].map(k => `<rect x="${60 + k*0}" y="${100 + k*12}" width="14" height="12" fill="${k % 2 ? "#3f6b3a" : "#b0261c"}"/>`).join('')}
     <path ${INK} d="M60 100 h14 v86 h-14 z"/><circle cx="67" cy="94" r="7" fill="#b0261c" stroke="currentColor" stroke-width="2"/>
-    <g class="a-drift">
+    <g class="a-drift"><g transform="translate(566 0) scale(-1 1)">
       <path fill="currentColor" d="M232 62 q0 -18 26 -18 h26 q18 0 22 16 l52 -6 v8 l-52 4 q-4 14 -26 14 h-24 q-24 0 -24 -18 z"/>
       <path fill="#c9d3cf" d="M240 56 q2 -8 14 -8 h10 v14 h-24 z"/>
       <path ${INK} d="M274 44 v-8"/>
       <path class="a-rotor" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" d="M206 34 H344"/>
       <circle cx="360" cy="60" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/>
       <path ${INK} d="M246 86 h52 M256 80 v6 M288 80 v6"/>
-    </g>
+    </g></g>
     ${[0,1,2,3,4,5].map(k => `<circle class="a-snow" style="animation-delay:${k * .9}s" cx="${80 + k * 85}" cy="20" r="2.4" fill="currentColor"/>`).join('')}
     <path ${INK} d="M30 188 H570"/>`, "Декабрь 1979 г.: пограничный столб, перевал, вертолёты уходят на юг"),
   archive: frame(`
