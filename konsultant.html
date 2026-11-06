@@ -260,6 +260,9 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   .a-pen { animation: pen 1.4s ease-in-out infinite; }
   .a-sweep { animation: spin 4s linear infinite; }
   .a-dropnb { animation: dropnb 4.5s ease-in infinite; }
+  .a-sheetl { animation: sheetl 4s ease-in infinite; opacity: 0; }
+  .a-sheetr { animation: sheetr 4s ease-in 2s infinite; opacity: 0; }
+  .a-fly { animation: flyp 4.8s ease-in-out infinite; opacity: 0; }
   .a-drift { animation: drift 9s linear infinite; }
   .a-surf { animation: surf 3s ease-in-out infinite alternate; }
   .a-beam2 { animation: beam 6s ease-in-out infinite; }
@@ -292,6 +295,9 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 @keyframes write { from { stroke-dashoffset: 160; } 60%, to { stroke-dashoffset: 0; } }
 @keyframes tilt { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
 @keyframes dropnb { 0% { transform: translateY(-46px); opacity: 0; } 20% { opacity: 1; } 55% { transform: translateY(0); opacity: 1; } 80%, 100% { transform: translateY(0); opacity: 0; } }
+@keyframes sheetl { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(-150px, 20px); opacity: 0; } }
+@keyframes sheetr { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(160px, 10px); opacity: 0; } }
+@keyframes flyp { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(230px, -10px) rotate(25deg); opacity: 0; } }
 @keyframes nod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes fire { from { transform: scaleY(.8) skewX(-3deg); } to { transform: scaleY(1.1) skewX(3deg); } }
 @keyframes fly { from { transform: translateX(-460px); } to { transform: translateX(260px); } }
@@ -518,20 +524,32 @@ const ILL = {
     <rect x="414" y="90" width="90" height="70" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/><path ${INK} d="M426 106 h66 M426 120 h58 M426 134 h66 M426 148 h50"/>
     <path ${INK} d="M40 190 H560"/>`, "Два профиля, два одинаковых текста: в режиме двоемыслия"),
   endSpeech: frame(`
-    <path ${INK} d="M150 70 V176 M150 132 H226 V176 M150 70 h10 V132"/>
-    <path ${INK} d="M450 70 V176 M450 132 H374 V176 M450 70 h-10 V132"/>
-    <rect x="164" y="112" width="58" height="18" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
-    <text x="193" y="125" text-anchor="middle" font-family="PT Serif, serif" font-size="9.5" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
-    <g class="a-nod"><rect x="378" y="106" width="58" height="24" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
-    <text x="407" y="123" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="#f6f5ef">ДОКЛАД</text></g>
-    <g class="a-sway-b"><circle cx="300" cy="66" r="14" ${INK}/><path ${INK} d="M300 80 V136 M300 96 L252 116 M300 96 L348 116 M300 136 L284 176 M300 136 L316 176"/></g>
-    <path ${INK} d="M40 180 H560"/><rect x="40" y="182" width="520" height="8" fill="url(#hatch)"/>`, "Два стула: газетная колонка и речи генсека"),
+    <path ${INK} d="M40 186 H560"/>
+    <rect x="76" y="96" width="120" height="78" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="136" y="112" text-anchor="middle" font-family="PT Mono, monospace" font-size="11" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
+    <path stroke="currentColor" stroke-width="1.5" d="M86 118 H186 M86 128 h44 M86 136 h44 M86 144 h44 M86 152 h44 M86 160 h44 M142 128 h44 M142 136 h44 M142 144 h30"/>
+    <rect x="140" y="148" width="48" height="20" fill="none" stroke="#b0261c" stroke-width="2"/>
+    <path ${INK} d="M250 150 h100 l10 24 h-120 z"/><rect x="262" y="128" width="76" height="22" rx="3" ${INK}/>
+    <path stroke="currentColor" stroke-width="2" d="M270 156 h60 M268 164 h64"/>
+    <g class="a-sheetl"><rect x="276" y="96" width="44" height="34" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.2" d="M282 106 h32 M282 113 h32 M282 120 h20"/></g>
+    <g class="a-sheetr"><rect x="276" y="96" width="44" height="34" fill="#f6f5ef" stroke="#b0261c" stroke-width="1.5"/><path stroke="#b0261c" stroke-width="1.2" d="M282 106 h32 M282 113 h32 M282 120 h20"/></g>
+    <path ${INK} d="M420 186 L436 116 H520 L536 186"/><path ${INK} d="M428 116 H528"/>
+    <path ${INK} d="M500 116 q6 -22 -10 -34"/><circle cx="488" cy="80" r="5" fill="currentColor"/>
+    <text x="478" y="150" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="#b0261c">ДОКЛАД</text>`, "Одна машинка, два адресата: колонка — в газету, абзац — в доклад генсека"),
   endIzv: frame(`
-    <g class="a-roll"><circle cx="170" cy="100" r="40" ${INK}/><path stroke="currentColor" stroke-width="3" d="M130 100 h80 M170 60 v80 M142 72 l56 56 M198 72 l-56 56"/></g>
-    <g class="a-roll-r"><circle cx="270" cy="150" r="30" ${INK}/><path stroke="currentColor" stroke-width="3" d="M240 150 h60 M270 120 v60"/></g>
-    <path ${INK} d="M70 140 H170 C210 140 230 120 270 120 C300 120 310 150 330 150 H352"/>
-    ${[0,1,2].map(k => `<g class="a-sheet" style="animation-delay:${k * 1.2}s"><rect x="360" y="120" width="56" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/><path stroke="currentColor" stroke-width="2" d="M368 132 h40 M368 142 h30"/></g>`).join('')}
-    <path ${INK} d="M40 190 H560"/>`, "Ротационная машина: ваша колонка уходит в тираж"),
+    <path ${INK} d="M40 186 H560"/>
+    <rect x="120" y="40" width="200" height="140" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="220" y="64" text-anchor="middle" font-family="PT Mono, monospace" font-size="18" font-weight="700" fill="currentColor">ИЗВЕСТИЯ</text>
+    <path stroke="currentColor" stroke-width="2" d="M130 72 H310"/>
+    ${[0,1,2,3,4,5,6,7,8,9].map(k => `<path stroke="currentColor" stroke-width="1.5" d="M132 ${84 + k*9} h52 M196 ${84 + k*9} h${k === 0 ? 0 : 52}"/>`).join('')}
+    <rect x="252" y="80" width="62" height="92" fill="none" stroke="#b0261c" stroke-width="2.5"/>
+    <text x="283" y="92" text-anchor="middle" font-family="PT Mono, monospace" font-size="7" fill="#b0261c">ОБОЗРЕВАТЕЛЬ</text>
+    ${[0,1,2,3,4,5,6,7].map(k => `<path stroke="currentColor" stroke-width="1.5" d="M258 ${102 + k*8} h50"/>`).join('')}
+    <path ${INK} d="M400 186 V96 H520 V186 M390 96 L460 70 L530 96"/>
+    <rect x="414" y="110" width="92" height="40" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
+    <text x="460" y="88" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">СОЮЗПЕЧАТЬ</text>
+    ${[0,1,2].map(k => `<g class="a-sway-b" style="animation-delay:${k * .5}s"><rect x="${420 + k*28}" y="112" width="22" height="30" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.2" d="M${423 + k*28} 118 h16 M${423 + k*28} 124 h16 M${423 + k*28} 130 h10"/></g>`).join('')}
+    <g class="a-nod"><circle cx="546" cy="128" r="7" ${INK}/><path ${INK} d="M546 135 V166 M546 166 l-8 20 M546 166 l8 20 M546 144 l-14 6"/></g>`, "Газета с вашей колонкой: за «Известиями» с утра очередь у киоска"),
   endInst: frame(`
     <rect x="380" y="30" width="170" height="156" ${INK}/><path ${INK} d="M380 82 H550 M380 134 H550"/>
     ${[0,1,2].map(r => [...Array(9)].map((_, k) => `<rect x="${388 + k*18}" y="${40 + r*52}" width="12" height="38" fill="none" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
@@ -543,21 +561,55 @@ const ILL = {
     <path ${RED} class="a-pulse" d="M326 96 q12 14 0 28 M204 96 q-12 14 0 28"/>
     <path ${INK} d="M40 190 H560"/>`, "Хлебный переулок, 1991 г.: полки до потолка, звонят из Вашингтона"),
   endOut: frame(`
-    <path ${INK} d="M80 60 H420 M100 60 V186 M400 60 V186 M80 60 L250 24 L420 60"/>
-    <path ${INK} d="M160 140 H340 M180 140 v46 M320 140 v46"/>
-    <rect x="216" y="104" width="68" height="36" rx="5" ${INK}/><circle cx="268" cy="122" r="7" ${INK}/><path ${INK} d="M226 114 h28 M226 124 h28"/>
-    <path ${RED} class="a-pulse" d="M296 96 q10 -10 20 0"/><path ${RED} class="a-pulse" style="animation-delay:.4s" d="M290 84 q22 -20 42 0"/>
-    <circle cx="510" cy="50" r="20" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
-    <g class="a-sway-b"><path ${INK} d="M500 186 V120 M500 140 q-30 -10 -40 -34 M500 128 q26 -8 34 -30"/><circle cx="462" cy="104" r="16" ${INK}/><circle cx="536" cy="96" r="14" ${INK}/><circle cx="470" cy="112" r="4" fill="#b0261c"/></g>
-    <path ${INK} d="M40 188 H560"/>`, "Веранда дачи: приёмник шестьдесят восьмого года, Би-би-си больше не глушат"),
+    <path ${INK} d="M30 186 H570"/>
+    <path fill="#c9b48a" opacity=".35" d="M150 186 V104 H290 V186 Z"/>
+    <path ${INK} d="M150 186 V104 H290 V186"/>
+    <path ${INK} d="M136 106 L220 50 L304 106"/>
+    <rect x="206" y="70" width="28" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="1.5" d="M220 70 V92 M206 81 H234"/>
+    ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="1" d="M150 ${116 + k*12} H290"/>`).join('')}
+    <path ${INK} d="M290 186 V122 H392 V186"/><path ${INK} d="M284 124 L300 112 H392"/>
+    ${[0,1,2,3].map(k => `<rect x="${298 + k*23}" y="128" width="19" height="26" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/>`).join('')}
+    <path ${INK} d="M296 158 H392"/>
+    <rect x="352" y="146" width="22" height="12" rx="2" fill="#3a2e22" stroke="currentColor" stroke-width="1.5"/>
+    <g class="a-pulse"><path ${RED} d="M380 140 q6 -6 0 -12 M386 144 q10 -10 0 -20"/></g>
+    <path ${INK} d="M300 186 v-10 h20 v-8 h20"/>
+    <rect x="186" y="140" width="26" height="46" fill="#3a2e22" stroke="currentColor" stroke-width="2"/>
+    ${[0,1,2,3,4,5,6,7,8,9,10,11].map(k => `<path ${INK} d="M${410 + k*13} 186 V164 l4 -5 l4 5 V186"/>`).join('')}
+    <path ${INK} d="M406 172 H566"/>
+    <path fill="#f6f5ef" stroke="currentColor" stroke-width="2" d="M92 186 V60 h7 V186 Z"/>
+    ${[0,1,2,3,4,5].map(k => `<path stroke="currentColor" stroke-width="2" d="M92 ${74 + k*18} h4"/>`).join('')}
+    <g class="a-sway-b"><path stroke="#3f6b3a" stroke-width="2" fill="none" d="M96 70 q-30 10 -40 34 M96 84 q26 4 40 28 M96 60 q-14 -16 -34 -12"/></g>`, "Дача: веранда, приёмник шестьдесят восьмого года, Би-би-си больше не глушат"),
   endAide: frame(`
-    <path ${INK} d="M120 186 V120 H200 V186 M128 120 V96 H192 V120 M138 96 V74 H182 V96 M146 74 L160 34 L174 74"/>
-    <path ${INK} d="M140 150 h20 v36 h-20z"/>
-    <path class="a-pulse" fill="#b0261c" d="M160 18 l4 9 10 1 -8 6 3 10 -9 -6 -9 6 3 -10 -8 -6 10 -1z"/>
-    <path ${INK} d="M360 186 L380 120 H500 L520 186"/>
-    <path ${INK} d="M440 120 V80 M440 80 q0 -12 10 -12"/><ellipse cx="452" cy="66" rx="8" ry="5" fill="currentColor"/>
-    <g class="a-nod"><rect x="396" y="100" width="40" height="26" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5" transform="rotate(-8 416 113)"/><path stroke="currentColor" stroke-width="2" d="M402 108 h28 M402 116 h22" transform="rotate(-8 416 113)"/></g>
-    <path ${INK} d="M40 190 H560"/>`, "Трибуна и черновики: ваши мысли стали словами генсека"),
+    <path ${INK} d="M30 186 H570"/>
+    <path ${INK} d="M60 186 V150 H270 V186 M70 150 V186 M260 150 V186"/>
+    <rect x="96" y="96" width="120" height="54" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <path stroke="currentColor" stroke-width="1.5" d="M106 108 h100 M106 118 h40 M106 128 h100 M106 138 h70"/>
+    <path stroke="#b0261c" stroke-width="2" d="M150 118 h50 M146 116 l58 4"/>
+    <path class="a-write" fill="none" stroke="#b0261c" stroke-width="2" d="M150 112 q10 -10 22 -2 q10 6 22 -4"/>
+    <g class="a-pen"><path stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M222 92 L200 118"/></g>
+    <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" d="M228 120 C300 80 360 80 410 104"/>
+    <path ${INK} d="M404 98 l8 7 l-10 4"/>
+    <path ${INK} d="M400 186 L414 118 H494 L508 186"/><path ${INK} d="M406 118 H502"/>
+    <rect x="426" y="96" width="48" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5"/>
+    <path stroke="currentColor" stroke-width="1.2" d="M432 104 h36 M432 110 h24"/>
+    <path ${INK} d="M480 118 q8 -26 -6 -40"/><circle cx="472" cy="76" r="5" fill="currentColor"/>
+    <path fill="#b0261c" d="M540 60 l4 -10 l4 10 l10 0 l-8 6 l3 10 l-9 -6 l-9 6 l3 -10 l-8 -6 z" opacity=".8"/>
+    <path ${INK} d="M536 186 V110 h16 V186 M530 110 h28 M534 96 h20 v14 M540 80 h8 v16"/>`, "Черновик с вашей правкой и трибуна: ваши мысли стали словами президента"),
+  intro: frame(`
+    <rect x="0" y="0" width="600" height="210" fill="#1f2a33" opacity=".9"/>
+    ${[[40,24],[120,40],[200,18],[520,30],[560,60],[460,16],[330,26]].map(([x,y],k) => `<circle class="a-blink" style="animation-delay:${k * .7}s" cx="${x}" cy="${y}" r="1.6" fill="#f6f5ef"/>`).join('')}
+    <circle cx="90" cy="46" r="14" fill="#f0d48a" opacity=".9"/>
+    <path fill="#2e3a44" stroke="#c9d3cf" stroke-width="2" d="M40 186 V64 H320 V186 Z"/>
+    <path stroke="#c9d3cf" stroke-width="2" d="M30 64 H330 M40 78 H320"/>
+    ${[0,1,2,3].map(r => [0,1,2,3,4,5].map(k => { const lit = r === 1 && k === 3; return `<rect x="${58 + k*44}" y="${90 + r*22}" width="22" height="14" fill="${lit ? "#f0d48a" : "#3a4652"}" stroke="#c9d3cf" stroke-width="1.5"${lit ? ' class="a-flicker"' : ""}/>`; }).join('')).join('')}
+    <g class="a-carriage"><path stroke="#1f1d1a" stroke-width="2" d="M194 120 h16"/></g>
+    ${[0,1,2].map(k => `<g class="a-fly" style="animation-delay:${k * 1.6}s"><rect x="210" y="104" width="16" height="20" fill="#f6f5ef" stroke="#1f1d1a" stroke-width="1"/><path stroke="#1f1d1a" stroke-width="1" d="M213 110 h10 M213 114 h10 M213 118 h6"/></g>`).join('')}
+    <path fill="none" stroke="#c9d3cf" stroke-width="1.5" stroke-dasharray="3 7" d="M228 112 C320 60 400 60 452 104"/>
+    <path fill="#2e3a44" stroke="#c9d3cf" stroke-width="2.5" d="M430 186 L444 118 H524 L538 186 Z"/>
+    <path stroke="#c9d3cf" stroke-width="2.5" d="M436 118 H532"/>
+    <path fill="none" stroke="#c9d3cf" stroke-width="2.5" d="M508 118 q8 -24 -6 -38"/><circle cx="500" cy="78" r="5" fill="#c9d3cf"/>
+    <circle cx="484" cy="104" r="9" fill="none" stroke="#c9d3cf" stroke-width="2.5"/><path stroke="#c9d3cf" stroke-width="2.5" d="M484 113 V118"/>
+    <path stroke="#c9d3cf" stroke-width="2" d="M20 188 H580"/>`, "Старая площадь, ночью: горит одно окно. Текст, который вы пишете, утром произнесёт другой"),
   endMo: frame(`
     <path ${INK} d="M40 186 V54 H300 V186"/><path ${INK} d="M30 54 H310 M40 70 H300"/>
     <rect x="204" y="152" width="40" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
@@ -576,26 +628,31 @@ const ILL = {
     <text x="539" y="113" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">1963–1991</text>
     <path ${INK} d="M20 190 H580"/>`, "Старая площадь: двери опечатаны, вывеску сняли, записные книжки за тридцать лет — в портфель"),
   endLong: frame(`
-    <path ${INK} d="M100 186 V110 q0 -30 30 -30 h60 q30 0 30 30 V186 M90 140 h20 M210 140 h20 M110 150 h100"/>
-    <rect x="290" y="80" width="120" height="86" rx="8" ${INK}/>
-    <rect class="a-tv" x="302" y="92" width="96" height="62" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
-    <circle cx="350" cy="104" r="4.5" fill="currentColor"/>
-    <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" d="M350 109 v13 M350 112 q-12 -4 -20 -14 M350 112 q12 -4 20 -14 M347 128 l-5 20 M353 128 l11 -14"/>
-    <path fill="#f6f5ef" stroke="currentColor" stroke-width="2" d="M334 124 q16 -8 32 0 q-16 8 -32 0 z"/>
-    <path ${INK} d="M330 166 l-10 20 M370 166 l10 20"/>
-    <rect x="470" y="40" width="70" height="146" ${INK}/><circle cx="530" cy="116" r="3" fill="currentColor"/>
-    <path stroke="currentColor" stroke-width="2" d="M470 104 q-10 12 6 22"/>
-    <g class="a-stamp"><circle cx="476" cy="126" r="9" fill="#b0261c"/></g>
-    <path ${INK} d="M40 190 H560"/>`, "Пенсия: «Лебединое озеро» 19 августа и опечатанная дверь кабинета"),
+    <path ${INK} d="M30 186 H570"/>
+    <path ${INK} d="M90 186 V114 q0 -30 30 -30 h60 q30 0 30 30 V186 M80 144 h20 M200 144 h20 M100 154 h100"/>
+    <rect x="270" y="80" width="130" height="90" rx="8" ${INK}/>
+    <rect class="a-tv" x="282" y="92" width="106" height="66" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
+    <g class="a-sway-b"><circle cx="335" cy="106" r="5" fill="currentColor"/><path ${INK} d="M335 111 V130 M335 116 l-16 -8 M335 116 l16 -8 M335 130 l-10 18 M335 130 l12 14"/><path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M318 128 q17 -8 34 0 q-17 8 -34 0 z"/></g>
+    <path ${INK} d="M300 170 l-10 16 M370 170 l10 16"/>
+    <rect x="460" y="58" width="70" height="86" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="460" y="58" width="70" height="20" fill="#b0261c" stroke="currentColor" stroke-width="2.5"/>
+    <text x="495" y="72" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="#f6f5ef">АВГУСТ</text>
+    <text x="495" y="118" text-anchor="middle" font-family="PT Mono, monospace" font-size="34" font-weight="700" fill="currentColor">19</text>
+    <text x="495" y="136" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">ПОНЕДЕЛЬНИК</text>
+    <circle cx="495" cy="52" r="3" fill="currentColor"/>`, "Пенсия, 19 августа: по всем программам «Лебединое озеро»"),
   endDir: frame(`
-    <rect x="370" y="30" width="150" height="100" ${INK}/><path ${INK} d="M445 30 v100 M370 80 h150"/>
-    <circle class="a-pulse" cx="490" cy="56" r="12" fill="#f0d48a" stroke="currentColor" stroke-width="2"/>
-    <path ${INK} d="M80 150 H500 M100 150 v36 M480 150 v36"/>
-    <rect x="180" y="70" width="140" height="78" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
-    <text x="250" y="90" text-anchor="middle" font-family="PT Mono, monospace" font-size="12" fill="currentColor">ОБРАЩЕНИЕ</text>
-    <path ${INK} class="a-write" d="M192 104 h116 M192 116 h104 M192 128 h110"/>
-    <g class="a-pen"><path stroke="#b0261c" stroke-width="5" stroke-linecap="round" d="M276 142 L312 112"/></g>
-    <path ${INK} d="M40 190 H560"/>`, "Кабинет директора: подпись, которую не нужно согласовывать"),
+    <path ${INK} d="M30 186 H570"/>
+    <path ${INK} d="M120 186 V148 H380 V186 M132 148 V186 M368 148 V186"/>
+    <rect x="186" y="108" width="128" height="40" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+    <text x="250" y="122" text-anchor="middle" font-family="PT Mono, monospace" font-size="10" fill="currentColor">ОБРАЩЕНИЕ</text>
+    <path stroke="currentColor" stroke-width="1.2" d="M196 128 h108 M196 134 h80"/>
+    <path class="a-write" fill="none" stroke="#b0261c" stroke-width="2" d="M262 144 q8 -8 14 -2 q6 6 12 -4 q6 -6 14 2"/>
+    <g class="a-pen"><path stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M318 118 L300 142"/></g>
+    <path ${INK} d="M440 186 V60 H530 V186"/>
+    <path fill="#c9d3cf" stroke="currentColor" stroke-width="2.5" d="M440 60 L470 70 V186 L440 186 Z"/>
+    ${[0,1,2].map(k => `<g class="a-nod" style="animation-delay:${k * .4}s"><circle cx="${488 + k*16}" cy="${96 + (k%2)*4}" r="7" ${INK}/><path ${INK} d="M${488 + k*16} ${103 + (k%2)*4} V140"/></g>`).join('')}
+    <rect x="440" y="34" width="90" height="20" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5"/>
+    <text x="485" y="48" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">ДИРЕКТОР</text>`, "Кабинет директора: сотрудники ждут в дверях, подпись не нужно согласовывать"),
   obit: frame(`
     <rect x="110" y="34" width="120" height="150" ${INK}/><rect x="124" y="48" width="92" height="122" fill="none" stroke="currentColor" stroke-width="2"/>
     <circle cx="170" cy="92" r="22" ${INK}/><path ${INK} d="M136 160 q34 -46 68 0"/>
@@ -1119,17 +1176,17 @@ const SCENES = [
     { side: "us", who: "Washington Post", what: "Рецензия на «Endgame» С. Тэлботта: попытки Киссинджера превратить владивостокскую договорённость в договор администрация Форда в 1976 г. отложила под внутриполитическим давлением; потом мешали Ангола, Китай и другое.", src: "Washington Post (подборка «Arbatov — Washington Post»), рецензия на Talbott, Endgame (1979)" }
   ] },
 
-{ year: "1974", ill: "recall", when: s => s.flags.exiled && !s.flags.returned && s.stats.pen >= 5, place: "Звонок по «вертушке»", title: "Вас зовут обратно",
+{ year: "1974", ill: "recall", when: s => s.flags.exiled && !s.flags.returned && s.stats.pen >= 4, place: "Звонок по «вертушке»", title: "Вас зовут обратно",
   text: s => `<p>Вы давно не на Старой площади. ${s.place === "izv" ? "Колонки в газете читают, на летучках вас цитируют." : "Книги выходят, на вас ссылаются."} И вдруг звонок: готовят большую речь, бригада не справляется, нужен человек с пером.</p>
     <p>Опала, как выясняется, бывает с перерывами на работу.</p>`,
   choices: s => [
-    { t: "Ехать в Завидово: писать речи, оставаясь на своей работе.", fx: { trust: +3, pen: +1 }, set: { returned: true }, like: "Бовин",
+    { t: "Ехать в Завидово: писать речи, оставаясь на своей работе.", fx: { trust: +3, pen: +1 }, set: { returned: true, speechwriter: true }, like: "Бовин",
       res: "Вас встречают, будто вы и не уходили. Днём вы правите доклад, вечером возвращаетесь к своей колонке. Два стула оказываются удобнее одного.",
       ep: "из опалы вас позвали обратно в Завидово, и вы писали речи, не уходя из газеты" },
     { t: "Вежливо отказаться: у вас теперь своя фамилия.", cred: { r: +1 }, fx: { trust: -1 }, set: { returned: true }, like: null,
       res: "На том конце провода долго молчат. Больше не звонят, но и не мешают.",
       ep: "однажды вы отказались вернуться на Старую площадь, и это было приятно" },
-    { t: "Согласиться, но выговорить условие: свои абзацы вы пишете сами, без «доводки».", req: { pen: 7 }, cred: { r: +1 }, fx: { trust: +1, pen: +2 }, set: { returned: true }, like: "Бовин",
+    { t: "Согласиться, но выговорить условие: свои абзацы вы пишете сами, без «доводки».", req: { pen: 7 }, cred: { r: +1 }, fx: { trust: +1, pen: +2 }, set: { returned: true, speechwriter: true }, like: "Бовин",
       res: "Условие принимают со смешком. Ваши абзацы правят меньше чужих, но правят всё равно.",
       ep: "вы вернулись в Завидово на своих условиях, и их соблюдали почти всегда" }
   ],
@@ -1417,6 +1474,21 @@ const SCENES = [
     { who: "Арбатов", what: "Андропов был сторонником разрядки, но сомневался, что с Рейганом что-то выйдет; после реакции Вашингтона на КАЛ-007 сомнения стали уверенностью.", src: "Арбатов, «Человек системы», раздел «О Ю. В. Андропове»" }
   ] },
 
+{ year: "1984", ill: "recall", when: s => s.place === "izv" && !s.flags.speechwriter && !s.flags.declined84 && s.stats.pen >= 4, place: "Звонок по «вертушке», зима", title: "Снова нужны речи",
+  text: s => `<p>Новый генсек болен, доклады за него читают другие, и бригаде не хватает рук. ${s.flags.returned ? "Десять лет назад вы отказались вернуться. Теперь звонят снова, как будто того разговора не было." : "На летучке вас цитируют, а вечером звонят со Старой площади: помнят, как вы писали."}</p>
+    <p>Предлагают то же, что когда-то Бовину: писать речи, не уходя из газеты.</p>`,
+  choices: s => [
+    { t: "Согласиться: днём колонка, ночью доклад.", fx: { trust: +2, pen: +1, con: -1 }, set: { speechwriter: true }, like: "Бовин",
+      res: "Вы пишете два текста одной рукой: в газету — своими словами, в доклад — чужими. Через месяц вы перестаёте замечать разницу, и это вас пугает больше, чем усталость.",
+      ep: "в восемьдесят четвёртом вы снова стали писать речи, не уходя из газеты" },
+    { t: "Отказаться: газета дала вам фамилию, и терять её незачем.", cred: { r: +1 }, fx: { trust: -1, con: +1 }, set: { declined84: true }, like: null,
+      res: "Трубку кладут вежливо. В газете об этом звонке никто не узнаёт, и вы тоже стараетесь его забыть.",
+      ep: "в восемьдесят четвёртом вы отказались снова писать речи" }
+  ],
+  voices: [
+    { who: "Бовин", what: "Совмещал «Известия» с «отхожими промыслами»: из газеты его снова и снова вызывали в Завидово писать тексты для руководства.", src: "Бовин, «XX век как жизнь», вступление к части об «Известиях»" }
+  ] },
+
 { year: "1985", ill: "tvportrait", when: s => s.flags.tv, doc: "Текст выпуска «Международной панорамы», весна 1985 г.", place: "Останкино, весна", title: "Никита Сергеевич",
   text: s => `<p>Новый генсек только что избран. В Москве шепчутся, что все его идеи были в зародыше ещё у Хрущёва. За границей о Хрущёве снова пишут статьи.</p>
     <p>У вас в выпуске сюжет об американском фермерстве. В архиве Гостелерадио есть плёнка: Хрущёв в 1959 году на ферме Гарста в Айове.${s.flags.soy ? " Вы вспоминаете свою записку о сое: про американские сорта тогда приходилось писать так, будто Хрущёва никогда не было." : ""}</p>`,
@@ -1634,7 +1706,7 @@ const ENDINGS = [
     real: "Уход из аппарата бывал разным: Бурлацкого вывели из ЦК в 1965 г., Делюсин ушёл в апреле того же года. Тех, у кого не было своего круга, мемуаристы почти не вспоминают.", src: "Петров 2023, с. 258–261; реестр консультантов, § 4" },
   { key: "hollow", ill: "endHollow", lost: true, test: s => s.flags.hollow, title: "В режиме двоемыслия",
     real: "«Двоемыслие» — слово самих мемуаристов: Брутенц пишет об «эре особого политического двоемыслия и двоедушия» после 1968 г., глава Черняева о Международном отделе называется «В режиме двоемыслия».", src: "Брутенц 1998, с. 239–240; Черняев 1995, гл. VII" },
-  { key: "speech", ill: "endSpeech", test: s => s.flags.returned && s.place === "izv", title: "Обозреватель и речевик",
+  { key: "speech", ill: "endSpeech", test: s => s.flags.speechwriter && s.place === "izv", title: "Обозреватель и речевик",
     real: "А. Е. Бовин после перевода в «Известия» продолжал работать над текстами Брежнева в Завидове: газетная колонка и речи генсека одновременно.", src: "Бовин, физ. 265–267; Александров-Агентов 1994, с. 279" },
   { key: "izv", ill: "endIzv", test: s => s.place === "izv", title: "Политобозреватель",
     real: "А. Е. Бовин — консультант и спичрайтер Брежнева, затем политический обозреватель «Известий»; первую статью ему подписал Катушев.", src: "Бовин, «XX век как жизнь», физ. 266–267" },
@@ -1762,9 +1834,9 @@ const TRAITS = [
 ];
 
 /* ——— Состояние и отрисовка ——— */
-const KEY = "konsultant-v8";
+const KEY = "konsultant-v9";
 let S;
-function fresh() { return { i: 0, phase: "ask", pick: null, place: "cand", stats: { ...START }, flags: {}, log: [], prev: null }; }
+function fresh() { return { i: 0, phase: "intro", pick: null, place: "cand", stats: { ...START }, flags: {}, log: [], prev: null }; }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 function load() { try { const v = JSON.parse(localStorage.getItem(KEY) || "null"); if (v && v.stats && v.i < SCENES.length) return v; } catch (e) {} return null; }
 
@@ -2114,9 +2186,23 @@ function renderEnd() {
   const un = $("undo"); if (un) un.addEventListener("click", undo);
 }
 
+function renderIntro() {
+  const seen = seenEndings ? seenEndings() : [];
+  $("sheet").innerHTML = `<div class="grif"><span class="secret">Секретно · экз. единств.</span><span>1963 → 1991</span></div>
+    ${ILL.intro}
+    <div class="place">Москва, Старая площадь</div><h2>Консультант ЦК</h2>
+    <div class="epi">
+      <p>Вы — молодой учёный-американист, и вас зовут в группу консультантов ЦК КПСС. Такие люди писали доклады генсеков, записки о разрядке и ОСВ, речи для трибуны ООН. Их фамилий в текстах нет: утром ваши слова произнесёт другой.</p>
+      <p>Впереди почти тридцать лет, от хрущёвской оттепели до флага, который спустят над Кремлём в декабре девяносто первого. В каждой сцене нужно выбрать: что вписать в текст, что вычеркнуть, когда промолчать, а когда спорить. Доверие начальства, перо, круг друзей и собственные убеждения тянут в разные стороны, и удержать всё сразу не удастся никому.</p>
+      <p>Герой вымышлен, а всё вокруг него — нет. После каждого решения открывается «Как вспоминали»: что в той же ситуации сделали и написали Арбатов, Бовин, Черняев, Шахназаров, Брутенц, Александров-Агентов, — со ссылками на страницы мемуаров и документов. Игра о том, как в советской системе думали, писали и спорили люди, которые служили ей и одновременно пытались её изменить.</p>
+    </div>
+    <p style="font-size:15px;color:var(--ink-soft)">Партия занимает минут двадцать. Концовок одиннадцать${seen.length ? `, вы открыли ${seen.length}` : ""}.</p>
+    <div class="row"><button type="button" class="btn" id="begin">Открыть дело →</button></div>`;
+  $("begin").addEventListener("click", () => { S.phase = "ask"; render(true); window.scrollTo({ top: 0, behavior: "smooth" }); });
+}
 function render(anim) {
   renderYears(); renderFile();
-  if (S.phase === "end") renderEnd(); else renderScene();
+  if (S.phase === "intro") renderIntro(); else if (S.phase === "end") renderEnd(); else renderScene();
   const sh = $("sheet");
   if (anim) { sh.classList.remove("enter"); void sh.offsetWidth; sh.classList.add("enter"); }
   save();
