@@ -2205,7 +2205,7 @@ function seenEndings(add) {
   return v;
 }
 /* ——— Журнал партий (Google-таблица) ——— */
-const LOG_URL = "";
+const LOG_URL = "https://script.google.com/macros/s/AKfycbx1hJ_J8LcKeFGm5xlMdT2l6OLwMsK-VjdYNVPxy_4TCoocWx55okNpMZDpZR5dGf1YpQ/exec";
 function playerId() {
   try { let v = localStorage.getItem("konsultant-player"); if (!v) { v = Math.random().toString(36).slice(2, 10); localStorage.setItem("konsultant-player", v); } return v; } catch (err) { return "без-хранилища"; }
 }
