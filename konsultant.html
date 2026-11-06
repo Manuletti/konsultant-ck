@@ -566,10 +566,12 @@ const ILL = {
     <path stroke="#f6f5ef" stroke-width="5" d="M150 156 L190 182 M190 156 L150 182"/>
     <circle cx="170" cy="169" r="6" fill="#b0261c" stroke="currentColor" stroke-width="1.5"/>
     <path ${INK} d="M330 150 H570 M346 150 V186 M554 150 V186"/>
-    <path fill="#3a2e22" stroke="currentColor" stroke-width="2.5" d="M398 120 L410 86 H492 L504 120 Z"/>
-    ${[0,1,2].map(k => `<g class="a-dropnb" style="animation-delay:${k * 1.5}s"><rect x="${418 + k*22}" y="96" width="18" height="30" fill="${["#b0261c","#3f6b3a","#3a5ba0"][k]}" stroke="currentColor" stroke-width="1.5"/><path stroke="#f6f5ef" stroke-width="1.5" d="M${421 + k*22} 104 h12"/></g>`).join('')}
-    <rect x="396" y="118" width="110" height="32" rx="4" fill="#5a4330" stroke="currentColor" stroke-width="2.5"/>
-    <path stroke="#f0d48a" stroke-width="3" d="M444 126 h14"/>
+    <rect x="404" y="92" width="102" height="30" rx="3" fill="#3a2e22" stroke="currentColor" stroke-width="2.5"/>
+    <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M436 92 q19 -20 38 0"/>
+    ${[0,1,2].map(k => `<g class="a-dropnb" style="animation-delay:${k * 1.5}s"><rect x="${420 + k*24}" y="76" width="18" height="30" fill="${["#b0261c","#3f6b3a","#3a5ba0"][k]}" stroke="currentColor" stroke-width="1.5"/><path stroke="#f6f5ef" stroke-width="1.5" d="M${423 + k*24} 84 h12"/></g>`).join('')}
+    <rect x="396" y="104" width="118" height="46" rx="6" fill="#6b4e34" stroke="currentColor" stroke-width="2.5"/>
+    <path stroke="currentColor" stroke-width="2" d="M398 116 H512"/>
+    ${[424, 474].map(x => `<rect x="${x}" y="104" width="12" height="30" fill="#3a2e22" stroke="currentColor" stroke-width="1.5"/><rect x="${x - 2}" y="126" width="16" height="9" rx="1.5" fill="#f0d48a" stroke="currentColor" stroke-width="1.5"/>`).join('')}
     ${[0,1,2,3].map(k => `<rect x="522" y="${140 - k*7}" width="34" height="7" fill="${["#b0261c","#3f6b3a","#3a5ba0","#b0261c"][k]}" stroke="currentColor" stroke-width="1.5"/>`).join('')}
     <text x="539" y="113" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">1963–1991</text>
     <path ${INK} d="M20 190 H580"/>`, "Старая площадь: двери опечатаны, вывеску сняли, записные книжки за тридцать лет — в портфель"),
