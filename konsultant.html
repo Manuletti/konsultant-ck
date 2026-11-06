@@ -259,6 +259,7 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
   .a-tv { animation: tv 2.2s steps(1, end) infinite; }
   .a-pen { animation: pen 1.4s ease-in-out infinite; }
   .a-sweep { animation: spin 4s linear infinite; }
+  .a-dropnb { animation: dropnb 4.5s ease-in infinite; }
   .a-drift { animation: drift 9s linear infinite; }
   .a-surf { animation: surf 3s ease-in-out infinite alternate; }
   .a-beam2 { animation: beam 6s ease-in-out infinite; }
@@ -290,6 +291,7 @@ details.path-wrap summary { cursor: pointer; font-family: var(--f-type); font-si
 @keyframes needle { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(26px); } 60% { transform: translateX(12px); } }
 @keyframes write { from { stroke-dashoffset: 160; } 60%, to { stroke-dashoffset: 0; } }
 @keyframes tilt { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes dropnb { 0% { transform: translateY(-46px); opacity: 0; } 20% { opacity: 1; } 55% { transform: translateY(0); opacity: 1; } 80%, 100% { transform: translateY(0); opacity: 0; } }
 @keyframes nod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes fire { from { transform: scaleY(.8) skewX(-3deg); } to { transform: scaleY(1.1) skewX(3deg); } }
 @keyframes fly { from { transform: translateX(-460px); } to { transform: translateX(260px); } }
@@ -557,12 +559,20 @@ const ILL = {
     <g class="a-nod"><rect x="396" y="100" width="40" height="26" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5" transform="rotate(-8 416 113)"/><path stroke="currentColor" stroke-width="2" d="M402 108 h28 M402 116 h22" transform="rotate(-8 416 113)"/></g>
     <path ${INK} d="M40 190 H560"/>`, "Трибуна и черновики: ваши мысли стали словами генсека"),
   endMo: frame(`
-    <path ${INK} d="M80 186 V50 H520 V186"/><path ${INK} d="M70 50 H530 M80 72 H520"/>
-    ${[0,1,2].map(r => [...Array(11)].map((_, k) => `<rect class="${r === 2 && k === 7 ? "a-flicker" : ""}" x="${96 + k*38}" y="${84 + r*24}" width="18" height="14" fill="${r === 2 && k === 7 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
-    <path ${INK} d="M272 186 v-32 h56 v32 M300 154 v32"/>
-    <g class="a-nod"><rect x="420" y="160" width="60" height="26" rx="4" fill="#3a2e22" stroke="currentColor" stroke-width="2.5"/><path stroke="#f6f5ef" stroke-width="2" d="M440 160 v-6 h20 v6"/></g>
-    <path ${RED} d="M480 172 h10"/>
-    <path ${INK} d="M40 190 H560"/>`, "Старая площадь: портфель с записными книжками за тридцать лет"),
+    <path ${INK} d="M40 186 V54 H300 V186"/><path ${INK} d="M30 54 H310 M40 70 H300"/>
+    <rect x="204" y="152" width="40" height="22" fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+    ${[0,1,2].map(r => [0,1,2,3,4,5].map(k => `<rect class="${r === 1 && k === 4 ? "a-flicker" : ""}" x="${58 + k*40}" y="${82 + r*22}" width="20" height="14" fill="${r === 1 && k === 4 ? "#f0d48a" : "#3a2e22"}" opacity="${r === 1 && k === 4 ? 1 : .55}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
+    <path ${INK} d="M148 186 V150 H192 V186 M170 150 V186"/>
+    <path stroke="#f6f5ef" stroke-width="5" d="M150 156 L190 182 M190 156 L150 182"/>
+    <circle cx="170" cy="169" r="6" fill="#b0261c" stroke="currentColor" stroke-width="1.5"/>
+    <path ${INK} d="M330 150 H570 M346 150 V186 M554 150 V186"/>
+    <path fill="#3a2e22" stroke="currentColor" stroke-width="2.5" d="M398 120 L410 86 H492 L504 120 Z"/>
+    ${[0,1,2].map(k => `<g class="a-dropnb" style="animation-delay:${k * 1.5}s"><rect x="${418 + k*22}" y="96" width="18" height="30" fill="${["#b0261c","#3f6b3a","#3a5ba0"][k]}" stroke="currentColor" stroke-width="1.5"/><path stroke="#f6f5ef" stroke-width="1.5" d="M${421 + k*22} 104 h12"/></g>`).join('')}
+    <rect x="396" y="118" width="110" height="32" rx="4" fill="#5a4330" stroke="currentColor" stroke-width="2.5"/>
+    <path stroke="#f0d48a" stroke-width="3" d="M444 126 h14"/>
+    ${[0,1,2,3].map(k => `<rect x="522" y="${140 - k*7}" width="34" height="7" fill="${["#b0261c","#3f6b3a","#3a5ba0","#b0261c"][k]}" stroke="currentColor" stroke-width="1.5"/>`).join('')}
+    <text x="539" y="113" text-anchor="middle" font-family="PT Mono, monospace" font-size="9" fill="currentColor">1963–1991</text>
+    <path ${INK} d="M20 190 H580"/>`, "Старая площадь: двери опечатаны, вывеску сняли, записные книжки за тридцать лет — в портфель"),
   endLong: frame(`
     <path ${INK} d="M100 186 V110 q0 -30 30 -30 h60 q30 0 30 30 V186 M90 140 h20 M210 140 h20 M110 150 h100"/>
     <rect x="290" y="80" width="120" height="86" rx="8" ${INK}/>
