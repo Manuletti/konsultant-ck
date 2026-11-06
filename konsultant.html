@@ -109,6 +109,11 @@ h2 { font-family: var(--f-type); font-weight: 400; font-size: clamp(20px, 3.2vw,
 .draft .slot { border-bottom: 1px dashed var(--stamp); color: var(--stamp); }
 .draft .slot.filled { color: var(--ink); background: rgba(90,63,142,.09); border-bottom-style: solid; }
 .draft.read { margin-bottom: 12px; }
+.logform { margin: 18px 0 6px; padding: 12px 14px; border: 1px dashed var(--rule); }
+.logform .hint { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+.logform label { font-family: var(--f-type); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.logform .row { margin-top: 8px; gap: 8px; flex-wrap: wrap; }
+.logform input { flex: 1 1 200px; font: inherit; padding: 8px 10px; border: 1px solid var(--rule); background: rgba(255,255,255,.5); color: var(--ink); }
 .draft.montage { padding: 0; background: repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,0,0,.05) 22px 24px) top/100% 8px no-repeat, rgba(255,255,255,.25); padding-top: 8px; }
 .draft.montage .mrow { display: grid; grid-template-columns: 110px 1fr; border-top: 1px solid var(--rule); }
 .draft.montage .mlbl { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 10px; border-right: 1px solid var(--rule); }
@@ -775,17 +780,21 @@ const ILL = {
     <rect x="96" y="54" width="168" height="106" rx="8" fill="#c9d3cf" stroke="currentColor" stroke-width="2"/>
     <g class="a-tv">
       ${[0,1,2,3,4].map(k => `<path stroke="currentColor" stroke-width="1.5" fill="none" d="M${108 + k*12} 158 V118 M${108 + k*12} 132 q-6 -2 -8 -8 M${108 + k*12} 124 q6 -2 8 -8"/>`).join('')}
-      <path fill="#f6f5ef" stroke="currentColor" stroke-width="2" d="M170 158 q0 -26 26 -26 q26 0 26 26 z"/>
-      <circle cx="196" cy="108" r="16" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
-      <path stroke="currentColor" stroke-width="2" d="M180 108 q-4 0 -4 5 M212 108 q4 0 4 5 M188 103 h6 M199 103 h6 M190 107 h3 M200 107 h3 M191 118 h10"/>
-      <path ${INK} d="M218 140 L236 112"/>
-      <path fill="currentColor" d="M228 108 q8 -12 16 0 z"/><path stroke="currentColor" stroke-width="2.5" d="M222 109 h28"/>
+      <path fill="#5a6470" stroke="currentColor" stroke-width="2" d="M146 160 q0 -28 34 -30 q34 2 34 30 z"/>
+      <path fill="#f6f5ef" stroke="currentColor" stroke-width="1.5" d="M172 131 l8 14 l8 -14 z"/><path stroke="#b0261c" stroke-width="3" d="M180 136 v12"/>
+      <rect x="174" y="118" width="12" height="14" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/>
+      <circle cx="180" cy="106" r="15" fill="#f6f5ef" stroke="currentColor" stroke-width="2.5"/>
+      <path stroke="currentColor" stroke-width="2" fill="none" d="M165 106 q-4 0 -4 5 M195 106 q4 0 4 5 M172 103 h5 M183 103 h5 M174 107 h2 M184 107 h2 M175 115 q5 2 10 0"/>
+      <path fill="currentColor" d="M166 95 q0 -18 14 -18 q14 0 14 18 z"/>
+      <ellipse cx="180" cy="95" rx="22" ry="4" fill="currentColor"/>
+      <path stroke="#f6f5ef" stroke-width="1.5" d="M167 91 h26"/>
+      <g class="a-wave" style="transform-box: view-box; transform-origin: 206px 140px;"><path fill="none" stroke="#5a6470" stroke-width="8" stroke-linecap="round" d="M206 140 L226 114 L230 98"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M202 136 L222 110 L225 98"/><circle cx="231" cy="92" r="6" fill="#f6f5ef" stroke="currentColor" stroke-width="2"/></g>
       ${[0,1,2,3,4,5,6].map(k => `<rect x="${100 + k*24}" y="57" width="8" height="4" fill="currentColor" opacity=".5"/>`).join('')}
     </g>
     <path ${INK} d="M140 174 l-12 14 M220 174 l12 14"/>
     <path ${INK} d="M500 186 V90 q20 -16 40 0 V186 M500 120 h40 M500 150 h40"/>
     ${[0,1,2,3,4].map(k => `<g class="a-sway-b" style="animation-delay:${k * .4}s"><path ${INK} d="M${330 + k*32} 186 V110"/><path stroke="currentColor" stroke-width="2.5" fill="none" d="M${330 + k*32} 160 q-16 -4 -20 -18 M${330 + k*32} 140 q16 -4 20 -18 M${330 + k*32} 120 q-12 -4 -14 -14"/><path fill="#f0d48a" stroke="currentColor" stroke-width="2" d="M${330 + k*32} 132 q8 -14 0 -26 q-8 12 0 26z"/></g>`).join('')}
-    <path ${INK} d="M40 190 H560"/>`, "1985 г.: на экране — плёнка 1959 года, Хрущёв со шляпой в руке; за кадром — кукуруза фермы Гарста"),
+    <path ${INK} d="M40 190 H560"/>`, "1985 г.: на экране — плёнка 1959 года, Хрущёв в шляпе машет с фермы Гарста; за кадром — кукуруза"),
   endImemo: frame(`
     <path ${INK} d="M210 186 V30 H330 V186"/><path ${INK} d="M200 30 H340"/>
     ${[0,1,2,3,4,5,6].map(r => [0,1,2,3].map(k => `<rect class="${r === 1 && k === 2 ? "a-flicker" : ""}" x="${222 + k*27}" y="${42 + r*20}" width="15" height="11" fill="${r === 1 && k === 2 ? "#f0d48a" : "none"}" stroke="currentColor" stroke-width="2"/>`).join('')).join('')}
@@ -2195,6 +2204,35 @@ function seenEndings(add) {
   if (add && !v.includes(add)) { v.push(add); try { localStorage.setItem("konsultant-endings", JSON.stringify(v)); } catch (err) {} }
   return v;
 }
+/* ——— Журнал партий (Google-таблица) ——— */
+const LOG_URL = "";
+function playerId() {
+  try { let v = localStorage.getItem("konsultant-player"); if (!v) { v = Math.random().toString(36).slice(2, 10); localStorage.setItem("konsultant-player", v); } return v; } catch (err) { return "без-хранилища"; }
+}
+function sendLog(name) {
+  if (!LOG_URL) return false;
+  const e = ENDINGS.find(x => x.test(S));
+  const body = { id: S.gid, player: playerId(), name: (name || "").trim().slice(0, 60), ending: e.title, key: e.key, lost: !!e.lost,
+    credo: ({ r: "шестидесятник", s: "государственник", i: "интернационалист" })[S.flags.credo] || "", dec: S.flags.dec || "",
+    stats: S.stats, steps: S.log.length, path: S.log.map(l => l.year + " " + l.title).join("; "), version: KEY };
+  try { fetch(LOG_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body) }); } catch (err) { return false; }
+  return true;
+}
+function logEnd() {
+  if (!LOG_URL) return "";
+  if (!S.gid) S.gid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  if (!S.logged) { S.logged = true; sendLog(""); }
+  return `<div class="logform"><label for="logname">Подпись в журнале партий</label>
+    <div class="row"><input id="logname" type="text" maxlength="60" placeholder="Ваше имя (необязательно)" value="${esc(S.logName || "")}"><button type="button" class="btn ghost" id="logsend">Подписать дело</button></div>
+    <p class="hint" id="logmsg">${S.logName ? "Дело подписано: " + esc(S.logName) + "." : "Результат партии записан в общий журнал без имени. Если впишете имя, оно появится рядом с результатом."}</p></div>`;
+}
+function bindLog() {
+  const b = $("logsend"); if (!b) return;
+  b.addEventListener("click", () => {
+    const v = $("logname").value.trim(); if (!v) { $("logmsg").textContent = "Впишите имя или оставьте дело без подписи."; return; }
+    if (sendLog(v)) { S.logName = v; save(); $("logmsg").textContent = "Дело подписано: " + v + "."; }
+  });
+}
 function renderEnd() {
   const e = ENDINGS.find(x => x.test(S));
   const seen = seenEndings(e.key);
@@ -2210,10 +2248,12 @@ function renderEnd() {
       <ol class="path">${S.log.map(l => `<li><span>${l.year}</span><span>${esc(l.title)}: ${esc(l.t)}</span></li>`).join("")}</ol></details>
     <p class="collection">Открыто концовок: <b>${seen.length} из ${ENDINGS.length}</b> — ${ENDINGS.filter(x => seen.includes(x.key)).map(x => esc(x.title)).join(", ")}.</p>
     <p style="margin-top:8px;font-size:15px;color:var(--ink-soft)">${e.lost ? "Это одна из двух проигрышных концовок. Можно переиграть последний лист или начать новое дело." : "Концовок одиннадцать, из них две проигрышные. Эпилог собирается из ваших решений."}</p>
+    ${logEnd()}
     <div class="row"><button type="button" class="btn" id="again">Начать новое дело</button>
       ${e.lost && S.prev ? `<button type="button" class="btn ghost" id="undo">Переиграть последний лист</button>` : ""}</div>`;
   $("again").addEventListener("click", () => { S = fresh(); render(true); window.scrollTo({ top: 0, behavior: "smooth" }); });
   const un = $("undo"); if (un) un.addEventListener("click", undo);
+  bindLog(); save();
 }
 
 function renderIntro() {
@@ -2227,6 +2267,7 @@ function renderIntro() {
       <p>Герой вымышлен, а всё вокруг него — нет. После каждого решения открывается «Как вспоминали»: что в той же ситуации сделали и написали Арбатов, Бовин, Черняев, Шахназаров, Брутенц, Александров-Агентов, — со ссылками на страницы мемуаров и документов. Игра о том, как в советской системе думали, писали и спорили люди, которые служили ей и одновременно пытались её изменить.</p>
     </div>
     <p style="font-size:15px;color:var(--ink-soft)">Партия занимает минут двадцать. Концовок одиннадцать${seen.length ? `, вы открыли ${seen.length}` : ""}.</p>
+    ${LOG_URL ? `<p style="font-size:14px;color:var(--ink-soft)">Итог каждой партии — концовка, показатели и путь по годам — записывается в журнал игры без имени. Имя можно добавить в конце, по желанию.</p>` : ""}
     <div class="row"><button type="button" class="btn" id="begin">Открыть дело →</button></div>`;
   $("begin").addEventListener("click", () => { S.phase = "ask"; render(true); window.scrollTo({ top: 0, behavior: "smooth" }); });
 }
