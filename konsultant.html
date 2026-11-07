@@ -390,14 +390,15 @@ const ILL = {
     <path ${INK} d="M40 186 H560"/><rect x="40" y="188" width="520" height="8" fill="url(#hatch)"/>`, "Госдача: читки вслух, бильярд в гостиной, ели вокруг"),
   silent: frame(`
     <path ${INK} d="M60 150 H330 M80 150 V186 M310 150 V186"/>
-    <path ${INK} d="M120 150 L134 108 H226 L240 150 Z"/><circle cx="180" cy="128" r="14" ${INK}/>
-    <path ${INK} d="M136 104 v-8 h16 M224 104 v-8 h-16"/>
-    <path fill="none" stroke="currentColor" stroke-width="2" d="M232 132 q20 4 22 20 q2 10 -4 12 q-6 2 -4 10 q2 8 -4 10"/>
-    <path ${INK} d="M232 176 q-18 -10 -4 -26 l6 4 q-10 10 2 18 z"/>
-    <path ${RED} class="a-blink" d="M262 70 L298 106 M298 70 L262 106"/>
-    <circle cx="440" cy="104" r="56" ${INK}/><path ${INK} d="M440 104 V66"/>
-    <path ${INK} class="a-spin" d="M440 104 L476 104"/>
-    ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${104 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${104 + 54*Math.sin(a)}"/>`; }).join('')}
+    <path ${INK} d="M110 150 L124 112 H206 L220 150 Z"/><circle cx="165" cy="131" r="13" ${INK}/>
+    <path ${INK} d="M126 108 v-8 h14 M204 108 v-8 h-14"/>
+    <path fill="none" stroke="currentColor" stroke-width="2" d="M220 140 q6 -8 10 0 q4 8 8 0 q4 -8 8 0 q4 8 8 0 q3 -6 6 -2"/>
+    <path fill="#f6f5ef" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M258 150 q-4 -12 8 -14 h50 q12 2 8 14 h-12 q-2 -6 -8 -6 h-26 q-6 0 -8 6 z"/>
+    <g class="a-blink"><path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" d="M300 118 h10 M316 118 h10 M332 118 h10"/></g>
+    <path ${RED} d="M262 70 L298 106 M298 70 L262 106"/>
+    <circle cx="440" cy="110" r="56" ${INK}/><path ${INK} d="M440 110 V72"/>
+    <path ${INK} class="a-spin" d="M440 110 L476 110"/>
+    ${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<path stroke="currentColor" stroke-width="3" d="M${440 + 48*Math.cos(a)} ${110 + 48*Math.sin(a)} L${440 + 54*Math.cos(a)} ${110 + 54*Math.sin(a)}"/>`; }).join('')}
     <path ${INK} d="M40 186 H560"/>`, "Октябрь 1964 г.: трубка снята, а сверху больше не звонят"),
   abolish: frame(`
     <rect x="200" y="28" width="200" height="160" fill="#f6f5ef" stroke="currentColor" stroke-width="3"/>
@@ -412,9 +413,9 @@ const ILL = {
     <path ${INK} d="M120 30 H480 V140 H120 Z"/>
     <path class="a-curtain-l" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M120 30 q40 56 0 110 Z"/>
     <path class="a-curtain-r" fill="url(#hatch)" stroke="currentColor" stroke-width="3" d="M480 30 q-40 56 0 110 Z"/>
-    <path class="a-beam" fill="#b0261c" opacity=".35" d="M300 30 L266 140 H334 Z"/>
+    <path class="a-beam" style="transform-box: view-box; transform-origin: 300px 30px;" fill="#b0261c" opacity=".35" d="M300 30 L266 140 H334 Z"/>
     <circle cx="300" cy="86" r="10" ${INK}/><path ${INK} d="M300 96 v24 M300 120 l-10 18 M300 120 l10 18"/>
-    <g class="a-wave"><path ${INK} d="M300 104 l-16 10 M300 104 l18 -12"/></g>
+    <g class="a-wave" style="transform-box: view-box; transform-origin: 300px 104px;"><path ${INK} d="M300 104 l-16 10 M300 104 l18 -12"/></g>
     <path ${INK} d="M100 140 H500 V150 H100 Z"/>
     ${[0,1,2,3,4,5,6,7,8].map(k => `<circle class="a-flicker" style="animation-delay:${k * .3}s" cx="${130 + k*42}" cy="145" r="2.5" fill="#f0d48a"/>`).join('')}
     ${[0,1,2,3,4,5,6,7,8,9,10].map(k => `<g><circle cx="${90 + k*42}" cy="168" r="9" fill="currentColor"/><path fill="currentColor" d="M${74 + k*42} 192 q16 -22 32 0 z"/></g>`).join('')}`, "Таганка: свет на сцене, консультанты в зале"),
